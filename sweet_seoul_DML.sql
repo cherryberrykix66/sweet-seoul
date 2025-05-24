@@ -1,0 +1,1025 @@
+-- CUSTOMERS table
+INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
+VALUES ('Jiwoo', 'Kim', 'jiwoo.kim@email.com', '303-555-0101', SYSDATE-180, '123 Cherry St', 'Denver', 'CO', '80202', 1, 1, 350, 'Gold', 'Email');
+
+INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
+VALUES ('Minho', 'Park', 'minho.park@email.com', '303-555-0102', SYSDATE-165, '456 Oak Ave', 'Denver', 'CO', '80203', 1, 0, 200, 'Silver', 'SMS');
+
+INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
+VALUES ('Soyeon', 'Lee', 'soyeon.lee@email.com', '303-555-0103', SYSDATE-150, '789 Pine Blvd', 'Boulder', 'CO', '80301', 1, 1, 450, 'Gold', 'Email');
+
+INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
+VALUES ('Jaehyun', 'Choi', 'jaehyun.choi@email.com', '303-555-0104', SYSDATE-135, '101 Maple Dr', 'Denver', 'CO', '80202', 0, 1, 100, 'Standard', 'Phone');
+
+INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
+VALUES ('Yuna', 'Jung', 'yuna.jung@email.com', '303-555-0105', SYSDATE-120, '202 Elm St', 'Aurora', 'CO', '80010', 1, 0, 175, 'Silver', 'Email');
+
+INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
+VALUES ('Taehyung', 'Kim', 'taehyung.kim@email.com', '303-555-0106', SYSDATE-105, '303 Birch Ave', 'Lakewood', 'CO', '80215', 1, 1, 525, 'Platinum', 'SMS');
+
+INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
+VALUES ('Nayeon', 'Kang', 'nayeon.kang@email.com', '303-555-0107', SYSDATE-90, '404 Walnut Blvd', 'Denver', 'CO', '80205', 0, 1, 75, 'Standard', 'Phone');
+
+INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
+VALUES ('Jimin', 'Seo', 'jimin.seo@email.com', '303-555-0108', SYSDATE-75, '505 Cedar Dr', 'Boulder', 'CO', '80303', 1, 1, 275, 'Silver', 'Email');
+
+INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
+VALUES ('Soojin', 'Yoon', 'soojin.yoon@email.com', '303-555-0109', SYSDATE-60, '606 Spruce Ave', 'Denver', 'CO', '80206', 1, 0, 400, 'Gold', 'SMS');
+
+INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
+VALUES ('Jihyo', 'Hwang', 'jihyo.hwang@email.com', '303-555-0110', SYSDATE-45, '707 Aspen St', 'Fort Collins', 'CO', '80525', 0, 1, 150, 'Silver', 'Email');
+
+-- MARKETING_CHANNELS table
+INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
+VALUES ('Instagram Ads', 'Social Media', 'Instagram', 15.50, 8);
+
+INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
+VALUES ('Facebook Ads', 'Social Media', 'Facebook', 12.75, 6);
+
+INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
+VALUES ('Google Search', 'Search Engine', 'Google', 18.25, 10);
+
+INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
+VALUES ('TikTok Promotion', 'Social Media', 'TikTok', 10.50, 12);
+
+INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
+VALUES ('Local Food Blog', 'Blog', 'Denver Food Scene', 8.00, 7);
+
+INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
+VALUES ('Email Newsletter', 'Email', 'Mailchimp', 5.25, 9);
+
+INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
+VALUES ('Radio Ad', 'Traditional', 'K-Pop Radio Show', 22.50, 4);
+
+INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
+VALUES ('K-Pop Event Sponsorship', 'Event', 'Denver K-Pop Festival', 35.00, 14);
+
+INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
+VALUES ('Anime Convention Booth', 'Event', 'Denver Anime Con', 30.00, 15);
+
+INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
+VALUES ('Local University Flyers', 'Traditional', 'CU Denver Campus', 7.50, 5);
+
+-- PROMOTIONS table
+INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
+VALUES ('Summer K-Pop Special', 'Get 15% off all K-Pop themed pastries this summer!', TO_DATE('2023-06-01', 'YYYY-MM-DD'), TO_DATE('2023-08-31', 'YYYY-MM-DD'), 15, 'percentage', 'both', 'BTS Macarons', 0, 'discount', 0);
+
+INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
+VALUES ('Anime Weekend Bundle', 'Buy 3 anime-themed pastries, get 1 free!', TO_DATE('2023-07-15', 'YYYY-MM-DD'), TO_DATE('2023-07-17', 'YYYY-MM-DD'), 0, 'percentage', 'both', 'Naruto Cakes', 0, 'bundle', 0);
+
+INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
+VALUES ('Online Exclusive Deal', '$5 off your first online order!', TO_DATE('2023-06-15', 'YYYY-MM-DD'), TO_DATE('2023-09-15', 'YYYY-MM-DD'), 5, 'fixed', 'online', NULL, 0, 'discount', 20);
+
+INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
+VALUES ('Gift Card Special', 'Get a $5 bonus when you purchase a $50 gift card', TO_DATE('2023-07-01', 'YYYY-MM-DD'), TO_DATE('2023-08-01', 'YYYY-MM-DD'), 5, 'fixed', 'both', NULL, 1, 'offer', 50);
+
+INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
+VALUES ('Back to School Discount', '10% off all bakery items for students', TO_DATE('2023-08-15', 'YYYY-MM-DD'), TO_DATE('2023-09-15', 'YYYY-MM-DD'), 10, 'percentage', 'in-store', NULL, 0, 'discount', 0);
+
+INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
+VALUES ('Twice-Themed Pastry Week', 'Special pricing on Twice-themed pastries', TO_DATE('2023-09-01', 'YYYY-MM-DD'), TO_DATE('2023-09-07', 'YYYY-MM-DD'), 20, 'percentage', 'both', 'Twice Cupcakes', 0, 'discount', 0);
+
+INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
+VALUES ('Subscription Sign-up Special', 'First month 50% off when you sign up for a pastry subscription', TO_DATE('2023-07-01', 'YYYY-MM-DD'), TO_DATE('2023-10-01', 'YYYY-MM-DD'), 50, 'percentage', 'online', NULL, 0, 'discount', 0);
+
+INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
+VALUES ('Holiday Gift Bundle', 'Special holiday gift pack with assorted Korean pastries', TO_DATE('2023-11-15', 'YYYY-MM-DD'), TO_DATE('2023-12-25', 'YYYY-MM-DD'), 15, 'fixed', 'both', NULL, 0, 'bundle', 0);
+
+INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
+VALUES ('Dragon Ball Z Special', 'Limited time offerings of Dragon Ball themed pastries', TO_DATE('2023-10-01', 'YYYY-MM-DD'), TO_DATE('2023-10-15', 'YYYY-MM-DD'), 10, 'percentage', 'both', 'Dragon Ball Donuts', 0, 'discount', 0);
+
+INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
+VALUES ('Loyalty Member Month', 'Double points for all loyalty members this month', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-31', 'YYYY-MM-DD'), 0, 'percentage', 'both', NULL, 0, 'offer', 0);
+
+-- PRODUCTS table
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('Hotteok', 'Sweet Korean pancake filled with brown sugar, honey, and nuts', 'Pastry', 'Korea', 3.50, 0, NULL, 0, NULL, 0, 0, 20);
+
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('Bungeo-ppang', 'Fish-shaped pastry filled with sweet red bean paste', 'Pastry', 'Korea', 2.75, 1, NULL, 0, NULL, 0, 0, 15);
+
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('BTS Macarons', 'Purple macarons inspired by BTS''s signature color', 'Macaron', 'Fusion', 4.50, 0, SYSDATE + 7, 1, 'BTS', 0, 0, 25);
+
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('Yakgwa', 'Traditional Korean honey cookie', 'Cookie', 'Korea', 2.00, 0, NULL, 0, NULL, 0, 0, 30);
+
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('Naruto Dango', 'Colorful dango skewers inspired by Naruto', 'Rice Cake', 'Fusion', 3.25, 0, SYSDATE + 3, 1, 'Naruto', 0, 0, 20);
+
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('Injeolmi', 'Sweet Korean rice cake coated with soybean powder', 'Rice Cake', 'Korea', 2.50, 0, SYSDATE + 5, 0, NULL, 0, 0, 25);
+
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('Twice Cupcakes', 'Colorful cupcakes inspired by Twice members', 'Cupcake', 'Fusion', 5.00, 0, SYSDATE + 4, 1, 'Twice', 0, 0, 15);
+
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('Songpyeon', 'Half-moon shaped rice cake for Chuseok', 'Rice Cake', 'Korea', 3.00, 1, NULL, 0, NULL, 0, 0, 20);
+
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('Dragon Ball Donuts', 'Orange glazed donuts with stars inspired by Dragon Balls', 'Donut', 'Fusion', 4.25, 0, SYSDATE + 2, 1, 'Dragon Ball', 0, 0, 20);
+
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('Hwangnam-ppang', 'Traditional pastry from Gyeongju filled with red bean paste', 'Pastry', 'Korea', 3.75, 0, NULL, 0, NULL, 0, 0, 15);
+
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('Blackpink Cake Pops', 'Pink and black cake pops inspired by Blackpink', 'Cake Pop', 'Fusion', 3.50, 0, SYSDATE + 5, 1, 'Blackpink', 1, 0, 20);
+
+INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, expiry_date, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
+VALUES ('Matcha Roll Cake', 'Soft sponge cake with matcha cream filling', 'Cake', 'Fusion', 4.75, 0, SYSDATE + 3, 0, NULL, 0, 0, 10);
+
+-- INVENTORY table
+-- Adding inventory for each product with varying stock levels
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (1, 45, 25, SYSDATE-7, NULL, 'Room temperature in sealed container', 20, 100);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (2, 30, 20, SYSDATE-5, NULL, 'Refrigerate at 4°C', 15, 80);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (3, 60, 30, SYSDATE-3, NULL, 'Refrigerate at 4°C', 25, 120);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (4, 75, 35, SYSDATE-10, NULL, 'Room temperature in sealed container', 30, 150);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (5, 40, 25, SYSDATE-2, NULL, 'Refrigerate at 4°C', 20, 90);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (6, 50, 30, SYSDATE-6, NULL, 'Refrigerate at 4°C', 25, 100);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (7, 35, 20, SYSDATE-1, NULL, 'Refrigerate at 4°C', 15, 80);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (8, 25, 25, SYSDATE-8, SYSDATE+2, 'Refrigerate at 4°C', 20, 90);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (9, 45, 25, SYSDATE-4, NULL, 'Room temperature in sealed container', 20, 100);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (10, 55, 20, SYSDATE-9, NULL, 'Room temperature in sealed container', 15, 80);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (11, 30, 25, SYSDATE-2, NULL, 'Refrigerate at 4°C', 20, 90);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (12, 20, 15, SYSDATE-5, SYSDATE+3, 'Refrigerate at 4°C', 10, 60);
+
+-- SUBSCRIPTIONS table
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (1, SYSDATE-60, SYSDATE+10, 'Active', 35.00, 1, 'Standard', 0, '123 Cherry St, Denver, CO 80202');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (3, SYSDATE-45, SYSDATE+5, 'Active', 55.00, 1, 'Premium', 0, '789 Pine Blvd, Boulder, CO 80301');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (5, SYSDATE-90, SYSDATE+15, 'Paused', 35.00, 1, 'Standard', 0, '202 Elm St, Aurora, CO 80010');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (6, SYSDATE-120, SYSDATE+3, 'Active', 55.00, 1, 'Premium', 0, '303 Birch Ave, Lakewood, CO 80215');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (8, SYSDATE-30, SYSDATE+20, 'Active', 35.00, 1, 'Standard', 0, '505 Cedar Dr, Boulder, CO 80303');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (2, SYSDATE-150, SYSDATE+7, 'Canceled', 55.00, 1, 'Premium', 0, '456 Oak Ave, Denver, CO 80203');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (9, SYSDATE-75, SYSDATE+12, 'Active', 35.00, 1, 'Standard', 0, '606 Spruce Ave, Denver, CO 80206');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (4, SYSDATE-100, SYSDATE+4, 'Active', 55.00, 2, 'Premium', 1, '101 Maple Dr, Denver, CO 80202');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (10, SYSDATE-110, SYSDATE+18, 'Paused', 35.00, 1, 'Standard', 0, '707 Aspen St, Fort Collins, CO 80525');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (7, SYSDATE-85, SYSDATE+9, 'Active', 35.00, 1, 'Standard', 0, '404 Walnut Blvd, Denver, CO 80205');
+
+-- CUSTOMER_PREFERENCES table
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (1, 'Sweet, Nutty', 'Pastry, Rice Cake', 1, 'BTS, Blackpink');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (2, 'Red Bean, Matcha', 'Pastry, Cake', 1, 'EXO, Naruto');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (3, 'Sweet, Fruity', 'Macaron, Cupcake', 1, 'Twice, BTS');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (4, 'Honey, Cinnamon', 'Cookie, Pastry', 1, 'Dragon Ball, One Piece');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (5, 'Red Bean, Sweet', 'Rice Cake, Pastry', 1, 'Blackpink, Attack on Titan');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (6, 'Matcha, Black Sesame', 'Cake, Macaron', 1, 'BTS, My Hero Academia');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (7, 'Chocolate, Sweet', 'Donut, Cake Pop', 0, NULL);
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (8, 'Honey, Nutty', 'Cookie, Pastry', 1, 'Twice, Demon Slayer');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (9, 'Sweet, Red Bean', 'Rice Cake, Pastry', 1, 'Blackpink, Naruto');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (10, 'Matcha, Fruity', 'Cake, Macaron', 1, 'BTS, One Piece');
+
+-- GIFT_CARDS table
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (1, 3, 'GC-2023-1001', 50.00, 50.00, SYSDATE-30, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (2, 5, 'GC-2023-1002', 25.00, 15.75, SYSDATE-45, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (6, 8, 'GC-2023-1003', 100.00, 100.00, SYSDATE-60, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (3, 7, 'GC-2023-1004', 75.00, 0.00, SYSDATE-90, ADD_MONTHS(SYSDATE, 12), 1);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (9, 4, 'GC-2023-1005', 50.00, 23.50, SYSDATE-75, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (5, 10, 'GC-2023-1006', 30.00, 30.00, SYSDATE-15, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (8, 2, 'GC-2023-1007', 40.00, 18.25, SYSDATE-120, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (7, 1, 'GC-2023-1008', 25.00, 0.00, SYSDATE-150, ADD_MONTHS(SYSDATE, 12), 1);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (4, 6, 'GC-2023-1009', 60.00, 60.00, SYSDATE-20, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (10, 9, 'GC-2023-1010', 50.00, 35.50, SYSDATE-45, ADD_MONTHS(SYSDATE, 12), 0);
+
+-- ORDERS table
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (1, SYSDATE-25, 18.50, 'Delivered', 'Credit Card', 3, 'online', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (3, SYSDATE-20, 27.75, 'Delivered', 'Credit Card', 1, 'online', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (5, SYSDATE-18, 9.25, 'Delivered', 'PayPal', 4, 'online', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (2, SYSDATE-15, 12.50, 'Delivered', 'Credit Card', 2, 'online', 1, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (7, SYSDATE-10, 22.00, 'Delivered', 'Cash', NULL, 'in-store', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (4, SYSDATE-7, 34.25, 'Shipped', 'Gift Card', NULL, 'online', 0, 4);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (9, SYSDATE-5, 16.75, 'Processing', 'Credit Card', 5, 'online', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (6, SYSDATE-3, 45.00, 'Processing', 'Credit Card', 1, 'online', 1, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (8, SYSDATE-2, 8.50, 'Processing', 'Cash', NULL, 'in-store', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (10, SYSDATE-1, 19.25, 'Pending', 'Credit Card', 4, 'online', 0, NULL);
+
+-- FEEDBACK table
+-- FEEDBACK table with FEEDBACK_ID primary key
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (1, 1, 41, 3, 5, SYSDATE-20);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (2, 3, 42, 5, 4, SYSDATE-15);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (3, 5, 43, 2, 3, SYSDATE-12);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (4, 2, 44, 7, 5, SYSDATE-10);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (5, 7, 45, 1, 4, SYSDATE-8);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (6, 4, 46, 9, 5, SYSDATE-5);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (7, 9, 47, 6, 4, SYSDATE-3);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (8, 6, 48, 3, 5, SYSDATE-1);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (9, 1, 41, 11, 4, SYSDATE-19);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (10, 3, 42, 10, 5, SYSDATE-14);
+
+-- ORDER_ITEMS table
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (41, 3, 2, 4.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (41, 11, 2, 3.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (42, 5, 3, 3.25, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (42, 10, 4, 4.25, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (43, 2, 3, 2.75, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (44, 7, 2, 5.00, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (44, 4, 1, 2.00, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (45, 1, 4, 3.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (45, 6, 3, 2.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (46, 9, 5, 4.25, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (46, 12, 3, 4.75, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (47, 6, 4, 2.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (47, 8, 2, 3.00, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (48, 3, 6, 4.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (48, 7, 3, 5.00, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (49, 1, 2, 3.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (49, 4, 1, 2.00, 0.50, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (50, 5, 3, 3.25, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (50, 2, 4, 2.75, 0.50, SYSTIMESTAMP, SYSTIMESTAMP); 
+
+-- SUBSCRIPTION_ITEMS table
+-- SUBSCRIPTION_ITEMS table with original subscription_ids 1-10 and SUBSCRIPTION_ITEM_ID primary key
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (1, 1, 1, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (2, 1, 3, 6, 2023, 1, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (3, 2, 5, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (4, 2, 7, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (5, 3, 2, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (6, 4, 3, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (7, 4, 9, 6, 2023, 1, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (8, 5, 1, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (9, 5, 6, 6, 2023, 1, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (10, 7, 3, 6, 2023, 1, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (11, 7, 7, 6, 2023, 1, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (12, 8, 5, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+-- ORDER_STATUS_HISTORY table
+-- The triggers should automatically populate most of these, but we'll add a few manually for history
+-- these were producing errors because the order_id values needed to match those in the ORDERS column
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (1, 41, 'Created', 'Pending', 'SYSTEM', SYSDATE-25, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (2, 41, 'Pending', 'Processing', 'SYSTEM', SYSDATE-25, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (3, 41, 'Processing', 'Shipped', 'SYSTEM', SYSDATE-24, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (4, 41, 'Shipped', 'Delivered', 'SYSTEM', SYSDATE-23, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (5, 42, 'Created', 'Pending', 'SYSTEM', SYSDATE-20, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (6, 42, 'Pending', 'Processing', 'SYSTEM', SYSDATE-20, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (7, 42, 'Processing', 'Shipped', 'SYSTEM', SYSDATE-19, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (8, 42, 'Shipped', 'Delivered', 'SYSTEM', SYSDATE-18, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (9, 43, 'Created', 'Pending', 'SYSTEM', SYSDATE-18, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (10, 43, 'Pending', 'Processing', 'SYSTEM', SYSDATE-18, SYSTIMESTAMP, SYSTIMESTAMP);
+
+-- PRODUCT_PROMOTIONS table - linking products to promotions
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (3, 1, 3.83, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (7, 1, 4.25, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (11, 1, 2.98, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (5, 2, NULL, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (9, 2, NULL, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (3, 2, NULL, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (1, 3, 3.00, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (2, 3, 2.35, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (7, 6, 4.00, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (9, 9, 3.83, SYSTIMESTAMP, SYSTIMESTAMP);
+
+
+-- CUSTOMER_PROMOTION table - CORRECTED with customer_ids 11-20
+-- These inserts match the actual customer_ids in your database
+
+-- Insert sample data for customer-specific promotions
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (11, 1, 0, SYSDATE-30, SYSDATE+30, 0, 2);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (11, 3, 1, SYSDATE-60, SYSDATE-10, 1, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (12, 2, 0, SYSDATE-20, SYSDATE+40, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (13, 6, 0, SYSDATE-15, SYSDATE+15, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (14, 9, 0, SYSDATE-10, SYSDATE+50, 0, 3);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (15, 5, 1, SYSDATE-45, SYSDATE-5, 2, 2);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (16, 1, 0, SYSDATE-30, SYSDATE+30, 1, 2);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (17, 10, 0, SYSDATE-5, SYSDATE+25, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (18, 3, 0, SYSDATE-25, SYSDATE+35, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (19, 7, 0, SYSDATE-40, SYSDATE+20, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (20, 4, 1, SYSDATE-50, SYSDATE-15, 1, 1);
+
+-- Additional entries to show multiple promotions per customer
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (11, 5, 0, SYSDATE-15, SYSDATE+45, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (13, 1, 0, SYSDATE-30, SYSDATE+30, 0, 2);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (15, 7, 0, SYSDATE-10, SYSDATE+50, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (16, 2, 0, SYSDATE-20, SYSDATE+40, 0, 1);
+
+-- Commit all changes
+COMMIT;
+
+/*
+smoke tests - let's make sure our tables are properly filled with data before moving on
+*/
+
+-- test CUSTOMERS table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format specific columns based on your schema
+COLUMN customer_id FORMAT 999999 HEADING 'ID'
+COLUMN first_name FORMAT A12 HEADING 'First Name'
+COLUMN last_name FORMAT A12 HEADING 'Last Name'
+COLUMN email FORMAT A25 HEADING 'Email'
+COLUMN phone FORMAT A15 HEADING 'Phone'
+COLUMN join_date FORMAT A12 HEADING 'Join Date'
+COLUMN address FORMAT A20 HEADING 'Address'
+COLUMN city FORMAT A12 HEADING 'City'
+COLUMN state FORMAT A4 HEADING 'ST'
+COLUMN postal_code FORMAT A10 HEADING 'Postal Code'
+COLUMN is_online_customer FORMAT 9 HEADING 'Online'
+COLUMN is_in_store_customer FORMAT 9 HEADING 'In-Store'
+COLUMN loyalty_points FORMAT 9999 HEADING 'Points'
+COLUMN loyalty_status FORMAT A10 HEADING 'Status'
+COLUMN preferred_communication_method FORMAT A10 HEADING 'Comm Method'
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+-- Then run your query
+SELECT * FROM CUSTOMERS ORDER BY customer_id;
+
+-- test MARKETING_CHANNELS table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format specific columns based on your schema
+COLUMN marketing_channel_id FORMAT 999999 HEADING 'ID'
+COLUMN channel_name FORMAT A25 HEADING 'Channel Name'
+COLUMN channel_type FORMAT A15 HEADING 'Type'
+COLUMN specific_platform FORMAT A20 HEADING 'Platform'
+COLUMN customer_acquisition_cost FORMAT $99,990.99 HEADING 'Acquisition Cost'
+COLUMN conversion_rate FORMAT 990.9 HEADING 'Conv. Rate %'
+
+-- Then run your query
+SELECT * FROM MARKETING_CHANNELS ORDER BY marketing_channel_id;
+
+
+-- test PROMOTIONS table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+-- Format specific columns based on your schema
+COLUMN promotion_id FORMAT 999 HEADING 'ID'
+COLUMN promotion_name FORMAT A25 HEADING 'Promotion'
+COLUMN description FORMAT A30 HEADING 'Description'
+COLUMN start_date FORMAT A10 HEADING 'Start Date'
+COLUMN end_date FORMAT A10 HEADING 'End Date'
+COLUMN discount_amount FORMAT 990.9 HEADING 'Discount'
+COLUMN discount_type FORMAT A10 HEADING 'Type'
+COLUMN platform FORMAT A8 HEADING 'Platform'
+COLUMN kpop_anime_reference FORMAT A15 HEADING 'K-Pop/Anime Ref'
+COLUMN is_gift_card_promo FORMAT 9 HEADING 'Gift Card'
+COLUMN promotion_type FORMAT A10 HEADING 'Promo Type'
+COLUMN min_purchase FORMAT 990.99 HEADING 'Min Purch'
+
+-- Then run your query
+SELECT * FROM PROMOTIONS ORDER BY promotion_id;
+
+-- test PRODUCTS table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+-- Format specific columns based on your schema
+COLUMN product_id FORMAT 999 HEADING 'ID'
+COLUMN product_name FORMAT A20 HEADING 'Product Name'
+COLUMN description FORMAT A40 HEADING 'Description'
+COLUMN category FORMAT A12 HEADING 'Category'
+COLUMN origin FORMAT A10 HEADING 'Origin'
+COLUMN base_price FORMAT $99.99 HEADING 'Price'
+COLUMN seasonal FORMAT 9 HEADING 'Season'
+COLUMN expiry_date FORMAT A10 HEADING 'Expires'
+COLUMN limited_edition FORMAT 9 HEADING 'Ltd Ed'
+COLUMN kpop_anime_tie_in FORMAT A15 HEADING 'K-Pop/Anime'
+COLUMN online_exclusive FORMAT 9 HEADING 'Online'
+COLUMN in_store_exclusive FORMAT 9 HEADING 'In-Store'
+COLUMN min_inventory_level FORMAT 999 HEADING 'Min Inv'
+
+-- Then run your query
+SELECT * FROM PRODUCTS ORDER BY product_id;
+
+-- test INVENTORY table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+-- Format specific columns based on your schema
+COLUMN inventory_id FORMAT 999 HEADING 'Inv ID'
+COLUMN product_id FORMAT 999 HEADING 'Prod ID'
+COLUMN current_stock FORMAT 999 HEADING 'In Stock'
+COLUMN reorder_point FORMAT 999 HEADING 'Reorder At'
+COLUMN last_restock_date FORMAT A12 HEADING 'Last Restock'
+COLUMN expected_arrival FORMAT A12 HEADING 'Next Arrival'
+COLUMN storage_requirements FORMAT A30 HEADING 'Storage Requirements'
+COLUMN min_stock_level FORMAT 999 HEADING 'Min Stock'
+COLUMN max_stock_level FORMAT 999 HEADING 'Max Stock'
+
+-- Then run your query
+SELECT * FROM INVENTORY ORDER BY product_id;
+
+-- test SUBSCRIPTIONS table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+-- Format specific columns based on your schema
+COLUMN subscription_id FORMAT 999 HEADING 'Sub ID'
+COLUMN customer_id FORMAT 999 HEADING 'Cust ID'
+COLUMN start_date FORMAT A12 HEADING 'Start Date'
+COLUMN next_delivery_date FORMAT A12 HEADING 'Next Delivery'
+COLUMN subscription_status FORMAT A10 HEADING 'Status'
+COLUMN monthly_price FORMAT $99.99 HEADING 'Monthly Fee'
+COLUMN billing_cycle FORMAT 90 HEADING 'Bill Cycle'
+COLUMN subscription_type FORMAT A12 HEADING 'Type'
+COLUMN is_gift FORMAT 9 HEADING 'Gift'
+COLUMN delivery_address FORMAT A40 HEADING 'Delivery Address'
+
+-- Then run your query
+SELECT * FROM SUBSCRIPTIONS ORDER BY subscription_id;
+
+-- test CUSTOMER_PREFERENCES table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format specific columns based on your schema
+COLUMN preference_id FORMAT 999 HEADING 'Pref ID'
+COLUMN customer_id FORMAT 999 HEADING 'Cust ID'
+COLUMN flavor_preference FORMAT A25 HEADING 'Flavor Preferences'
+COLUMN product_category_preference FORMAT A30 HEADING 'Category Preferences'
+COLUMN subscription_interest FORMAT 9 HEADING 'Sub Int'
+COLUMN kpop_anime_interest FORMAT A30 HEADING 'K-Pop/Anime Interests'
+
+-- Then run your query
+SELECT * FROM CUSTOMER_PREFERENCES ORDER BY customer_id;
+
+-- test GIFT_CARDS table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+-- Format specific columns based on your schema
+COLUMN gift_card_id FORMAT 999 HEADING 'Card ID'
+COLUMN issuer_customer_id FORMAT 999 HEADING 'Issuer ID'
+COLUMN recipient_customer_id FORMAT 999 HEADING 'Recip ID'
+COLUMN gift_card_code FORMAT A15 HEADING 'Gift Card Code'
+COLUMN initial_amount FORMAT $990.99 HEADING 'Initial Amount'
+COLUMN current_balance FORMAT $990.99 HEADING 'Current Balance'
+COLUMN issue_date FORMAT A12 HEADING 'Issue Date'
+COLUMN expiry_date FORMAT A12 HEADING 'Expiry Date'
+COLUMN is_redeemed FORMAT 9 HEADING 'Redeemed'
+
+-- Then run your query
+SELECT * FROM GIFT_CARDS ORDER BY gift_card_id;
+
+-- test ORDERS table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+-- Format specific columns based on your schema
+COLUMN order_id FORMAT 999999 HEADING 'Order ID'
+COLUMN customer_id FORMAT 999999 HEADING 'Cust ID'
+COLUMN order_date FORMAT A12 HEADING 'Order Date'
+COLUMN total_amount FORMAT $990.99 HEADING 'Total'
+COLUMN order_status FORMAT A12 HEADING 'Status'
+COLUMN payment_method FORMAT A15 HEADING 'Payment Method'
+COLUMN marketing_channel_id FORMAT 999 HEADING 'Mktg Ch'
+COLUMN platform FORMAT A10 HEADING 'Platform'
+COLUMN is_gift FORMAT 9 HEADING 'Gift'
+COLUMN gift_card_id FORMAT 999999 HEADING 'Gift Card ID'
+COLUMN created_at FORMAT A19 HEADING 'Created'
+COLUMN updated_at FORMAT A19 HEADING 'Updated'
+
+-- Then run your query
+SELECT * FROM ORDERS ORDER BY order_id;
+
+-- test FEEDBACK table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+-- Format specific columns based on your schema
+COLUMN feedback_id FORMAT 999 HEADING 'ID'
+COLUMN customer_id FORMAT 999 HEADING 'Cust ID'
+COLUMN order_id FORMAT 999999 HEADING 'Order ID'
+COLUMN product_id FORMAT 999 HEADING 'Prod ID'
+COLUMN rating FORMAT 9.9 HEADING 'Rating'
+COLUMN feedback_date FORMAT A12 HEADING 'Date'
+
+-- Then run your query
+SELECT * FROM FEEDBACK ORDER BY feedback_id;
+
+-- test ORDER_ITEMS table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';
+
+-- Format specific columns based on your schema
+COLUMN order_item_id FORMAT 999999 HEADING 'Item ID'
+COLUMN order_id FORMAT 999999 HEADING 'Order ID'
+COLUMN product_id FORMAT 999 HEADING 'Prod ID'
+COLUMN quantity FORMAT 999 HEADING 'Qty'
+COLUMN unit_price FORMAT $99.99 HEADING 'Unit Price'
+COLUMN discount FORMAT $99.99 HEADING 'Discount'
+COLUMN item_total FORMAT $999.99 HEADING 'Total'
+COLUMN created_at FORMAT A19 HEADING 'Created'
+COLUMN updated_at FORMAT A19 HEADING 'Updated'
+
+-- Run query with calculated line item total
+SELECT 
+    order_item_id,
+    order_id,
+    product_id,
+    quantity,
+    unit_price,
+    discount,
+    (quantity * unit_price) - discount AS item_total,
+    created_at,
+    updated_at
+FROM ORDER_ITEMS
+ORDER BY order_id, order_item_id;
+
+-- test SUBSCRIPTION_ITEMS table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';
+
+-- Format specific columns based on your schema
+COLUMN subscription_item_id FORMAT 999999 HEADING 'Item ID'
+COLUMN subscription_id FORMAT 999 HEADING 'Sub ID'
+COLUMN product_id FORMAT 999 HEADING 'Prod ID'
+COLUMN month FORMAT 99 HEADING 'Month'
+COLUMN year FORMAT 9999 HEADING 'Year'
+COLUMN quantity FORMAT 999 HEADING 'Qty'
+COLUMN period FORMAT A15 HEADING 'Period'
+COLUMN created_at FORMAT A19 HEADING 'Created'
+COLUMN updated_at FORMAT A19 HEADING 'Updated'
+
+-- Run query with formatted period
+SELECT 
+    subscription_item_id,
+    subscription_id,
+    product_id,
+    month,
+    year,
+    quantity,
+    TO_CHAR(TO_DATE(month || '/01/' || year, 'MM/DD/YYYY'), 'Month YYYY') AS period,
+    created_at,
+    updated_at
+FROM SUBSCRIPTION_ITEMS
+ORDER BY subscription_id, year, month, subscription_item_id;
+
+-- test ORDER_STATUS_HISTORY table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';
+
+-- Format specific columns based on your schema
+COLUMN history_id FORMAT 999999 HEADING 'Hist ID'
+COLUMN order_id FORMAT 999999 HEADING 'Order ID'
+COLUMN previous_status FORMAT A15 HEADING 'Previous Status'
+COLUMN new_status FORMAT A15 HEADING 'New Status'
+COLUMN updated_by FORMAT A15 HEADING 'Updated By'
+COLUMN status_change_date FORMAT A19 HEADING 'Status Change Date'
+COLUMN created_at FORMAT A19 HEADING 'Created At'
+COLUMN updated_at FORMAT A19 HEADING 'Updated At'
+
+-- Then run your query
+SELECT * FROM ORDER_STATUS_HISTORY ORDER BY order_id, status_change_date;
+
+
+-- test PRODUCT_PROMOTIONS table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD HH24:MI:SS';
+
+-- Format specific columns based on your schema
+COLUMN product_promotion_id FORMAT 999999 HEADING 'PP ID'
+COLUMN product_id FORMAT 999 HEADING 'Prod ID'
+COLUMN promotion_id FORMAT 999 HEADING 'Promo ID'
+COLUMN special_price FORMAT $990.99 HEADING 'Special Price'
+COLUMN created_at FORMAT A19 HEADING 'Created At'
+COLUMN updated_at FORMAT A19 HEADING 'Updated At'
+
+-- Then run your query
+SELECT * FROM PRODUCT_PROMOTIONS ORDER BY product_id, promotion_id;
+
+
+-- Sample query to test CUSTOMER_PROMOTION table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+-- Format specific columns based on your schema
+COLUMN customer_promotion_id FORMAT 999 HEADING 'CP ID'
+COLUMN customer_id FORMAT 999 HEADING 'Cust ID'
+COLUMN promotion_id FORMAT 999 HEADING 'Promo ID'
+COLUMN is_used FORMAT 9 HEADING 'Used'
+COLUMN date_offered FORMAT A12 HEADING 'Date Offered'
+COLUMN expiry_date FORMAT A12 HEADING 'Expiry Date'
+COLUMN times_used FORMAT 999 HEADING 'Times Used'
+COLUMN usage_limit FORMAT 999 HEADING 'Usage Limit'
+COLUMN status FORMAT A20 HEADING 'Status'
+
+-- Run query with calculated status
+SELECT 
+    customer_promotion_id,
+    customer_id,
+    promotion_id,
+    is_used,
+    date_offered,
+    expiry_date,
+    times_used,
+    usage_limit,
+    CASE 
+        WHEN expiry_date < SYSDATE THEN 'Expired'
+        WHEN times_used >= usage_limit THEN 'Usage Limit Reached'
+        WHEN is_used = 1 THEN 'Used'
+        ELSE 'Active' 
+    END AS status
+FROM CUSTOMER_PROMOTION
+ORDER BY customer_id, promotion_id;
+
+-- Sample query to join with customer and promotion details
+SELECT 
+    cp.customer_promotion_id,
+    c.first_name || ' ' || c.last_name AS customer_name,
+    p.promotion_name,
+    p.discount_amount,
+    p.discount_type,
+    cp.date_offered,
+    cp.expiry_date,
+    cp.times_used,
+    cp.usage_limit,
+    CASE 
+        WHEN cp.expiry_date < SYSDATE THEN 'Expired'
+        WHEN cp.times_used >= cp.usage_limit THEN 'Usage Limit Reached'
+        WHEN cp.is_used = 1 THEN 'Used'
+        ELSE 'Active' 
+    END AS status
+FROM CUSTOMER_PROMOTION cp
+JOIN CUSTOMERS c ON cp.customer_id = c.customer_id
+JOIN PROMOTIONS p ON cp.promotion_id = p.promotion_id
+ORDER BY customer_name, p.promotion_name;
+
+-- Check that everything inserted correctly
+SELECT COUNT(*) AS total_customer_promotions FROM CUSTOMER_PROMOTION;
