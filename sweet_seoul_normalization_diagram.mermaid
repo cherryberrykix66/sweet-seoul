@@ -1,0 +1,137 @@
+erDiagram
+    %% Core Entities with their relationships
+    CUSTOMERS ||--o{ ORDERS : places
+    CUSTOMERS ||--o{ SUBSCRIPTIONS : subscribes_to
+    CUSTOMERS ||--o{ CUSTOMER_PREFERENCES : has
+    CUSTOMERS ||--o{ FEEDBACK : provides
+    CUSTOMERS ||--o{ CUSTOMER_PROMOTION : receives
+    CUSTOMERS ||--o{ GIFT_CARDS_ISSUED : issues
+    CUSTOMERS ||--o{ GIFT_CARDS_RECEIVED : receives
+    
+    PRODUCTS ||--o{ ORDER_ITEMS : included_in
+    PRODUCTS ||--o{ SUBSCRIPTION_ITEMS : featured_in
+    PRODUCTS ||--|| INVENTORY : tracked_in
+    PRODUCTS ||--o{ PRODUCT_PROMOTIONS : featured_in
+    PRODUCTS ||--o{ FEEDBACK : rated_in
+    
+    ORDERS ||--|{ ORDER_ITEMS : contains
+    ORDERS ||--o{ ORDER_STATUS_HISTORY : tracks
+    ORDERS }o--o| MARKETING_CHANNELS : attributed_to
+    ORDERS }o--o| GIFT_CARDS : redeems
+    
+    SUBSCRIPTIONS ||--|{ SUBSCRIPTION_ITEMS : includes
+    
+    PROMOTIONS ||--o{ PRODUCT_PROMOTIONS : applies_to
+    PROMOTIONS ||--o{ CUSTOMER_PROMOTION : offered_to
+    
+    %% Entity definitions with keys
+    CUSTOMERS {
+        int customer_id PK
+        string email UK
+        string first_name
+        string last_name
+    }
+    
+    ORDERS {
+        int order_id PK
+        int customer_id FK
+        int marketing_channel_id FK
+        int gift_card_id FK
+        date order_date
+    }
+    
+    ORDER_STATUS_HISTORY {
+        int history_id PK
+        int order_id FK
+        string status
+    }
+    
+    ORDER_ITEMS {
+        int order_item_id PK
+        int order_id FK
+        int product_id FK
+        int quantity
+    }
+    
+    PRODUCTS {
+        int product_id PK
+        string product_name UK
+        string description
+    }
+    
+    INVENTORY {
+        int inventory_id PK
+        int product_id FK
+        int current_stock
+    }
+    
+    MARKETING_CHANNELS {
+        int marketing_channel_id PK
+        string channel_name UK
+        string channel_type
+    }
+    
+    SUBSCRIPTIONS {
+        int subscription_id PK
+        int customer_id FK
+        date start_date
+    }
+    
+    SUBSCRIPTION_ITEMS {
+        int subscription_item_id PK
+        int subscription_id FK
+        int product_id FK
+        int quantity
+    }
+    
+    PROMOTIONS {
+        int promotion_id PK
+        string promotion_name
+        date start_date
+        date end_date
+    }
+    
+    CUSTOMER_PROMOTION {
+        int customer_promotion_id PK
+        int customer_id FK
+        int promotion_id FK
+        boolean is_used
+        int usage_limit
+    }
+    
+    PRODUCT_PROMOTIONS {
+        int product_promotion_id PK
+        int product_id FK
+        int promotion_id FK
+        decimal special_price
+    }
+    
+    CUSTOMER_PREFERENCES {
+        int preference_id PK
+        int customer_id FK
+        string preferences
+    }
+    
+    FEEDBACK {
+        int feedback_id PK
+        int customer_id FK
+        int order_id FK
+        int product_id FK
+        int rating
+    }
+    
+    GIFT_CARDS {
+        int gift_card_id PK
+        int issuer_customer_id FK
+        int recipient_customer_id FK
+        string gift_card_code UK
+    }
+    
+    %% These are aliases to show the two relationships with GIFT_CARDS
+    GIFT_CARDS_ISSUED {
+        int gift_card_id PK
+    }
+    
+    GIFT_CARDS_RECEIVED {
+        int gift_card_id PK
+    }
