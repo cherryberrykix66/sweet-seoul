@@ -1,0 +1,223 @@
+erDiagram
+    CUSTOMERS ||--o{ ORDERS : places
+    CUSTOMERS ||--o{ SUBSCRIPTIONS : subscribes_to
+    CUSTOMERS ||--o{ CUSTOMER_PREFERENCES : has
+    CUSTOMERS ||--o{ FEEDBACK : provides
+    CUSTOMERS ||--o{ CUSTOMER_PROMOTION : receives
+    
+    CUSTOMER_PROMOTION }o--|| PROMOTIONS : links_to
+
+    ORDERS ||--|{ ORDER_ITEMS : contains
+    ORDERS }o--o| MARKETING_CHANNELS : attributed_to
+    ORDERS ||--o{ ORDER_STATUS_HISTORY : tracks
+
+    PRODUCTS ||--o{ ORDER_ITEMS : included_in
+    PRODUCTS ||--o{ SUBSCRIPTION_ITEMS : featured_in
+    PRODUCTS ||--|| INVENTORY : tracked_in
+    PRODUCTS }o--o{ PRODUCT_PROMOTIONS : featured_in
+
+    SUBSCRIPTIONS ||--|{ SUBSCRIPTION_ITEMS : includes
+    
+    PROMOTIONS ||--o{ PRODUCT_PROMOTIONS : contains
+    
+    GIFT_CARDS ||--o{ ORDERS : redeemed_in
+    
+    CUSTOMERS {
+        int customer_id PK
+        string first_name
+        string last_name
+        string email
+        string phone
+        date join_date
+        string address
+        string city
+        string state
+        string postal_code
+        boolean is_online_customer
+        boolean is_in_store_customer
+        int loyalty_points
+        string loyalty_status
+        string preferred_communication_method
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ORDERS {
+        int order_id PK
+        int customer_id FK
+        date order_date
+        decimal total_amount
+        string order_status
+        string payment_method
+        int marketing_channel_id FK
+        string platform "online/in-store"
+        boolean is_gift
+        int gift_card_id FK "null if not redeemed with gift card"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ORDER_STATUS_HISTORY {
+        int history_id PK
+        int order_id FK
+        string previous_status
+        string new_status
+        timestamp status_change_date
+        string updated_by
+    }
+
+    ORDER_ITEMS {
+        int order_item_id PK
+        int order_id FK
+        int product_id FK
+        int quantity
+        decimal unit_price
+        decimal discount
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PRODUCTS {
+        int product_id PK
+        string product_name
+        string description
+        string category
+        string origin
+        decimal base_price
+        boolean seasonal
+        date expiry_date "product availability end date"
+        boolean limited_edition
+        string kpop_anime_tie_in
+        boolean online_exclusive
+        boolean in_store_exclusive
+        int min_inventory_level
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    INVENTORY {
+        int inventory_id PK
+        int product_id FK
+        int current_stock
+        int reorder_point
+        date last_restock_date
+        date expected_arrival
+        string storage_requirements
+        int min_stock_level
+        int max_stock_level
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    MARKETING_CHANNELS {
+        int marketing_channel_id PK
+        string channel_name
+        string channel_type "social/local"
+        string specific_platform "TikTok/Instagram/Facebook/Billboard/etc"
+        decimal customer_acquisition_cost
+        int conversion_rate
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    SUBSCRIPTIONS {
+        int subscription_id PK
+        int customer_id FK
+        date start_date
+        date next_delivery_date
+        string subscription_status
+        decimal monthly_price
+        int billing_cycle
+        string subscription_type "standard/premium"
+        boolean is_gift
+        string delivery_address
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    SUBSCRIPTION_ITEMS {
+        int subscription_item_id PK
+        int subscription_id FK
+        int product_id FK
+        int month
+        int year
+        int quantity
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PROMOTIONS {
+        int promotion_id PK
+        string promotion_name
+        string description
+        date start_date
+        date end_date
+        decimal discount_amount
+        string discount_type "percentage/fixed"
+        string platform "online/in-store/both"
+        string kpop_anime_reference
+        boolean is_gift_card_promo
+        string promotion_type "discount/bundle/offer"
+        decimal min_purchase
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CUSTOMER_PROMOTION {
+        int customer_promotion_id PK
+        int customer_id FK
+        int promotion_id FK
+        boolean is_used
+        date date_offered
+        date expiry_date
+        int times_used
+        int usage_limit
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PRODUCT_PROMOTIONS {
+        int product_promotion_id PK
+        int product_id FK
+        int promotion_id FK
+        decimal special_price
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CUSTOMER_PREFERENCES {
+        int preference_id PK
+        int customer_id FK
+        string flavor_preference
+        string product_category_preference
+        boolean subscription_interest
+        string kpop_anime_interest
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    FEEDBACK {
+        int feedback_id PK
+        int customer_id FK
+        int order_id FK "null for general feedback"
+        int product_id FK "null for general feedback"
+        int rating "1-5"
+        string comment
+        date feedback_date
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    GIFT_CARDS {
+        int gift_card_id PK
+        int issuer_customer_id FK
+        int recipient_customer_id FK "null if physical card"
+        string gift_card_code
+        decimal initial_amount
+        decimal current_balance
+        date issue_date
+        date expiry_date
+        boolean is_redeemed
+        timestamp created_at
+        timestamp updated_at
+    }
