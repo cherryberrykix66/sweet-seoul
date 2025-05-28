@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functional Dependency Diagram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .table-diagram {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .table-diagram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .table-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            transition: color 0.2s ease;
+        }
+        
+        .table-diagram:hover .table-name {
+            color: #1a472a;
+        }
+        
+        .dependency-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .primary-key {
+            background-color: #2c5aa0;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .primary-key:hover {
+            background-color: #1a472a;
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(44, 90, 160, 0.4);
+        }
+        
+        .arrow {
+            font-size: 24px;
+            color: #2c5aa0;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .table-diagram:hover .arrow {
+            color: #1a472a;
+            transform: scale(1.1);
+        }
+        
+        .dependent-attributes {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .attribute {
+            background-color: #e8f0fe;
+            color: #1a73e8;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            border: 1px solid #d2e3fc;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        
+        .attribute:hover {
+            background-color: #1565c0;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 12px rgba(21, 101, 192, 0.3);
+            border-color: #1565c0;
+        }
+        
+        .foreign-keys {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            transition: border-color 0.3s ease;
+        }
+        
+        .table-diagram:hover .foreign-keys {
+            border-top-color: #2c5aa0;
+        }
+        
+        .foreign-key-title {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+        
+        .table-diagram:hover .foreign-key-title {
+            color: #2c5aa0;
+        }
+        
+        .foreign-key {
+            background-color: #fff3e0;
+            color: #e65100;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-bottom: 5px;
+            display: inline-block;
+            border: 1px solid #ffcc02;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        
+        .foreign-key:hover {
+            background-color: #ff6f00;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(255, 111, 0, 0.4);
+            border-color: #ff6f00;
+        }
+        
+        .legend {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .legend:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .legend-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5aa0;
+            margin-bottom: 10px;
+            transition: color 0.2s ease;
+        }
+        
+        .legend:hover .legend-title {
+            color: #1a472a;
+        }
+        
+        .legend-item {
+            margin: 5px 0;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+        
+        .legend:hover .legend-item {
+            color: #333;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c5aa0;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        h1:hover {
+            color: #1a472a;
+            text-shadow: 0 2px 4px rgba(44, 90, 160, 0.2);
+        }
+        
+        /* Additional subtle animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .table-diagram {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .table-diagram:nth-child(even) {
+            animation-delay: 0.1s;
+        }
+        
+        .table-diagram:nth-child(odd) {
+            animation-delay: 0.05s;
+        }
+        
+        /* Hover effect for the entire container */
+        .container:hover .table-diagram:not(:hover) {
+            opacity: 0.7;
+            transform: scale(0.98);
+        }
+        
+        /* Add a subtle glow effect */
+        .primary-key::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #2c5aa0, #1a472a);
+            border-radius: 6px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .primary-key:hover::before {
+            opacity: 0.5;
+        }
+        
+        /* Responsive design improvements */
+        @media (max-width: 768px) {
+            .dependency-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .primary-key {
+                min-width: auto;
+                align-self: flex-start;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+                align-self: center;
+            }
+            
+            .table-diagram:hover .arrow {
+                transform: rotate(90deg) scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Functional Dependency Diagrams</h1>
+        
+        <div class="legend">
+            <div class="legend-title">Legend:</div>
+            <div class="legend-item">• <strong>A → B, C, D</strong> means that attribute A functionally determines attributes B, C, and D</div>
+            <div class="legend-item">• <strong>A -->> B</strong> means that attribute A references attribute B in another entity (foreign key relationship)</div>
+        </div>
+
+        <!-- CUSTOMERS -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: CUSTOMERS</div>
+            <div class="dependency-container">
+                <div class="primary-key">customer_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">first_name</div>
+                    <div class="attribute">last_name</div>
+                    <div class="attribute">email</div>
+                    <div class="attribute">phone</div>
+                    <div class="attribute">join_date</div>
+                    <div class="attribute">address</div>
+                    <div class="attribute">city</div>
+                    <div class="attribute">state</div>
+                    <div class="attribute">postal_code</div>
+                    <div class="attribute">is_online_customer</div>
+                    <div class="attribute">is_in_store_customer</div>
+                    <div class="attribute">loyalty_points</div>
+                    <div class="attribute">loyalty_status</div>
+                    <div class="attribute">preferred_communication_method</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDERS -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: ORDERS</div>
+            <div class="dependency-container">
+                <div class="primary-key">order_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">customer_id</div>
+                    <div class="attribute">order_date</div>
+                    <div class="attribute">total_amount</div>
+                    <div class="attribute">order_status</div>
+                    <div class="attribute">payment_method</div>
+                    <div class="attribute">marketing_channel_id</div>
+                    <div class="attribute">platform</div>
+                    <div class="attribute">is_gift</div>
+                    <div class="attribute">gift_card_id</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+            <div class="foreign-keys">
+                <div class="foreign-key-title">Foreign Key References:</div>
+                <div class="foreign-key">customer_id -->> CUSTOMERS.customer_id</div>
+                <div class="foreign-key">marketing_channel_id -->> MARKETING_CHANNELS.marketing_channel_id</div>
+                <div class="foreign-key">gift_card_id -->> GIFT_CARDS.gift_card_id</div>
+            </div>
+        </div>
+
+        <!-- ORDER_STATUS_HISTORY -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: ORDER_STATUS_HISTORY</div>
+            <div class="dependency-container">
+                <div class="primary-key">history_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">order_id</div>
+                    <div class="attribute">previous_status</div>
+                    <div class="attribute">new_status</div>
+                    <div class="attribute">status_change_date</div>
+                    <div class="attribute">updated_by</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+            <div class="foreign-keys">
+                <div class="foreign-key-title">Foreign Key References:</div>
+                <div class="foreign-key">order_id -->> ORDERS.order_id</div>
+            </div>
+        </div>
+
+        <!-- ORDER_ITEMS -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: ORDER_ITEMS</div>
+            <div class="dependency-container">
+                <div class="primary-key">order_item_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">order_id</div>
+                    <div class="attribute">product_id</div>
+                    <div class="attribute">quantity</div>
+                    <div class="attribute">unit_price</div>
+                    <div class="attribute">discount</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+            <div class="foreign-keys">
+                <div class="foreign-key-title">Foreign Key References:</div>
+                <div class="foreign-key">order_id -->> ORDERS.order_id</div>
+                <div class="foreign-key">product_id -->> PRODUCTS.product_id</div>
+            </div>
+        </div>
+
+        <!-- PRODUCTS -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: PRODUCTS</div>
+            <div class="dependency-container">
+                <div class="primary-key">product_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">product_name</div>
+                    <div class="attribute">description</div>
+                    <div class="attribute">category</div>
+                    <div class="attribute">origin</div>
+                    <div class="attribute">base_price</div>
+                    <div class="attribute">seasonal</div>
+                    <div class="attribute">expiry_date</div>
+                    <div class="attribute">limited_edition</div>
+                    <div class="attribute">kpop_anime_tie_in</div>
+                    <div class="attribute">online_exclusive</div>
+                    <div class="attribute">in_store_exclusive</div>
+                    <div class="attribute">min_inventory_level</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INVENTORY -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: INVENTORY</div>
+            <div class="dependency-container">
+                <div class="primary-key">inventory_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">product_id</div>
+                    <div class="attribute">current_stock</div>
+                    <div class="attribute">reorder_point</div>
+                    <div class="attribute">last_restock_date</div>
+                    <div class="attribute">expected_arrival</div>
+                    <div class="attribute">storage_requirements</div>
+                    <div class="attribute">min_stock_level</div>
+                    <div class="attribute">max_stock_level</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+            <div class="foreign-keys">
+                <div class="foreign-key-title">Foreign Key References:</div>
+                <div class="foreign-key">product_id -->> PRODUCTS.product_id</div>
+            </div>
+        </div>
+
+        <!-- MARKETING_CHANNELS -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: MARKETING_CHANNELS</div>
+            <div class="dependency-container">
+                <div class="primary-key">marketing_channel_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">channel_name</div>
+                    <div class="attribute">channel_type</div>
+                    <div class="attribute">specific_platform</div>
+                    <div class="attribute">customer_acquisition_cost</div>
+                    <div class="attribute">conversion_rate</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBSCRIPTIONS -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: SUBSCRIPTIONS</div>
+            <div class="dependency-container">
+                <div class="primary-key">subscription_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">customer_id</div>
+                    <div class="attribute">start_date</div>
+                    <div class="attribute">next_delivery_date</div>
+                    <div class="attribute">subscription_status</div>
+                    <div class="attribute">monthly_price</div>
+                    <div class="attribute">billing_cycle</div>
+                    <div class="attribute">subscription_type</div>
+                    <div class="attribute">is_gift</div>
+                    <div class="attribute">delivery_address</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+            <div class="foreign-keys">
+                <div class="foreign-key-title">Foreign Key References:</div>
+                <div class="foreign-key">customer_id -->> CUSTOMERS.customer_id</div>
+            </div>
+        </div>
+
+        <!-- SUBSCRIPTION_ITEMS -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: SUBSCRIPTION_ITEMS</div>
+            <div class="dependency-container">
+                <div class="primary-key">subscription_item_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">subscription_id</div>
+                    <div class="attribute">product_id</div>
+                    <div class="attribute">month</div>
+                    <div class="attribute">year</div>
+                    <div class="attribute">quantity</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+            <div class="foreign-keys">
+                <div class="foreign-key-title">Foreign Key References:</div>
+                <div class="foreign-key">subscription_id -->> SUBSCRIPTIONS.subscription_id</div>
+                <div class="foreign-key">product_id -->> PRODUCTS.product_id</div>
+            </div>
+        </div>
+
+        <!-- PROMOTIONS -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: PROMOTIONS</div>
+            <div class="dependency-container">
+                <div class="primary-key">promotion_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">promotion_name</div>
+                    <div class="attribute">description</div>
+                    <div class="attribute">start_date</div>
+                    <div class="attribute">end_date</div>
+                    <div class="attribute">discount_amount</div>
+                    <div class="attribute">discount_type</div>
+                    <div class="attribute">platform</div>
+                    <div class="attribute">kpop_anime_reference</div>
+                    <div class="attribute">is_gift_card_promo</div>
+                    <div class="attribute">promotion_type</div>
+                    <div class="attribute">min_purchase</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CUSTOMER_PROMOTION -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: CUSTOMER_PROMOTION</div>
+            <div class="dependency-container">
+                <div class="primary-key">customer_promotion_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">customer_id</div>
+                    <div class="attribute">promotion_id</div>
+                    <div class="attribute">is_used</div>
+                    <div class="attribute">date_offered</div>
+                    <div class="attribute">expiry_date</div>
+                    <div class="attribute">times_used</div>
+                    <div class="attribute">usage_limit</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+            <div class="foreign-keys">
+                <div class="foreign-key-title">Foreign Key References:</div>
+                <div class="foreign-key">customer_id -->> CUSTOMERS.customer_id</div>
+                <div class="foreign-key">promotion_id -->> PROMOTIONS.promotion_id</div>
+            </div>
+        </div>
+
+        <!-- PRODUCT_PROMOTIONS -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: PRODUCT_PROMOTIONS</div>
+            <div class="dependency-container">
+                <div class="primary-key">product_promotion_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">product_id</div>
+                    <div class="attribute">promotion_id</div>
+                    <div class="attribute">special_price</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+            <div class="foreign-keys">
+                <div class="foreign-key-title">Foreign Key References:</div>
+                <div class="foreign-key">product_id -->> PRODUCTS.product_id</div>
+                <div class="foreign-key">promotion_id -->> PROMOTIONS.promotion_id</div>
+            </div>
+        </div>
+
+        <!-- CUSTOMER_PREFERENCES -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: CUSTOMER_PREFERENCES</div>
+            <div class="dependency-container">
+                <div class="primary-key">preference_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">customer_id</div>
+                    <div class="attribute">flavor_preference</div>
+                    <div class="attribute">product_category_preference</div>
+                    <div class="attribute">subscription_interest</div>
+                    <div class="attribute">kpop_anime_interest</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+            <div class="foreign-keys">
+                <div class="foreign-key-title">Foreign Key References:</div>
+                <div class="foreign-key">customer_id -->> CUSTOMERS.customer_id</div>
+            </div>
+        </div>
+
+        <!-- FEEDBACK -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: FEEDBACK</div>
+            <div class="dependency-container">
+                <div class="primary-key">feedback_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">customer_id</div>
+                    <div class="attribute">order_id</div>
+                    <div class="attribute">product_id</div>
+                    <div class="attribute">rating</div>
+                    <div class="attribute">comment</div>
+                    <div class="attribute">feedback_date</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+            <div class="foreign-keys">
+                <div class="foreign-key-title">Foreign Key References:</div>
+                <div class="foreign-key">customer_id -->> CUSTOMERS.customer_id</div>
+                <div class="foreign-key">order_id -->> ORDERS.order_id</div>
+                <div class="foreign-key">product_id -->> PRODUCTS.product_id</div>
+            </div>
+        </div>
+
+        <!-- GIFT_CARDS -->
+        <div class="table-diagram">
+            <div class="table-name">Table Name: GIFT_CARDS</div>
+            <div class="dependency-container">
+                <div class="primary-key">gift_card_id</div>
+                <div class="arrow">→</div>
+                <div class="dependent-attributes">
+                    <div class="attribute">issuer_customer_id</div>
+                    <div class="attribute">recipient_customer_id</div>
+                    <div class="attribute">gift_card_code</div>
+                    <div class="attribute">initial_amount</div>
+                    <div class="attribute">current_balance</div>
+                    <div class="attribute">issue_date</div>
+                    <div class="attribute">expiry_date</div>
+                    <div class="attribute">is_redeemed</div>
+                    <div class="attribute">created_at</div>
+                    <div class="attribute">updated_at</div>
+                </div>
+            </div>
+            <div class="foreign-keys">
+                <div class="foreign-key-title">Foreign Key References:</div>
+                <div class="foreign-key">issuer_customer_id -->> CUSTOMERS.customer_id</div>
+                <div class="foreign-key">recipient_customer_id -->> CUSTOMERS.customer_id</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
