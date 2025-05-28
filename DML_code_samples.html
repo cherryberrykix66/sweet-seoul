@@ -390,4 +390,662 @@ INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_da
 VALUES (5, 40, 25, SYSDATE-2, NULL, 'Refrigerate at 4°C', 20, 90);
 
 INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
-VALUES (6, 50, 30, SYSDATE-6, NULL, 'Refrigerate at 4°C',
+VALUES (6, 50, 30, SYSDATE-6, NULL, 'Refrigerate at 4°C', 25, 100);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (7, 35, 20, SYSDATE-1, NULL, 'Refrigerate at 4°C', 15, 80);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (8, 25, 25, SYSDATE-8, SYSDATE+2, 'Refrigerate at 4°C', 20, 90);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (9, 45, 25, SYSDATE-4, NULL, 'Room temperature in sealed container', 20, 100);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (10, 55, 20, SYSDATE-9, NULL, 'Room temperature in sealed container', 15, 80);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (11, 30, 25, SYSDATE-2, NULL, 'Refrigerate at 4°C', 20, 90);
+
+INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
+VALUES (12, 20, 15, SYSDATE-5, SYSDATE+3, 'Refrigerate at 4°C', 10, 60);</code></pre>
+        </div>
+    </div>
+
+    <h2 id="subscriptions-data">Subscriptions Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Subscription Records</div>
+        <div class="code-description">Monthly subscription boxes with different tiers and delivery schedules</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- SUBSCRIPTIONS table
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (1, SYSDATE-60, SYSDATE+10, 'Active', 35.00, 1, 'Standard', 0, '123 Cherry St, Denver, CO 80202');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (3, SYSDATE-45, SYSDATE+5, 'Active', 55.00, 1, 'Premium', 0, '789 Pine Blvd, Boulder, CO 80301');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (5, SYSDATE-90, SYSDATE+15, 'Paused', 35.00, 1, 'Standard', 0, '202 Elm St, Aurora, CO 80010');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (6, SYSDATE-120, SYSDATE+3, 'Active', 55.00, 1, 'Premium', 0, '303 Birch Ave, Lakewood, CO 80215');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (8, SYSDATE-30, SYSDATE+20, 'Active', 35.00, 1, 'Standard', 0, '505 Cedar Dr, Boulder, CO 80303');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (2, SYSDATE-150, SYSDATE+7, 'Canceled', 55.00, 1, 'Premium', 0, '456 Oak Ave, Denver, CO 80203');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (9, SYSDATE-75, SYSDATE+12, 'Active', 35.00, 1, 'Standard', 0, '606 Spruce Ave, Denver, CO 80206');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (4, SYSDATE-100, SYSDATE+4, 'Active', 55.00, 2, 'Premium', 1, '101 Maple Dr, Denver, CO 80202');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (10, SYSDATE-110, SYSDATE+18, 'Paused', 35.00, 1, 'Standard', 0, '707 Aspen St, Fort Collins, CO 80525');
+
+INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle, subscription_type, is_gift, delivery_address)
+VALUES (7, SYSDATE-85, SYSDATE+9, 'Active', 35.00, 1, 'Standard', 0, '404 Walnut Blvd, Denver, CO 80205');</code></pre>
+        </div>
+    </div>
+
+    <h2 id="preferences-data">Customer Preferences Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Customer Preference Records</div>
+        <div class="code-description">Customer preferences for flavors, categories, and K-pop/anime interests for personalized recommendations</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- CUSTOMER_PREFERENCES table
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (1, 'Sweet, Nutty', 'Pastry, Rice Cake', 1, 'BTS, Blackpink');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (2, 'Red Bean, Matcha', 'Pastry, Cake', 1, 'EXO, Naruto');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (3, 'Sweet, Fruity', 'Macaron, Cupcake', 1, 'Twice, BTS');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (4, 'Honey, Cinnamon', 'Cookie, Pastry', 1, 'Dragon Ball, One Piece');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (5, 'Red Bean, Sweet', 'Rice Cake, Pastry', 1, 'Blackpink, Attack on Titan');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (6, 'Matcha, Black Sesame', 'Cake, Macaron', 1, 'BTS, My Hero Academia');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (7, 'Chocolate, Sweet', 'Donut, Cake Pop', 0, NULL);
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (8, 'Honey, Nutty', 'Cookie, Pastry', 1, 'Twice, Demon Slayer');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (9, 'Sweet, Red Bean', 'Rice Cake, Pastry', 1, 'Blackpink, Naruto');
+
+INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
+VALUES (10, 'Matcha, Fruity', 'Cake, Macaron', 1, 'BTS, One Piece');</code></pre>
+        </div>
+    </div>
+
+    <h2 id="gift-cards-data">Gift Cards Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Gift Card Records</div>
+        <div class="code-description">Gift cards with varying balances and redemption statuses</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- GIFT_CARDS table
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (1, 3, 'GC-2023-1001', 50.00, 50.00, SYSDATE-30, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (2, 5, 'GC-2023-1002', 25.00, 15.75, SYSDATE-45, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (6, 8, 'GC-2023-1003', 100.00, 100.00, SYSDATE-60, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (3, 7, 'GC-2023-1004', 75.00, 0.00, SYSDATE-90, ADD_MONTHS(SYSDATE, 12), 1);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (9, 4, 'GC-2023-1005', 50.00, 23.50, SYSDATE-75, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (5, 10, 'GC-2023-1006', 30.00, 30.00, SYSDATE-15, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (8, 2, 'GC-2023-1007', 40.00, 18.25, SYSDATE-120, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (7, 1, 'GC-2023-1008', 25.00, 0.00, SYSDATE-150, ADD_MONTHS(SYSDATE, 12), 1);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (4, 6, 'GC-2023-1009', 60.00, 60.00, SYSDATE-20, ADD_MONTHS(SYSDATE, 12), 0);
+
+INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
+VALUES (10, 9, 'GC-2023-1010', 50.00, 35.50, SYSDATE-45, ADD_MONTHS(SYSDATE, 12), 0);</code></pre>
+        </div>
+    </div>
+
+    <h2 id="orders-data">Orders Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Order Records</div>
+        <div class="code-description">Sample orders with various payment methods, marketing channels, and order statuses</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- ORDERS table
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (1, SYSDATE-25, 18.50, 'Delivered', 'Credit Card', 3, 'online', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (3, SYSDATE-20, 27.75, 'Delivered', 'Credit Card', 1, 'online', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (5, SYSDATE-18, 9.25, 'Delivered', 'PayPal', 4, 'online', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (2, SYSDATE-15, 12.50, 'Delivered', 'Credit Card', 2, 'online', 1, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (7, SYSDATE-10, 22.00, 'Delivered', 'Cash', NULL, 'in-store', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (4, SYSDATE-7, 34.25, 'Shipped', 'Gift Card', NULL, 'online', 0, 4);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (9, SYSDATE-5, 16.75, 'Processing', 'Credit Card', 5, 'online', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (6, SYSDATE-3, 45.00, 'Processing', 'Credit Card', 1, 'online', 1, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (8, SYSDATE-2, 8.50, 'Processing', 'Cash', NULL, 'in-store', 0, NULL);
+
+INSERT INTO ORDERS (customer_id, order_date, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id)
+VALUES (10, SYSDATE-1, 19.25, 'Pending', 'Credit Card', 4, 'online', 0, NULL);</code></pre>
+        </div>
+    </div>
+
+    <h2 id="feedback-data">Feedback Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Feedback Records</div>
+        <div class="code-description">Customer feedback and ratings for products and orders</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- FEEDBACK table with FEEDBACK_ID primary key
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (1, 1, 41, 3, 5, SYSDATE-20);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (2, 3, 42, 5, 4, SYSDATE-15);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (3, 5, 43, 2, 3, SYSDATE-12);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (4, 2, 44, 7, 5, SYSDATE-10);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (5, 7, 45, 1, 4, SYSDATE-8);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (6, 4, 46, 9, 5, SYSDATE-5);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (7, 9, 47, 6, 4, SYSDATE-3);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (8, 6, 48, 3, 5, SYSDATE-1);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (9, 1, 41, 11, 4, SYSDATE-19);
+
+INSERT INTO FEEDBACK (FEEDBACK_ID, customer_id, order_id, product_id, rating, feedback_date)
+VALUES (10, 3, 42, 10, 5, SYSDATE-14);</code></pre>
+        </div>
+    </div>
+
+    <h2 id="order-items-data">Order Items Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Order Item Records</div>
+        <div class="code-description">Individual line items for each order with quantities, prices, and discounts</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- ORDER_ITEMS table
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (41, 3, 2, 4.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (41, 11, 2, 3.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (42, 5, 3, 3.25, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (42, 10, 4, 4.25, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (43, 2, 3, 2.75, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (44, 7, 2, 5.00, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (44, 4, 1, 2.00, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (45, 1, 4, 3.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (45, 6, 3, 2.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (46, 9, 5, 4.25, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (46, 12, 3, 4.75, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (47, 6, 4, 2.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (47, 8, 2, 3.00, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (48, 3, 6, 4.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (48, 7, 3, 5.00, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (49, 1, 2, 3.50, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (49, 4, 1, 2.00, 0.50, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (50, 5, 3, 3.25, 0.00, SYSTIMESTAMP, SYSTIMESTAMP);  
+
+INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount, created_at, updated_at)
+VALUES (50, 2, 4, 2.75, 0.50, SYSTIMESTAMP, SYSTIMESTAMP);</code></pre>
+        </div>
+    </div>
+
+    <h2 id="subscription-items-data">Subscription Items Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Subscription Item Records</div>
+        <div class="code-description">Products included in subscription boxes by month and year</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- SUBSCRIPTION_ITEMS table with original subscription_ids 1-10 and SUBSCRIPTION_ITEM_ID primary key
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (1, 1, 1, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (2, 1, 3, 6, 2023, 1, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (3, 2, 5, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (4, 2, 7, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (5, 3, 2, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (6, 4, 3, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (7, 4, 9, 6, 2023, 1, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (8, 5, 1, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (9, 5, 6, 6, 2023, 1, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (10, 7, 3, 6, 2023, 1, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (11, 7, 7, 6, 2023, 1, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO SUBSCRIPTION_ITEMS (SUBSCRIPTION_ITEM_ID, subscription_id, product_id, month, year, quantity, created_at, updated_at)
+VALUES (12, 8, 5, 6, 2023, 2, SYSTIMESTAMP, SYSTIMESTAMP);</code></pre>
+        </div>
+    </div>
+
+    <h2 id="order-history-data">Order Status History Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Order Status History Records</div>
+        <div class="code-description">Audit trail of order status changes for tracking fulfillment progress</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- ORDER_STATUS_HISTORY table
+-- The triggers should automatically populate most of these, but we'll add a few manually for history
+-- these were producing errors because the order_id values needed to match those in the ORDERS column
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (2, 41, 'Pending', 'Processing', 'SYSTEM', SYSDATE-25, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (3, 41, 'Processing', 'Shipped', 'SYSTEM', SYSDATE-24, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (4, 41, 'Shipped', 'Delivered', 'SYSTEM', SYSDATE-23, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (5, 42, 'Created', 'Pending', 'SYSTEM', SYSDATE-20, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (6, 42, 'Pending', 'Processing', 'SYSTEM', SYSDATE-20, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (7, 42, 'Processing', 'Shipped', 'SYSTEM', SYSDATE-19, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (8, 42, 'Shipped', 'Delivered', 'SYSTEM', SYSDATE-18, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (9, 43, 'Created', 'Pending', 'SYSTEM', SYSDATE-18, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+VALUES (10, 43, 'Pending', 'Processing', 'SYSTEM', SYSDATE-18, SYSTIMESTAMP, SYSTIMESTAMP);</code></pre>
+        </div>
+    </div>
+
+    <h2 id="product-promotions-data">Product Promotions Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Product Promotion Records</div>
+        <div class="code-description">Junction table linking products to promotions with special pricing</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- PRODUCT_PROMOTIONS table - linking products to promotions
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (3, 1, 3.83, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (7, 1, 4.25, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (11, 1, 2.98, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (5, 2, NULL, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (9, 2, NULL, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (3, 2, NULL, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (1, 3, 3.00, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (2, 3, 2.35, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (7, 6, 4.00, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, special_price, created_at, updated_at)
+VALUES (9, 9, 3.83, SYSTIMESTAMP, SYSTIMESTAMP);</code></pre>
+        </div>
+    </div>
+
+    <h2 id="customer-promotions-data">Customer Promotions Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Customer Promotion Records</div>
+        <div class="code-description">Customer-specific promotion assignments with usage tracking and limits</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- CUSTOMER_PROMOTION table - CORRECTED with customer_ids 11-20
+-- These inserts match the actual customer_ids in your database
+
+-- Insert sample data for customer-specific promotions
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (11, 1, 0, SYSDATE-30, SYSDATE+30, 0, 2);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (11, 3, 1, SYSDATE-60, SYSDATE-10, 1, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (12, 2, 0, SYSDATE-20, SYSDATE+40, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (13, 6, 0, SYSDATE-15, SYSDATE+15, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (14, 9, 0, SYSDATE-10, SYSDATE+50, 0, 3);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (15, 5, 1, SYSDATE-45, SYSDATE-5, 2, 2);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (16, 1, 0, SYSDATE-30, SYSDATE+30, 1, 2);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (17, 10, 0, SYSDATE-5, SYSDATE+25, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (18, 3, 0, SYSDATE-25, SYSDATE+35, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (19, 7, 0, SYSDATE-40, SYSDATE+20, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (20, 4, 1, SYSDATE-50, SYSDATE-15, 1, 1);
+
+-- Additional entries to show multiple promotions per customer
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (11, 5, 0, SYSDATE-15, SYSDATE+45, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (13, 1, 0, SYSDATE-30, SYSDATE+30, 0, 2);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (15, 7, 0, SYSDATE-10, SYSDATE+50, 0, 1);
+
+INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
+VALUES (16, 2, 0, SYSDATE-20, SYSDATE+40, 0, 1);
+
+-- Commit all changes
+COMMIT;</code></pre>
+        </div>
+    </div>
+
+    <h2 id="testing-queries">Testing and Validation Queries</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Database Testing and Smoke Tests</div>
+        <div class="code-description">Comprehensive queries to validate data insertion and verify table relationships</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">/*
+smoke tests - let's make sure our tables are properly filled with data before moving on
+*/
+
+-- test CUSTOMERS table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format specific columns based on your schema
+COLUMN customer_id FORMAT 999999 HEADING 'ID'
+COLUMN first_name FORMAT A12 HEADING 'First Name'
+COLUMN last_name FORMAT A12 HEADING 'Last Name'
+COLUMN email FORMAT A25 HEADING 'Email'
+COLUMN phone FORMAT A15 HEADING 'Phone'
+COLUMN join_date FORMAT A12 HEADING 'Join Date'
+COLUMN address FORMAT A20 HEADING 'Address'
+COLUMN city FORMAT A12 HEADING 'City'
+COLUMN state FORMAT A4 HEADING 'ST'
+COLUMN postal_code FORMAT A10 HEADING 'Postal Code'
+COLUMN is_online_customer FORMAT 9 HEADING 'Online'
+COLUMN is_in_store_customer FORMAT 9 HEADING 'In-Store'
+COLUMN loyalty_points FORMAT 9999 HEADING 'Points'
+COLUMN loyalty_status FORMAT A10 HEADING 'Status'
+COLUMN preferred_communication_method FORMAT A10 HEADING 'Comm Method'
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+-- Then run your query
+SELECT * FROM CUSTOMERS ORDER BY customer_id;</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Advanced Testing Queries</div>
+        <div class="code-description">Complex queries to test joins, aggregations, and business logic</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Sample query to test CUSTOMER_PROMOTION table
+-- Set basic formatting options
+SET LINESIZE 200
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+
+-- Format specific columns based on your schema
+COLUMN customer_promotion_id FORMAT 999 HEADING 'CP ID'
+COLUMN customer_id FORMAT 999 HEADING 'Cust ID'
+COLUMN promotion_id FORMAT 999 HEADING 'Promo ID'
+COLUMN is_used FORMAT 9 HEADING 'Used'
+COLUMN date_offered FORMAT A12 HEADING 'Date Offered'
+COLUMN expiry_date FORMAT A12 HEADING 'Expiry Date'
+COLUMN times_used FORMAT 999 HEADING 'Times Used'
+COLUMN usage_limit FORMAT 999 HEADING 'Usage Limit'
+COLUMN status FORMAT A20 HEADING 'Status'
+
+-- Run query with calculated status
+SELECT 
+    customer_promotion_id,
+    customer_id,
+    promotion_id,
+    is_used,
+    date_offered,
+    expiry_date,
+    times_used,
+    usage_limit,
+    CASE 
+        WHEN expiry_date < SYSDATE THEN 'Expired'
+        WHEN times_used >= usage_limit THEN 'Usage Limit Reached'
+        WHEN is_used = 1 THEN 'Used'
+        ELSE 'Active' 
+    END AS status
+FROM CUSTOMER_PROMOTION
+ORDER BY customer_id, promotion_id;</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Business Intelligence Test Queries</div>
+        <div class="code-description">Sample queries for reporting and analytics validation</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Sample query to join with customer and promotion details
+SELECT 
+    cp.customer_promotion_id,
+    c.first_name || ' ' || c.last_name AS customer_name,
+    p.promotion_name,
+    p.discount_amount,
+    p.discount_type,
+    cp.date_offered,
+    cp.expiry_date,
+    cp.times_used,
+    cp.usage_limit,
+    CASE 
+        WHEN cp.expiry_date < SYSDATE THEN 'Expired'
+        WHEN cp.times_used >= cp.usage_limit THEN 'Usage Limit Reached'
+        WHEN cp.is_used = 1 THEN 'Used'
+        ELSE 'Active' 
+    END AS status
+FROM CUSTOMER_PROMOTION cp
+JOIN CUSTOMERS c ON cp.customer_id = c.customer_id
+JOIN PROMOTIONS p ON cp.promotion_id = p.promotion_id
+ORDER BY customer_name, p.promotion_name;
+
+-- Check that everything inserted correctly
+SELECT COUNT(*) AS total_customer_promotions FROM CUSTOMER_PROMOTION;
+
+-- Run query with calculated line item total for ORDER_ITEMS
+SELECT 
+    order_item_id,
+    order_id,
+    product_id,
+    quantity,
+    unit_price,
+    discount,
+    (quantity * unit_price) - discount AS item_total,
+    created_at,
+    updated_at
+FROM ORDER_ITEMS
+ORDER BY order_id, order_item_id;
+
+-- Run query with formatted period for SUBSCRIPTION_ITEMS
+SELECT 
+    subscription_item_id,
+    subscription_id,
+    product_id,
+    month,
+    year,
+    quantity,
+    TO_CHAR(TO_DATE(month || '/01/' || year, 'MM/DD/YYYY'), 'Month YYYY') AS period,
+    created_at,
+    updated_at
+FROM SUBSCRIPTION_ITEMS
+ORDER BY subscription_id, year, month, subscription_item_id;</code></pre>
+        </div>
+    </div>
+
+    <div class="highlight-note">
+        <strong>Validation Complete:</strong> After running these sample data insertions, your Sweet Seoul Korean Bakery database will be populated with realistic test data including 10 customers, 12 products, 10 promotional campaigns, various orders and subscriptions, and comprehensive business relationships for testing and development purposes.
+    </div>
+
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling.querySelector('code');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                button.textContent = 'Copied!';
+                button.style.backgroundColor = '#27ae60';
+                setTimeout(function() {
+                    button.textContent = 'Copy';
+                    button.style.backgroundColor = '#3498db';
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>date, created_at, updated_at)
+VALUES (1, 41, 'Created', 'Pending', 'SYSTEM', SYSDATE-25, SYSTIMESTAMP, SYSTIMESTAMP);
+
+INSERT INTO ORDER_STATUS_HISTORY (HISTORY_ID, order_id, previous_status, new_status, updated_by, status_change_
