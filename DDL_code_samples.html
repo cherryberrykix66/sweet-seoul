@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Seoul Korean Bakery - Oracle SQL Code Examples</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 3px solid #3498db;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            border-left: 6px solid #3498db;
+            padding-left: 20px;
+            background-color: #ecf0f1;
+            padding: 15px 20px;
+            border-radius: 5px;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #bdc3c7;
+            padding-bottom: 5px;
+        }
+        
+        .code-section {
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .code-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .code-description {
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            font-style: italic;
+            color: #6c757d;
+        }
+        
+        pre {
+            margin: 0 !important;
+            background-color: #2d3748 !important;
+            border-radius: 0 !important;
+        }
+        
+        pre code {
+            font-size: 0.9em;
+            line-height: 1.5;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .copy-button:hover {
+            opacity: 1;
+        }
+        
+        .code-container {
+            position: relative;
+        }
+        
+        .toc {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin: 8px 0;
+        }
+        
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .highlight-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            pre code {
+                font-size: 0.8em;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Sweet Seoul Korean Bakery<br>Oracle 19c Database Creation Script</h1>
+    
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+            <li><a href="#sequences">Sequences Creation</a></li>
+            <li><a href="#drop-tables">Drop Existing Tables</a></li>
+            <li><a href="#create-tables">Create Tables</a></li>
+            <li><a href="#business-logic">Business Logic Triggers</a></li>
+            <li><a href="#views">Reporting Views</a></li>
+        </ul>
+    </div>
+
+    <div class="highlight-note">
+        <strong>Note:</strong> This Oracle 19c database script creates a comprehensive e-commerce database for Sweet Seoul Korean Bakery, including customer management, orders, inventory, subscriptions, promotions, and reporting views.
+    </div>
+
+    <h2 id="sequences">Sequences Creation</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Create Sequences for Auto-Increment Functionality</div>
+        <div class="code-description">Creates sequences to simulate auto-increment behavior for primary keys in Oracle</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create sequences for auto-increment functionality
+CREATE SEQUENCE customers_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE marketing_channels_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE promotions_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE products_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE inventory_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE subscriptions_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE customer_preferences_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE gift_cards_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE orders_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE feedback_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE order_items_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE subscription_items_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE order_status_history_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE product_promotions_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE customer_promotion_seq START WITH 1 INCREMENT BY 1;</code></pre>
+        </div>
+    </div>
+
+    <h2 id="drop-tables">Drop Existing Tables</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Safe Table Dropping with Error Handling</div>
+        <div class="code-description">Drops existing tables in reverse order to avoid constraint violations, with proper error handling</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Drop existing tables if they exist (in reverse order of creation to avoid constraint violations)
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE PRODUCT_PROMOTIONS CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE ORDER_STATUS_HISTORY CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE SUBSCRIPTION_ITEMS CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE ORDER_ITEMS CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE FEEDBACK CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE ORDERS CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE GIFT_CARDS CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE CUSTOMER_PREFERENCES CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE SUBSCRIPTIONS CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE INVENTORY CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE PRODUCTS CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE PROMOTIONS CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE MARKETING_CHANNELS CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE CUSTOMERS CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/
+
+BEGIN
+   EXECUTE IMMEDIATE 'DROP TABLE CUSTOMER_PROMOTION CASCADE CONSTRAINTS';
+EXCEPTION
+   WHEN OTHERS THEN
+      IF SQLCODE != -942 THEN
+         RAISE;
+      END IF;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h2 id="create-tables">Create Tables</h2>
+
+    <h3>CUSTOMERS Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create CUSTOMERS Table with Identity Column</div>
+        <div class="code-description">Main customer table with auto-generated ID, constraints, indexes, and triggers</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Create CUSTOMERS table with GENERATED BY DEFAULT AS IDENTITY instead of NUMBER(10) for customer_id field
+CREATE TABLE CUSTOMERS (
+    customer_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    first_name VARCHAR2(50) NOT NULL,
+    last_name VARCHAR2(50) NOT NULL,
+    email VARCHAR2(100) NOT NULL UNIQUE,
+    phone VARCHAR2(20) NOT NULL,
+    join_date DATE DEFAULT SYSDATE NOT NULL,
+    address VARCHAR2(255) NOT NULL,
+    city VARCHAR2(50) NOT NULL,
+    state VARCHAR2(50) NOT NULL,
+    postal_code VARCHAR2(20) NOT NULL,
+    is_online_customer NUMBER(1) DEFAULT 0 NOT NULL,
+    is_in_store_customer NUMBER(1) DEFAULT 0 NOT NULL,
+    loyalty_points NUMBER(10) DEFAULT 0 NOT NULL,
+    loyalty_status VARCHAR2(20) DEFAULT 'Standard' NOT NULL,
+    preferred_communication_method VARCHAR2(20) DEFAULT 'Email',
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT chk_loyalty_points CHECK (loyalty_points >= 0),
+    CONSTRAINT chk_preferred_comm CHECK (preferred_communication_method IN ('Email', 'SMS', 'Phone', 'Mail'))
+);
+
+-- Create index on CUSTOMERS
+CREATE INDEX idx_customer_loyalty ON CUSTOMERS(loyalty_status);
+
+-- create triggers to automatically update the updated_at column when a row is modified
+CREATE OR REPLACE TRIGGER trg_customers_id
+BEFORE INSERT ON CUSTOMERS
+FOR EACH ROW
+BEGIN
+    SELECT customers_seq.NEXTVAL INTO :NEW.customer_id FROM DUAL;
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/
+
+CREATE OR REPLACE TRIGGER trg_customers_update
+BEFORE UPDATE ON CUSTOMERS
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>MARKETING_CHANNELS Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create MARKETING_CHANNELS Table</div>
+        <div class="code-description">Table for tracking marketing channel performance and customer acquisition</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Create MARKETING_CHANNELS table
+CREATE TABLE MARKETING_CHANNELS (
+    marketing_channel_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    channel_name VARCHAR2(50) NOT NULL UNIQUE,
+    channel_type VARCHAR2(20) NOT NULL,
+    specific_platform VARCHAR2(50) NOT NULL,
+    customer_acquisition_cost NUMBER(10, 2) DEFAULT 0.00,
+    conversion_rate NUMBER(3) DEFAULT 0,
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT chk_acquisition_cost CHECK (customer_acquisition_cost >= 0),
+    CONSTRAINT chk_conversion_rate CHECK (conversion_rate >= 0 AND conversion_rate <= 100)
+);
+
+-- Create index separately
+CREATE INDEX idx_marketing_channel_type ON MARKETING_CHANNELS(channel_type);
+
+-- create triggers to automatically update the updated_at column when a row is modified
+CREATE OR REPLACE TRIGGER trg_marketing_channels_update
+BEFORE UPDATE ON MARKETING_CHANNELS
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>PROMOTIONS Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create PROMOTIONS Table</div>
+        <div class="code-description">Table for managing promotional campaigns and discounts</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create PROMOTIONS table
+CREATE TABLE PROMOTIONS (
+    promotion_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    promotion_name VARCHAR2(100) NOT NULL,
+    description CLOB NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    discount_amount NUMBER(10, 2) NOT NULL,
+    discount_type VARCHAR2(20) NOT NULL,
+    platform VARCHAR2(20) NOT NULL,
+    kpop_anime_reference VARCHAR2(100),
+    is_gift_card_promo NUMBER(1) DEFAULT 0 NOT NULL,
+    promotion_type VARCHAR2(20) NOT NULL,
+    min_purchase NUMBER(10, 2) DEFAULT 0.00,
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT chk_promotion_dates CHECK (end_date >= start_date),
+    CONSTRAINT chk_discount_amount CHECK (discount_amount >= 0),
+    CONSTRAINT chk_min_purchase CHECK (min_purchase >= 0),
+    CONSTRAINT chk_platform CHECK (platform IN ('online', 'in-store', 'both')),
+    CONSTRAINT chk_discount_type CHECK (discount_type IN ('percentage', 'fixed')),
+    CONSTRAINT chk_promotion_type CHECK (promotion_type IN ('discount', 'bundle', 'offer', 'gift'))
+);
+
+-- Create indexes separately
+CREATE INDEX idx_promotion_dates ON PROMOTIONS(start_date, end_date);
+CREATE INDEX idx_promotion_platform ON PROMOTIONS(platform);
+CREATE INDEX idx_promotion_type ON PROMOTIONS(promotion_type);
+
+-- for the automatic update of the updated_at column, we'll need a trigger
+CREATE OR REPLACE TRIGGER trg_promotions_update
+BEFORE UPDATE ON PROMOTIONS
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>CUSTOMER_PROMOTION Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create CUSTOMER_PROMOTION Junction Table</div>
+        <div class="code-description">Junction table linking customers to promotions with usage tracking</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create CUSTOMER_PROMOTION table
+CREATE TABLE CUSTOMER_PROMOTION (
+    customer_promotion_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id NUMBER NOT NULL,
+    promotion_id NUMBER NOT NULL,
+    is_used NUMBER(1) DEFAULT 0 NOT NULL,
+    date_offered DATE DEFAULT SYSDATE NOT NULL,
+    expiry_date DATE NOT NULL,
+    times_used NUMBER DEFAULT 0 NOT NULL,
+    usage_limit NUMBER DEFAULT 1 NOT NULL,
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT fk_cust_promo_customer FOREIGN KEY (customer_id) 
+        REFERENCES CUSTOMERS(customer_id) ON DELETE CASCADE,
+    CONSTRAINT fk_cust_promo_promotion FOREIGN KEY (promotion_id) 
+        REFERENCES PROMOTIONS(promotion_id) ON DELETE CASCADE,
+    CONSTRAINT uq_customer_promotion UNIQUE (customer_id, promotion_id),
+    CONSTRAINT chk_times_used CHECK (times_used >= 0),
+    CONSTRAINT chk_usage_limit CHECK (usage_limit > 0),
+    CONSTRAINT chk_expiry_date_valid CHECK (expiry_date >= date_offered)
+);
+
+-- Create indexes
+CREATE INDEX idx_customer_promotion_used ON CUSTOMER_PROMOTION(is_used);
+CREATE INDEX idx_customer_promotion_expiry ON CUSTOMER_PROMOTION(expiry_date);
+
+-- Create trigger for automatic update of updated_at column
+CREATE OR REPLACE TRIGGER trg_customer_promotion_update
+BEFORE UPDATE ON CUSTOMER_PROMOTION
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>PRODUCTS Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create PRODUCTS Table</div>
+        <div class="code-description">Product catalog with Korean bakery-specific attributes including K-pop/anime tie-ins</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create PRODUCTS table
+CREATE TABLE PRODUCTS (
+    product_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    product_name VARCHAR2(100) NOT NULL UNIQUE,
+    description CLOB NOT NULL,
+    category VARCHAR2(50) NOT NULL,
+    origin VARCHAR2(50) NOT NULL,
+    base_price NUMBER(10, 2) NOT NULL,
+    seasonal NUMBER(1) DEFAULT 0 NOT NULL,
+    expiry_date DATE,
+    limited_edition NUMBER(1) DEFAULT 0 NOT NULL,
+    kpop_anime_tie_in VARCHAR2(100),
+    online_exclusive NUMBER(1) DEFAULT 0 NOT NULL,
+    in_store_exclusive NUMBER(1) DEFAULT 0 NOT NULL,
+    min_inventory_level NUMBER NOT NULL,
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT chk_base_price CHECK (base_price >= 0),
+    CONSTRAINT chk_min_inventory CHECK (min_inventory_level >= 0),
+    CONSTRAINT chk_exclusivity CHECK (NOT (online_exclusive = 1 AND in_store_exclusive = 1))
+);
+
+-- create indexes
+CREATE INDEX idx_product_category ON PRODUCTS(category);
+CREATE INDEX idx_product_seasonal ON PRODUCTS(seasonal);
+CREATE INDEX idx_product_limited ON PRODUCTS(limited_edition);
+CREATE INDEX idx_product_kpop ON PRODUCTS(kpop_anime_tie_in);
+
+-- create trigger
+CREATE OR REPLACE TRIGGER trg_products_update
+BEFORE UPDATE ON PRODUCTS
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>INVENTORY Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create INVENTORY Table</div>
+        <div class="code-description">Inventory management with stock levels and reorder points</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create INVENTORY table
+CREATE TABLE INVENTORY (
+    inventory_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    product_id NUMBER NOT NULL UNIQUE,
+    current_stock NUMBER DEFAULT 0 NOT NULL,
+    reorder_point NUMBER NOT NULL,
+    last_restock_date DATE,
+    expected_arrival DATE,
+    storage_requirements CLOB,
+    min_stock_level NUMBER NOT NULL,
+    max_stock_level NUMBER NOT NULL,
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT fk_inventory_product FOREIGN KEY (product_id) REFERENCES PRODUCTS(product_id) ON DELETE CASCADE,
+    CONSTRAINT chk_current_stock CHECK (current_stock >= 0),
+    CONSTRAINT chk_reorder_point CHECK (reorder_point >= 0),
+    CONSTRAINT chk_min_stock CHECK (min_stock_level >= 0),
+    CONSTRAINT chk_max_min_stock CHECK (max_stock_level >= min_stock_level)
+);
+
+-- create index 
+CREATE INDEX idx_inventory_stock ON INVENTORY(current_stock);
+
+-- create triggers
+CREATE OR REPLACE TRIGGER trg_inventory_update
+BEFORE UPDATE ON INVENTORY
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>SUBSCRIPTIONS Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create SUBSCRIPTIONS Table</div>
+        <div class="code-description">Subscription box service management</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create SUBSCRIPTIONS table
+CREATE TABLE SUBSCRIPTIONS (
+    subscription_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id NUMBER NOT NULL,
+    start_date DATE NOT NULL,
+    next_delivery_date DATE NOT NULL,
+    subscription_status VARCHAR2(20) DEFAULT 'Active' NOT NULL,
+    monthly_price NUMBER(10, 2) NOT NULL,
+    billing_cycle NUMBER DEFAULT 1 NOT NULL,
+    subscription_type VARCHAR2(20) DEFAULT 'Standard' NOT NULL,
+    is_gift NUMBER(1) DEFAULT 0 NOT NULL,
+    delivery_address CLOB NOT NULL,
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT fk_subscription_customer FOREIGN KEY (customer_id) 
+        REFERENCES CUSTOMERS(customer_id) ON DELETE CASCADE,
+    CONSTRAINT chk_monthly_price CHECK (monthly_price >= 0),
+    CONSTRAINT chk_billing_cycle CHECK (billing_cycle > 0),
+    CONSTRAINT chk_subscription_status CHECK (subscription_status IN ('Active', 'Paused', 'Canceled')),
+    CONSTRAINT chk_subscription_type CHECK (subscription_type IN ('Standard', 'Premium'))
+);
+
+-- create indexes
+CREATE INDEX idx_subscription_status ON SUBSCRIPTIONS(subscription_status);
+CREATE INDEX idx_subscription_type ON SUBSCRIPTIONS(subscription_type);
+
+-- create trigger
+CREATE OR REPLACE TRIGGER trg_subscriptions_update
+BEFORE UPDATE ON SUBSCRIPTIONS
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>CUSTOMER_PREFERENCES Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create CUSTOMER_PREFERENCES Table</div>
+        <div class="code-description">Customer preferences for personalized recommendations</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create CUSTOMER_PREFERENCES table
+CREATE TABLE CUSTOMER_PREFERENCES (
+    preference_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id NUMBER NOT NULL UNIQUE,
+    flavor_preference CLOB,
+    product_category_preference CLOB,
+    subscription_interest NUMBER(1) DEFAULT 0,
+    kpop_anime_interest VARCHAR2(255),
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT fk_preference_customer FOREIGN KEY (customer_id) 
+        REFERENCES CUSTOMERS(customer_id) ON DELETE CASCADE
+);
+
+-- create index
+CREATE INDEX idx_preference_subscription ON CUSTOMER_PREFERENCES(subscription_interest);
+
+-- create trigger
+CREATE OR REPLACE TRIGGER trg_customer_preferences_update
+BEFORE UPDATE ON CUSTOMER_PREFERENCES
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>GIFT_CARDS Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create GIFT_CARDS Table</div>
+        <div class="code-description">Gift card management with balance tracking</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create GIFT_CARDS table
+CREATE TABLE GIFT_CARDS (
+    gift_card_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    issuer_customer_id NUMBER NOT NULL,
+    recipient_customer_id NUMBER,
+    gift_card_code VARCHAR2(50) NOT NULL UNIQUE,
+    initial_amount NUMBER(10, 2) NOT NULL,
+    current_balance NUMBER(10, 2) NOT NULL,
+    issue_date DATE DEFAULT SYSDATE NOT NULL,
+    expiry_date DATE NOT NULL,
+    is_redeemed NUMBER(1) DEFAULT 0 NOT NULL,
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT fk_gift_issuer FOREIGN KEY (issuer_customer_id) 
+        REFERENCES CUSTOMERS(customer_id),
+    CONSTRAINT fk_gift_recipient FOREIGN KEY (recipient_customer_id) 
+        REFERENCES CUSTOMERS(customer_id),
+    CONSTRAINT chk_initial_amount CHECK (initial_amount > 0),
+    CONSTRAINT chk_current_balance CHECK (current_balance >= 0),
+    CONSTRAINT chk_balance_limit CHECK (current_balance <= initial_amount),
+    CONSTRAINT chk_expiry_date CHECK (expiry_date > issue_date)
+);
+
+-- create indexes
+CREATE INDEX idx_gift_card_code ON GIFT_CARDS(gift_card_code);
+CREATE INDEX idx_gift_card_redeemed ON GIFT_CARDS(is_redeemed);
+
+-- create trigger
+CREATE OR REPLACE TRIGGER trg_gift_cards_update
+BEFORE UPDATE ON GIFT_CARDS
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>ORDERS Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create ORDERS Table</div>
+        <div class="code-description">Main orders table with payment and fulfillment tracking</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create ORDERS table
+CREATE TABLE ORDERS (
+    order_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id NUMBER NOT NULL,
+    order_date DATE DEFAULT SYSDATE NOT NULL,
+    total_amount NUMBER(10, 2) NOT NULL,
+    order_status VARCHAR2(20) DEFAULT 'Pending' NOT NULL,
+    payment_method VARCHAR2(50) NOT NULL,
+    marketing_channel_id NUMBER,
+    platform VARCHAR2(20) NOT NULL,
+    is_gift NUMBER(1) DEFAULT 0 NOT NULL,
+    gift_card_id NUMBER,
+    created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    updated_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+    CONSTRAINT fk_order_customer FOREIGN KEY (customer_id) 
+        REFERENCES CUSTOMERS(customer_id),
+    CONSTRAINT fk_order_marketing FOREIGN KEY (marketing_channel_id) 
+        REFERENCES MARKETING_CHANNELS(marketing_channel_id),
+    CONSTRAINT fk_order_gift_card FOREIGN KEY (gift_card_id) 
+        REFERENCES GIFT_CARDS(gift_card_id),
+    CONSTRAINT chk_total_amount CHECK (total_amount >= 0),
+    CONSTRAINT chk_order_status CHECK (order_status IN ('Pending', 'Processing', 'Shipped', 'Delivered', 'Canceled')),
+    CONSTRAINT chk_order_platform CHECK (platform IN ('online', 'in-store'))
+);
+
+-- create indexes
+CREATE INDEX idx_order_date ON ORDERS(order_date);
+CREATE INDEX idx_order_status ON ORDERS(order_status);
+CREATE INDEX idx_order_platform ON ORDERS(platform);
+
+-- create triggers
+CREATE OR REPLACE TRIGGER trg_orders_update
+BEFORE UPDATE ON ORDERS
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>FEEDBACK Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create FEEDBACK Table</div>
+        <div class="code-description">Customer feedback and ratings system</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create FEEDBACK table incrementally
+CREATE TABLE FEEDBACK (
+    feedback_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    customer_id NUMBER NOT NULL,
+    rating NUMBER NOT NULL
+);
+
+ALTER TABLE FEEDBACK ADD (
+    order_id NUMBER,
+    product_id NUMBER,
+    feedback_date DATE NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);
+
+-- add constraints
+ALTER TABLE FEEDBACK ADD CONSTRAINT chk_rating_range 
+    CHECK (rating >= 1 AND rating <= 5);
+    
+ALTER TABLE FEEDBACK ADD CONSTRAINT fk_feedback_customer 
+    FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(customer_id);
+    
+ALTER TABLE FEEDBACK ADD CONSTRAINT fk_feedback_order 
+    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id);
+    
+ALTER TABLE FEEDBACK ADD CONSTRAINT fk_feedback_product 
+    FOREIGN KEY (product_id) REFERENCES PRODUCTS(product_id);
+
+-- add triggers
+CREATE OR REPLACE TRIGGER trg_feedback_before_insert
+BEFORE INSERT ON FEEDBACK
+FOR EACH ROW
+BEGIN
+    IF :NEW.feedback_date IS NULL THEN
+        :NEW.feedback_date := SYSDATE;
+    END IF;
+    
+    IF :NEW.created_at IS NULL THEN
+        :NEW.created_at := SYSTIMESTAMP;
+    END IF;
+    
+    IF :NEW.updated_at IS NULL THEN
+        :NEW.updated_at := SYSTIMESTAMP;
+    END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER trg_feedback_update
+BEFORE UPDATE ON FEEDBACK
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/
+
+-- add indexes
+CREATE INDEX idx_feedback_rating ON FEEDBACK(rating);
+CREATE INDEX idx_feedback_date ON FEEDBACK(feedback_date);</code></pre>
+        </div>
+    </div>
+
+    <h3>ORDER_ITEMS Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create ORDER_ITEMS Table</div>
+        <div class="code-description">Individual line items for each order</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create ORDER_ITEMS table
+CREATE TABLE ORDER_ITEMS (
+    order_item_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    order_id NUMBER NOT NULL,
+    product_id NUMBER NOT NULL,
+    quantity NUMBER NOT NULL,
+    unit_price NUMBER(10, 2) NOT NULL,
+    discount NUMBER(10, 2) DEFAULT 0.00,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);
+
+-- add constraints
+ALTER TABLE ORDER_ITEMS ADD CONSTRAINT fk_order_item_order
+    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id) ON DELETE CASCADE;
+    
+ALTER TABLE ORDER_ITEMS ADD CONSTRAINT fk_order_item_product
+    FOREIGN KEY (product_id) REFERENCES PRODUCTS(product_id);
+    
+ALTER TABLE ORDER_ITEMS ADD CONSTRAINT chk_quantity
+    CHECK (quantity > 0);
+    
+ALTER TABLE ORDER_ITEMS ADD CONSTRAINT chk_unit_price
+    CHECK (unit_price >= 0);
+    
+ALTER TABLE ORDER_ITEMS ADD CONSTRAINT chk_discount
+    CHECK (discount >= 0);
+    
+ALTER TABLE ORDER_ITEMS ADD CONSTRAINT chk_discount_limit
+    CHECK (discount <= unit_price * quantity);
+
+-- add index
+CREATE INDEX idx_order_item_product ON ORDER_ITEMS(product_id);
+
+-- create triggers
+CREATE OR REPLACE TRIGGER trg_order_items_before_insert
+BEFORE INSERT ON ORDER_ITEMS
+FOR EACH ROW
+BEGIN
+    IF :NEW.created_at IS NULL THEN
+        :NEW.created_at := SYSTIMESTAMP;
+    END IF;
+    
+    IF :NEW.updated_at IS NULL THEN
+        :NEW.updated_at := SYSTIMESTAMP;
+    END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER trg_order_items_update
+BEFORE UPDATE ON ORDER_ITEMS
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>SUBSCRIPTION_ITEMS Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create SUBSCRIPTION_ITEMS Table</div>
+        <div class="code-description">Products included in subscription boxes by month/year</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create SUBSCRIPTION_ITEMS table
+CREATE TABLE SUBSCRIPTION_ITEMS (
+    subscription_item_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    subscription_id NUMBER NOT NULL,
+    product_id NUMBER NOT NULL,
+    month NUMBER NOT NULL,
+    year NUMBER NOT NULL,
+    quantity NUMBER DEFAULT 1 NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);
+
+-- add constraints
+ALTER TABLE SUBSCRIPTION_ITEMS ADD CONSTRAINT fk_sub_item_subscription
+    FOREIGN KEY (subscription_id) REFERENCES SUBSCRIPTIONS(subscription_id) ON DELETE CASCADE;
+    
+ALTER TABLE SUBSCRIPTION_ITEMS ADD CONSTRAINT fk_sub_item_product
+    FOREIGN KEY (product_id) REFERENCES PRODUCTS(product_id);
+    
+ALTER TABLE SUBSCRIPTION_ITEMS ADD CONSTRAINT uq_sub_product_month_year
+    UNIQUE (subscription_id, product_id, month, year);
+    
+ALTER TABLE SUBSCRIPTION_ITEMS ADD CONSTRAINT chk_month_range
+    CHECK (month >= 1 AND month <= 12);
+    
+ALTER TABLE SUBSCRIPTION_ITEMS ADD CONSTRAINT chk_year_min
+    CHECK (year >= 2023);
+    
+ALTER TABLE SUBSCRIPTION_ITEMS ADD CONSTRAINT chk_quantity_positive
+    CHECK (quantity > 0);
+
+-- create index
+CREATE INDEX idx_subscription_item_date ON SUBSCRIPTION_ITEMS(year, month);
+
+-- create triggers
+CREATE OR REPLACE TRIGGER trg_sub_items_before_insert
+BEFORE INSERT ON SUBSCRIPTION_ITEMS
+FOR EACH ROW
+BEGIN
+    IF :NEW.created_at IS NULL THEN
+        :NEW.created_at := SYSTIMESTAMP;
+    END IF;
+    
+    IF :NEW.updated_at IS NULL THEN
+        :NEW.updated_at := SYSTIMESTAMP;
+    END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER trg_sub_items_update
+BEFORE UPDATE ON SUBSCRIPTION_ITEMS
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>ORDER_STATUS_HISTORY Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create ORDER_STATUS_HISTORY Table</div>
+        <div class="code-description">Audit trail for order status changes</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create ORDER_STATUS_HISTORY table
+CREATE TABLE ORDER_STATUS_HISTORY (
+    history_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    order_id NUMBER NOT NULL,
+    previous_status VARCHAR2(20) NOT NULL,
+    new_status VARCHAR2(20) NOT NULL,
+    status_change_date TIMESTAMP NOT NULL,
+    updated_by VARCHAR2(50) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);
+
+-- add foreign key constraint
+ALTER TABLE ORDER_STATUS_HISTORY ADD CONSTRAINT fk_hist_order
+    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id) ON DELETE CASCADE;
+
+-- add check constraints 
+ALTER TABLE ORDER_STATUS_HISTORY ADD CONSTRAINT chk_prev_status
+    CHECK (previous_status IN ('Pending', 'Processing', 'Shipped', 'Delivered', 'Canceled'));
+    
+ALTER TABLE ORDER_STATUS_HISTORY ADD CONSTRAINT chk_new_status
+    CHECK (new_status IN ('Pending', 'Processing', 'Shipped', 'Delivered', 'Canceled'));
+
+-- create indexes
+CREATE INDEX idx_history_order ON ORDER_STATUS_HISTORY(order_id);
+CREATE INDEX idx_history_status ON ORDER_STATUS_HISTORY(new_status);
+
+-- add trigger for timestamp defaults
+CREATE OR REPLACE TRIGGER trg_order_hist_before_insert
+BEFORE INSERT ON ORDER_STATUS_HISTORY
+FOR EACH ROW
+BEGIN
+    IF :NEW.status_change_date IS NULL THEN
+        :NEW.status_change_date := SYSTIMESTAMP;
+    END IF;
+    
+    IF :NEW.created_at IS NULL THEN
+        :NEW.created_at := SYSTIMESTAMP;
+    END IF;
+    
+    IF :NEW.updated_at IS NULL THEN
+        :NEW.updated_at := SYSTIMESTAMP;
+    END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER trg_order_hist_update
+BEFORE UPDATE ON ORDER_STATUS_HISTORY
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>PRODUCT_PROMOTIONS Table</h3>
+    <div class="code-section">
+        <div class="code-header">Create PRODUCT_PROMOTIONS Table</div>
+        <div class="code-description">Junction table linking products to promotions</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- create PRODUCT_PROMOTIONS table
+CREATE TABLE PRODUCT_PROMOTIONS (
+    product_promotion_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    product_id NUMBER NOT NULL,
+    promotion_id NUMBER NOT NULL,
+    special_price NUMBER(10, 2),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL
+);
+
+-- add constraints
+ALTER TABLE PRODUCT_PROMOTIONS ADD CONSTRAINT fk_prod_promo_product
+    FOREIGN KEY (product_id) REFERENCES PRODUCTS(product_id) ON DELETE CASCADE;
+    
+ALTER TABLE PRODUCT_PROMOTIONS ADD CONSTRAINT fk_prod_promo_promotion
+    FOREIGN KEY (promotion_id) REFERENCES PROMOTIONS(promotion_id) ON DELETE CASCADE;
+    
+ALTER TABLE PRODUCT_PROMOTIONS ADD CONSTRAINT uq_product_promotion
+    UNIQUE (product_id, promotion_id);
+    
+ALTER TABLE PRODUCT_PROMOTIONS ADD CONSTRAINT chk_special_price
+    CHECK (special_price IS NULL OR special_price >= 0);
+
+-- add triggers
+CREATE OR REPLACE TRIGGER trg_prod_promo_before_insert
+BEFORE INSERT ON PRODUCT_PROMOTIONS
+FOR EACH ROW
+BEGIN
+    IF :NEW.created_at IS NULL THEN
+        :NEW.created_at := SYSTIMESTAMP;
+    END IF;
+    
+    IF :NEW.updated_at IS NULL THEN
+        :NEW.updated_at := SYSTIMESTAMP;
+    END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER trg_prod_promo_update
+BEFORE UPDATE ON PRODUCT_PROMOTIONS
+FOR EACH ROW
+BEGIN
+    :NEW.updated_at := SYSTIMESTAMP;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h3>Table Creation Confirmation</h3>
+    <div class="code-section">
+        <div class="code-header">Verify All Tables Created</div>
+        <div class="code-description">Query to confirm all tables have been successfully created</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- check that all the tables were created
+SELECT table_name FROM user_tables ORDER BY table_name;</code></pre>
+        </div>
+    </div>
+
+    <h2 id="business-logic">Business Logic Triggers</h2>
+
+    <div class="code-section">
+        <div class="code-header">Order Status History Triggers</div>
+        <div class="code-description">Automatically track order status changes in history table</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Add triggers for auto-updating ORDER_STATUS_HISTORY when ORDERS.order_status changes
+CREATE OR REPLACE TRIGGER before_order_status_update
+BEFORE UPDATE ON ORDERS
+FOR EACH ROW
+BEGIN
+    IF :OLD.order_status != :NEW.order_status THEN
+        INSERT INTO ORDER_STATUS_HISTORY (order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+        VALUES (:OLD.order_id, :OLD.order_status, :NEW.order_status, USER, SYSTIMESTAMP, SYSTIMESTAMP, SYSTIMESTAMP);
+    END IF;
+END;
+/
+
+-- Add trigger for initial status record when order is created
+CREATE OR REPLACE TRIGGER after_order_insert
+AFTER INSERT ON ORDERS
+FOR EACH ROW
+BEGIN
+    INSERT INTO ORDER_STATUS_HISTORY (order_id, previous_status, new_status, updated_by, status_change_date, created_at, updated_at)
+    VALUES (:NEW.order_id, 'Created', :NEW.order_status, USER, SYSTIMESTAMP, SYSTIMESTAMP, SYSTIMESTAMP);
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Inventory Management Triggers</div>
+        <div class="code-description">Automatically update inventory levels when order items are modified</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Add trigger to update inventory when order items are added
+CREATE OR REPLACE TRIGGER after_order_item_insert
+AFTER INSERT ON ORDER_ITEMS
+FOR EACH ROW
+BEGIN
+    UPDATE INVENTORY
+    SET current_stock = current_stock - :NEW.quantity
+    WHERE product_id = :NEW.product_id;
+END;
+/
+
+-- Add trigger to update inventory when order items are modified
+CREATE OR REPLACE TRIGGER after_order_item_update
+AFTER UPDATE ON ORDER_ITEMS
+FOR EACH ROW
+BEGIN
+    UPDATE INVENTORY
+    SET current_stock = current_stock + :OLD.quantity - :NEW.quantity
+    WHERE product_id = :NEW.product_id;
+END;
+/
+
+-- Add trigger to update inventory when order items are deleted
+CREATE OR REPLACE TRIGGER after_order_item_delete
+AFTER DELETE ON ORDER_ITEMS
+FOR EACH ROW
+BEGIN
+    UPDATE INVENTORY
+    SET current_stock = current_stock + :OLD.quantity
+    WHERE product_id = :OLD.product_id;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Gift Card Balance Trigger</div>
+        <div class="code-description">Update gift card balance when used in orders</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Add trigger to update gift card balance when used in an order
+CREATE OR REPLACE TRIGGER after_order_with_gift_card
+AFTER INSERT ON ORDERS
+FOR EACH ROW
+BEGIN
+    IF :NEW.gift_card_id IS NOT NULL THEN
+        UPDATE GIFT_CARDS
+        SET current_balance = current_balance - :NEW.total_amount,
+            is_redeemed = CASE WHEN current_balance - :NEW.total_amount <= 0 THEN 1 ELSE is_redeemed END
+        WHERE gift_card_id = :NEW.gift_card_id;
+    END IF;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Customer Promotion Usage Trigger</div>
+        <div class="code-description">Automatically mark promotions as used when usage limit is reached</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Add customer promotion trigger to update is_used flag if usage limit is reached
+CREATE OR REPLACE TRIGGER trg_customer_promotion_usage
+BEFORE UPDATE OF times_used ON CUSTOMER_PROMOTION
+FOR EACH ROW
+BEGIN
+    IF :NEW.times_used >= :NEW.usage_limit AND :NEW.usage_limit > 0 THEN
+        :NEW.is_used := 1;
+    END IF;
+END;
+/</code></pre>
+        </div>
+    </div>
+
+    <h2 id="views">Reporting Views</h2>
+
+    <div class="code-section">
+        <div class="code-header">Customer Order History View</div>
+        <div class="code-description">Comprehensive customer order summary with loyalty information</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Customer order history with totals
+CREATE OR REPLACE VIEW vw_customer_order_history AS
+SELECT 
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    c.email,
+    COUNT(o.order_id) AS total_orders,
+    SUM(o.total_amount) AS lifetime_spend,
+    MAX(o.order_date) AS last_order_date,
+    c.loyalty_points,
+    c.loyalty_status
+FROM CUSTOMERS c
+LEFT JOIN ORDERS o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.first_name, c.last_name, c.email, c.loyalty_points, c.loyalty_status;</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Product Sales Performance View</div>
+        <div class="code-description">Product performance metrics including sales and ratings</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Product sales performance
+CREATE OR REPLACE VIEW vw_product_sales AS
+SELECT 
+    p.product_id,
+    p.product_name,
+    p.category,
+    p.base_price,
+    SUM(oi.quantity) AS total_units_sold,
+    SUM(oi.quantity * oi.unit_price) AS total_revenue,
+    COUNT(DISTINCT o.order_id) AS order_count,
+    AVG(f.rating) AS average_rating
+FROM PRODUCTS p
+LEFT JOIN ORDER_ITEMS oi ON p.product_id = oi.product_id
+LEFT JOIN ORDERS o ON oi.order_id = o.order_id
+LEFT JOIN FEEDBACK f ON p.product_id = f.product_id
+GROUP BY p.product_id, p.product_name, p.category, p.base_price;</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Marketing Channel Performance View</div>
+        <div class="code-description">Marketing channel effectiveness and ROI analysis</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Marketing channel effectiveness
+CREATE OR REPLACE VIEW vw_marketing_channel_performance AS
+SELECT 
+    mc.marketing_channel_id,
+    mc.channel_name,
+    mc.channel_type,
+    mc.specific_platform,
+    COUNT(o.order_id) AS attributed_orders,
+    SUM(o.total_amount) AS total_revenue,
+    mc.customer_acquisition_cost,
+    CASE 
+        WHEN COUNT(o.order_id) > 0 THEN SUM(o.total_amount) / COUNT(o.order_id)
+        ELSE 0 
+    END AS average_order_value,
+    CASE 
+        WHEN COUNT(o.order_id) > 0 AND SUM(o.total_amount) > 0 THEN 
+            mc.customer_acquisition_cost / (SUM(o.total_amount) / COUNT(o.order_id))
+        ELSE 0 
+    END AS cac_to_aov_ratio
+FROM MARKETING_CHANNELS mc
+LEFT JOIN ORDERS o ON mc.marketing_channel_id = o.marketing_channel_id
+GROUP BY mc.marketing_channel_id, mc.channel_name, mc.channel_type, mc.specific_platform, mc.customer_acquisition_cost;</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Subscription Performance View</div>
+        <div class="code-description">Subscription metrics and retention analysis</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Subscription performance and retention
+CREATE OR REPLACE VIEW vw_subscription_performance AS
+SELECT 
+    s.subscription_type,
+    COUNT(DISTINCT s.subscription_id) AS active_subscriptions,
+    AVG(s.monthly_price) AS average_monthly_price,
+    SUM(s.monthly_price) AS monthly_recurring_revenue,
+    COUNT(DISTINCT CASE WHEN s.subscription_status = 'Canceled' THEN s.subscription_id END) AS canceled_subscriptions,
+    CASE 
+        WHEN COUNT(DISTINCT s.subscription_id) > 0 
+        THEN 1 - (COUNT(DISTINCT CASE WHEN s.subscription_status = 'Canceled' THEN s.subscription_id END) / 
+                  NULLIF(COUNT(DISTINCT s.subscription_id), 0))
+        ELSE 0 
+    END AS retention_rate
+FROM SUBSCRIPTIONS s
+GROUP BY s.subscription_type;</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Inventory Alerts View</div>
+        <div class="code-description">Inventory status monitoring and reorder alerts</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Inventory status and alerts
+CREATE OR REPLACE VIEW vw_inventory_alerts AS
+SELECT 
+    p.product_id,
+    p.product_name,
+    i.current_stock,
+    i.reorder_point,
+    i.min_stock_level,
+    i.max_stock_level,
+    i.last_restock_date,
+    i.expected_arrival,
+    CASE 
+        WHEN i.current_stock <= i.min_stock_level THEN 'Critical'
+        WHEN i.current_stock <= i.reorder_point THEN 'Reorder'
+        WHEN i.current_stock >= i.max_stock_level * 0.9 THEN 'Overstocked'
+        ELSE 'Normal' 
+    END AS stock_status
+FROM INVENTORY i
+JOIN PRODUCTS p ON i.product_id = p.product_id;</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">K-pop/Anime Product Performance View</div>
+        <div class="code-description">Performance tracking for themed products</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- K-pop/anime product performance
+CREATE OR REPLACE VIEW vw_kpop_anime_performance AS
+SELECT 
+    p.product_id,
+    p.product_name,
+    p.kpop_anime_tie_in,
+    p.limited_edition,
+    SUM(oi.quantity) AS total_units_sold,
+    SUM(oi.quantity * oi.unit_price) AS total_revenue,
+    COUNT(DISTINCT o.order_id) AS order_count,
+    AVG(f.rating) AS average_rating
+FROM PRODUCTS p
+LEFT JOIN ORDER_ITEMS oi ON p.product_id = oi.product_id
+LEFT JOIN ORDERS o ON oi.order_id = o.order_id
+LEFT JOIN FEEDBACK f ON p.product_id = f.product_id
+WHERE p.kpop_anime_tie_in IS NOT NULL
+GROUP BY p.product_id, p.product_name, p.kpop_anime_tie_in, p.limited_edition;</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Gift Card Statistics View</div>
+        <div class="code-description">Gift card usage and redemption analytics</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Gift card usage statistics
+CREATE OR REPLACE VIEW vw_gift_card_statistics AS
+SELECT 
+    COUNT(gc.gift_card_id) AS total_gift_cards,
+    SUM(gc.initial_amount) AS total_initial_value,
+    SUM(gc.current_balance) AS total_remaining_balance,
+    SUM(gc.initial_amount - gc.current_balance) AS total_redeemed_value,
+    CASE 
+        WHEN SUM(gc.initial_amount) > 0 
+        THEN (SUM(gc.initial_amount) - SUM(gc.current_balance)) / NULLIF(SUM(gc.initial_amount), 0)
+        ELSE 0 
+    END AS redemption_rate,
+    COUNT(CASE WHEN gc.is_redeemed = 1 THEN 1 END) AS fully_redeemed_cards,
+    COUNT(CASE WHEN gc.current_balance > 0 AND gc.current_balance < gc.initial_amount THEN 1 END) AS partially_redeemed_cards,
+    COUNT(CASE WHEN gc.current_balance = gc.initial_amount THEN 1 END) AS unused_cards
+FROM GIFT_CARDS gc;</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Customer Feedback Summary View</div>
+        <div class="code-description">Overall customer satisfaction metrics</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Customer feedback summary
+CREATE OR REPLACE VIEW vw_customer_feedback_summary AS
+SELECT 
+    AVG(f.rating) AS average_rating,
+    COUNT(f.feedback_id) AS total_feedback,
+    COUNT(CASE WHEN f.rating = 5 THEN 1 END) AS five_star_count,
+    COUNT(CASE WHEN f.rating = 4 THEN 1 END) AS four_star_count,
+    COUNT(CASE WHEN f.rating = 3 THEN 1 END) AS three_star_count,
+    COUNT(CASE WHEN f.rating = 2 THEN 1 END) AS two_star_count,
+    COUNT(CASE WHEN f.rating = 1 THEN 1 END) AS one_star_count,
+    CASE 
+        WHEN COUNT(f.feedback_id) > 0 
+        THEN (COUNT(CASE WHEN f.rating >= 4 THEN 1 END) * 100.0) / NULLIF(COUNT(f.feedback_id), 0)
+        ELSE 0 
+    END AS satisfaction_percentage
+FROM FEEDBACK f;</code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">Active Customer Promotions View</div>
+        <div class="code-description">Current active promotions available to customers</div>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <pre><code class="language-sql">-- Create a view for active customer promotions
+CREATE OR REPLACE VIEW vw_active_customer_promotions AS
+SELECT 
+    cp.customer_promotion_id,
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    c.email,
+    p.promotion_id,
+    p.promotion_name,
+    p.discount_amount,
+    p.discount_type,
+    p.promotion_type,
+    cp.is_used,
+    cp.date_offered,
+    cp.expiry_date,
+    cp.times_used,
+    cp.usage_limit,
+    CASE 
+        WHEN cp.expiry_date < SYSDATE THEN 'Expired'
