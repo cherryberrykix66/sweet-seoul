@@ -1,6 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Seoul Korean Bakery - Sample Data SQL Examples</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 3px solid #3498db;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            border-left: 6px solid #3498db;
+            padding-left: 20px;
+            background-color: #ecf0f1;
+            padding: 15px 20px;
+            border-radius: 5px;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #bdc3c7;
+            padding-bottom: 5px;
+        }
+        
+        .code-section {
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .code-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .code-description {
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            font-style: italic;
+            color: #6c757d;
+        }
+        
+        pre {
+            margin: 0 !important;
+            background-color: #2d3748 !important;
+            border-radius: 0 !important;
+        }
+        
+        pre code {
+            font-size: 0.9em;
+            line-height: 1.5;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .copy-button:hover {
+            opacity: 1;
+        }
+        
+        .code-container {
+            position: relative;
+        }
+        
+        .toc {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin: 8px 0;
+        }
+        
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .highlight-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            pre code {
+                font-size: 0.8em;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Sweet Seoul Korean Bakery<br>Oracle 19c Database Sample Data Insertion Script</h1>
+    
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+            <li><a href="#customers-data">Customers Sample Data</a></li>
+            <li><a href="#marketing-data">Marketing Channels Data</a></li>
+            <li><a href="#promotions-data">Promotions Data</a></li>
+            <li><a href="#products-data">Products Data</a></li>
+            <li><a href="#inventory-data">Inventory Data</a></li>
+            <li><a href="#subscriptions-data">Subscriptions Data</a></li>
+            <li><a href="#preferences-data">Customer Preferences Data</a></li>
+            <li><a href="#gift-cards-data">Gift Cards Data</a></li>
+            <li><a href="#orders-data">Orders Data</a></li>
+            <li><a href="#feedback-data">Feedback Data</a></li>
+            <li><a href="#order-items-data">Order Items Data</a></li>
+            <li><a href="#subscription-items-data">Subscription Items Data</a></li>
+            <li><a href="#order-history-data">Order Status History Data</a></li>
+            <li><a href="#product-promotions-data">Product Promotions Data</a></li>
+            <li><a href="#customer-promotions-data">Customer Promotions Data</a></li>
+            <li><a href="#commit">Commit All Changes</a></li>
+            <li><a href="#testing-queries">Testing and Validation Queries</a></li>
+        </ul>
+    </div>
 
+    <div class="highlight-note">
+        <strong>Sample Data Overview:</strong> This Oracle SQL script populates the Sweet Seoul Korean Bakery database with realistic test data including customers with Korean names, K-pop and anime themed products, marketing channels, promotional campaigns, orders, and comprehensive business relationships.
+    </div>
 
--- CUSTOMERS table 
+    <h2 id="customers-data">Customers Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Customer Records</div>
+        <div class="code-description">Sample customers with Korean names, Colorado addresses, and varying loyalty levels</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- CUSTOMERS table 
 INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
 VALUES ('Jiwoo', 'Kim', 'jiwoo.kim@email.com', '303-555-0101', SYSDATE-180, '123 Cherry St', 'Denver', 'CO', '80202', 1, 1, 350, 'Gold', 'Email');
 
@@ -29,9 +237,18 @@ INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, 
 VALUES ('Soojin', 'Yoon', 'soojin.yoon@email.com', '303-555-0109', SYSDATE-60, '606 Spruce Ave', 'Denver', 'CO', '80206', 1, 0, 400, 'Gold', 'SMS');
 
 INSERT INTO CUSTOMERS (first_name, last_name, email, phone, join_date, address, city, state, postal_code, is_online_customer, is_in_store_customer, loyalty_points, loyalty_status, preferred_communication_method)
-VALUES ('Jihyo', 'Hwang', 'jihyo.hwang@email.com', '303-555-0110', SYSDATE-45, '707 Aspen St', 'Fort Collins', 'CO', '80525', 0, 1, 150, 'Silver', 'Email');
+VALUES ('Jihyo', 'Hwang', 'jihyo.hwang@email.com', '303-555-0110', SYSDATE-45, '707 Aspen St', 'Fort Collins', 'CO', '80525', 0, 1, 150, 'Silver', 'Email');</code></pre>
+        </div>
+    </div>
 
--- MARKETING_CHANNELS table 
+    <h2 id="marketing-data">Marketing Channels Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Marketing Channel Records</div>
+        <div class="code-description">Various marketing channels including social media, events, and traditional advertising with acquisition costs and conversion rates</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- MARKETING_CHANNELS table 
 INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
 VALUES ('Instagram K-pop Ads', 'Social Media', 'Instagram', 15.50, 8.25);
 
@@ -60,9 +277,18 @@ INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, c
 VALUES ('K-pop Event Referral', 'Referral', 'Denver K-Pop Festival', 30.00, 15.20);
 
 INSERT INTO MARKETING_CHANNELS (channel_name, channel_type, specific_platform, customer_acquisition_cost, conversion_rate)
-VALUES ('University Direct Marketing', 'Direct', 'CU Denver Campus', 7.50, 5.80);
+VALUES ('University Direct Marketing', 'Direct', 'CU Denver Campus', 7.50, 5.80);</code></pre>
+        </div>
+    </div>
 
--- PROMOTIONS table 
+    <h2 id="promotions-data">Promotions Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Promotion Records</div>
+        <div class="code-description">Various promotional campaigns including K-pop and anime themed offers, seasonal discounts, and loyalty programs</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- PROMOTIONS table 
 INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
 VALUES ('BTS Army Special', 'Get 15% off all BTS merchandise for ARMY members!', TO_DATE('2023-06-01', 'YYYY-MM-DD'), TO_DATE('2023-08-31', 'YYYY-MM-DD'), 15, 'percentage', 'both', 'BTS', 0, 'discount', 50.00);
 
@@ -91,9 +317,18 @@ INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, disco
 VALUES ('Naruto Fan Special', 'Limited time offerings of Naruto themed merchandise', TO_DATE('2023-10-01', 'YYYY-MM-DD'), TO_DATE('2023-10-15', 'YYYY-MM-DD'), 15, 'percentage', 'both', 'Naruto', 0, 'discount', 35.00);
 
 INSERT INTO PROMOTIONS (promotion_name, description, start_date, end_date, discount_amount, discount_type, platform, kpop_anime_reference, is_gift_card_promo, promotion_type, min_purchase)
-VALUES ('Loyalty Member Month', 'Double points for all loyalty members this month', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-31', 'YYYY-MM-DD'), 0, 'percentage', 'both', NULL, 0, 'offer', 0.00);
+VALUES ('Loyalty Member Month', 'Double points for all loyalty members this month', TO_DATE('2023-08-01', 'YYYY-MM-DD'), TO_DATE('2023-08-31', 'YYYY-MM-DD'), 0, 'percentage', 'both', NULL, 0, 'offer', 0.00);</code></pre>
+        </div>
+    </div>
 
--- PRODUCTS table (seasonal column values and ensure categories match constraints)
+    <h2 id="products-data">Products Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Product Records</div>
+        <div class="code-description">Korean bakery products including traditional items and K-pop/anime themed specialties with pricing and inventory requirements</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- PRODUCTS table (seasonal column values and ensure categories match constraints)
 INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
 VALUES ('BTS Love Yourself Album', 'Official BTS Love Yourself: Tear album with photo cards and poster', 'K-pop Albums', 'South Korea', 24.99, 0, 0, 'BTS', 0, 0, 20);
 
@@ -128,9 +363,18 @@ INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, s
 VALUES ('One Piece Luffy Figure', 'Premium Monkey D. Luffy figure in Gear 5 transformation', 'Anime Figures', 'Japan', 68.99, 0, 1, 'One Piece', 1, 0, 12);
 
 INSERT INTO PRODUCTS (product_name, description, category, origin, base_price, seasonal, limited_edition, kpop_anime_tie_in, online_exclusive, in_store_exclusive, min_inventory_level)
-VALUES ('BTS Map of the Soul Album', 'BTS Map of the Soul: 7 album with exclusive photo book', 'K-pop Albums', 'South Korea', 27.99, 0, 0, 'BTS', 0, 0, 30);
+VALUES ('BTS Map of the Soul Album', 'BTS Map of the Soul: 7 album with exclusive photo book', 'K-pop Albums', 'South Korea', 27.99, 0, 0, 'BTS', 0, 0, 30);</code></pre>
+        </div>
+    </div>
 
--- INVENTORY table (now storage_requirements uses CLOB data properly)
+    <h2 id="inventory-data">Inventory Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Inventory Records</div>
+        <div class="code-description">Inventory levels for each product with stock management parameters and storage requirements</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- INVENTORY table (now storage_requirements uses CLOB data properly)
 INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
 VALUES (1, 45, 25, SYSDATE-7, NULL, 'Keep in original packaging, room temperature. Store in dry environment away from direct sunlight. Handle with care to prevent damage to photo cards and posters. Stack no more than 20 units high to prevent crushing.', 20, 100);
 
@@ -165,9 +409,18 @@ INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_da
 VALUES (11, 18, 15, SYSDATE-2, SYSDATE+5, 'Fragile collectible - climate controlled storage. Premium figure requiring white glove handling. Display lighting should be LED only to prevent heat damage. Insurance coverage required. Photograph condition upon receipt.', 12, 40);
 
 INSERT INTO INVENTORY (product_id, current_stock, reorder_point, last_restock_date, expected_arrival, storage_requirements, min_stock_level, max_stock_level)
-VALUES (12, 55, 35, SYSDATE-5, NULL, 'Keep in original packaging, room temperature. Limited space edition requires careful handling. Store spine-up to prevent warping. Check periodically for any package damage. Rotate display copies regularly to prevent UV damage.', 30, 120);
+VALUES (12, 55, 35, SYSDATE-5, NULL, 'Keep in original packaging, room temperature. Limited space edition requires careful handling. Store spine-up to prevent warping. Check periodically for any package damage. Rotate display copies regularly to prevent UV damage.', 30, 120);</code></pre>
+        </div>
+    </div>
 
--- SUBSCRIPTIONS table (delivery_address now uses CLOB)
+    <h2 id="subscriptions-data">Subscriptions Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Subscription Records</div>
+        <div class="code-description">Monthly subscription boxes with different tiers and delivery schedules</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- SUBSCRIPTIONS table (delivery_address now uses CLOB)
 INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle_months, subscription_type, is_gift, auto_renewal, delivery_address)
 VALUES (1, SYSDATE-60, SYSDATE+10, 'Active', 35.00, 1, 'Standard', 0, 1, '123 Cherry St, Denver, CO 80202. Please deliver to front door. If no answer, leave package with building security. Call 303-555-0101 for delivery issues. Safe to leave packages. Preferred delivery time: weekdays after 3 PM.');
 
@@ -196,9 +449,18 @@ INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscrip
 VALUES (10, SYSDATE-110, SYSDATE+18, 'Paused', 35.00, 1, 'Standard', 0, 1, '707 Aspen St, Fort Collins, CO 80525. Rural delivery address. Use main mailbox at road entrance. Long driveway - do not attempt delivery to house. Leave packages in waterproof container at mailbox.');
 
 INSERT INTO SUBSCRIPTIONS (customer_id, start_date, next_delivery_date, subscription_status, monthly_price, billing_cycle_months, subscription_type, is_gift, auto_renewal, delivery_address)
-VALUES (7, SYSDATE-85, SYSDATE+9, 'Active', 35.00, 1, 'Standard', 0, 1, '404 Walnut Blvd, Denver, CO 80205. Work from home - available most days. Ring doorbell first. If no answer, please call 303-555-0107. OK to leave packages if covered area available.');
+VALUES (7, SYSDATE-85, SYSDATE+9, 'Active', 35.00, 1, 'Standard', 0, 1, '404 Walnut Blvd, Denver, CO 80205. Work from home - available most days. Ring doorbell first. If no answer, please call 303-555-0107. OK to leave packages if covered area available.');</code></pre>
+        </div>
+    </div>
 
--- CUSTOMER_PREFERENCES table (preference fields now use CLOB)
+    <h2 id="preferences-data">Customer Preferences Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Customer Preference Records</div>
+        <div class="code-description">Customer preferences for flavors, categories, and K-pop/anime interests for personalized recommendations</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- CUSTOMER_PREFERENCES table (preference fields now use CLOB)
 INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
 VALUES (1, 'Prefers authentic Korean merchandise, especially limited edition items from Big Hit Entertainment. Loves photo cards and special packaging. Interested in concert merchandise and collaboration items. Prefers new releases over vintage items. Quality over quantity approach to collecting.', 'K-pop Albums, Merchandise, Accessories. Strong preference for boy group items. Occasionally interested in girl group albums if they are special editions. Values original packaging and authenticity certificates. Prefers items with bonus content like photo books and posters.', 1, 'BTS, Blackpink, Stray Kids');
 
@@ -227,9 +489,18 @@ INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_catego
 VALUES (9, 'Fashion-forward K-pop fan with strong interest in apparel and styling. Prefers items that reflect current Korean fashion trends. Interested in high-quality apparel and fashionable accessories. Values style and wearability over pure collectible value.', 'Apparel, Accessories, K-pop Albums. Strong focus on fashion and style items. Prefers clothing and accessories that can be incorporated into regular wardrobe. Interested in items that reflect current Korean fashion trends and aesthetics.', 1, 'Blackpink, TWICE, NewJeans');
 
 INSERT INTO CUSTOMER_PREFERENCES (customer_id, flavor_preference, product_category_preference, subscription_interest, kpop_anime_interest)
-VALUES (10, 'Eclectic collector with interests spanning both K-pop and anime. Prefers unique and limited edition items from various sources. Interested in crossover merchandise and special collaborations. Values rarity and uniqueness over mainstream popularity. Enjoys discovering new and unusual items.', 'Collectibles, K-pop Albums, Anime Figures. Interested in unique crossover items and limited edition releases. Prefers rare and unusual merchandise over mainstream items. Values items that represent cultural fusion between K-pop and anime aesthetics.', 1, 'BTS, One Piece, Demon Slayer');
+VALUES (10, 'Eclectic collector with interests spanning both K-pop and anime. Prefers unique and limited edition items from various sources. Interested in crossover merchandise and special collaborations. Values rarity and uniqueness over mainstream popularity. Enjoys discovering new and unusual items.', 'Collectibles, K-pop Albums, Anime Figures. Interested in unique crossover items and limited edition releases. Prefers rare and unusual merchandise over mainstream items. Values items that represent cultural fusion between K-pop and anime aesthetics.', 1, 'BTS, One Piece, Demon Slayer');</code></pre>
+        </div>
+    </div>
 
--- GIFT_CARDS table 
+    <h2 id="gift-cards-data">Gift Cards Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Gift Card Records</div>
+        <div class="code-description">Gift cards with varying balances and redemption statuses</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- GIFT_CARDS table 
 INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
 VALUES (1, 3, 'GC-2023-1001', 50.00, 50.00, SYSDATE-30, ADD_MONTHS(SYSDATE, 12), 0);
 
@@ -258,9 +529,18 @@ INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_cod
 VALUES (4, 6, 'GC-2023-1009', 60.00, 60.00, SYSDATE-20, ADD_MONTHS(SYSDATE, 12), 0);
 
 INSERT INTO GIFT_CARDS (issuer_customer_id, recipient_customer_id, gift_card_code, initial_amount, current_balance, issue_date, expiry_date, is_redeemed)
-VALUES (10, 9, 'GC-2023-1010', 50.00, 35.50, SYSDATE-45, ADD_MONTHS(SYSDATE, 12), 0);
+VALUES (10, 9, 'GC-2023-1010', 50.00, 35.50, SYSDATE-45, ADD_MONTHS(SYSDATE, 12), 0);</code></pre>
+        </div>
+    </div>
 
--- ORDERS table
+    <h2 id="orders-data">Orders Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Order Records</div>
+        <div class="code-description">Sample orders with various payment methods, marketing channels, and order statuses</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- ORDERS table
 INSERT INTO ORDERS (customer_id, order_date, subtotal, tax_amount, shipping_cost, discount_amount, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id, shipping_address, billing_address)
 VALUES (1, SYSDATE-25, 16.87, 1.35, 5.99, 5.71, 18.50, 'Delivered', 'Credit Card', 3, 'online', 0, NULL, '123 Cherry St, Denver, CO 80202', '123 Cherry St, Denver, CO 80202');
 
@@ -289,9 +569,18 @@ INSERT INTO ORDERS (customer_id, order_date, subtotal, tax_amount, shipping_cost
 VALUES (8, SYSDATE-2, 8.50, 0.68, 0.00, 0.68, 8.50, 'Processing', 'Cash', NULL, 'in-store', 0, NULL, NULL, NULL);
 
 INSERT INTO ORDERS (customer_id, order_date, subtotal, tax_amount, shipping_cost, discount_amount, total_amount, order_status, payment_method, marketing_channel_id, platform, is_gift, gift_card_id, shipping_address, billing_address)
-VALUES (10, SYSDATE-1, 17.50, 1.40, 5.99, 5.64, 19.25, 'Pending', 'Credit Card', 4, 'online', 0, NULL, '707 Aspen St, Fort Collins, CO 80525', '707 Aspen St, Fort Collins, CO 80525');
+VALUES (10, SYSDATE-1, 17.50, 1.40, 5.99, 5.64, 19.25, 'Pending', 'Credit Card', 4, 'online', 0, NULL, '707 Aspen St, Fort Collins, CO 80525', '707 Aspen St, Fort Collins, CO 80525');</code></pre>
+        </div>
+    </div>
 
--- FEEDBACK table
+    <h2 id="feedback-data">Feedback Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Feedback Records</div>
+        <div class="code-description">Customer feedback and ratings for products and orders</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- FEEDBACK table
 INSERT INTO FEEDBACK (customer_id, order_id, product_id, rating, review_text, feedback_date, is_verified_purchase)
 VALUES (1, 1, 1, 5, 'Amazing BTS album! Great quality and fast shipping.', SYSDATE-20, 1);
 
@@ -320,9 +609,18 @@ INSERT INTO FEEDBACK (customer_id, order_id, product_id, rating, review_text, fe
 VALUES (1, 1, 2, 4, 'Lightstick is great quality, batteries last long.', SYSDATE-19, 1);
 
 INSERT INTO FEEDBACK (customer_id, order_id, product_id, rating, review_text, feedback_date, is_verified_purchase)
-VALUES (3, 2, 8, 5, 'NewJeans phone case fits perfectly and looks stylish.', SYSDATE-14, 1);
+VALUES (3, 2, 8, 5, 'NewJeans phone case fits perfectly and looks stylish.', SYSDATE-14, 1);</code></pre>
+        </div>
+    </div>
 
--- ORDER_ITEMS table
+    <h2 id="order-items-data">Order Items Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Order Item Records</div>
+        <div class="code-description">Individual line items for each order with quantities, prices, and discounts</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- ORDER_ITEMS table
 INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount)
 VALUES (1, 1, 1, 24.99, 3.75);  -- BTS Album with 15% discount
 
@@ -378,9 +676,18 @@ INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount)
 VALUES (10, 3, 1, 45.99, 5.64);  -- Naruto Figure with discount
 
 INSERT INTO ORDER_ITEMS (order_id, product_id, quantity, unit_price, discount)
-VALUES (11, 8, 1, 22.50, 0.00);  -- NewJeans Phone Case
+VALUES (11, 8, 1, 22.50, 0.00);  -- NewJeans Phone Case</code></pre>
+        </div>
+    </div>
 
--- SUBSCRIPTION_ITEMS table
+    <h2 id="subscription-items-data">Subscription Items Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Subscription Item Records</div>
+        <div class="code-description">Products included in subscription boxes by month and year</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- SUBSCRIPTION_ITEMS table
 INSERT INTO SUBSCRIPTION_ITEMS (subscription_id, product_id, delivery_date, quantity, delivery_status)
 VALUES (1, 1, TO_DATE('2023-06-15', 'YYYY-MM-DD'), 1, 'Delivered');
 
@@ -415,9 +722,18 @@ INSERT INTO SUBSCRIPTION_ITEMS (subscription_id, product_id, delivery_date, quan
 VALUES (7, 6, TO_DATE('2023-07-10', 'YYYY-MM-DD'), 1, 'Planned');
 
 INSERT INTO SUBSCRIPTION_ITEMS (subscription_id, product_id, delivery_date, quantity, delivery_status)
-VALUES (8, 3, TO_DATE('2023-07-15', 'YYYY-MM-DD'), 1, 'Planned');
+VALUES (8, 3, TO_DATE('2023-07-15', 'YYYY-MM-DD'), 1, 'Planned');</code></pre>
+        </div>
+    </div>
 
--- ORDER_STATUS_HISTORY table (triggers will handle this automatically)
+    <h2 id="order-history-data">Order Status History Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Order Status History Records</div>
+        <div class="code-description">Audit trail of order status changes for tracking fulfillment progress</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- ORDER_STATUS_HISTORY table (triggers will handle this automatically)
 -- NOTE: With enhanced triggers, these records will be created automatically when orders are inserted/updated
 -- But we can still insert some historical data for demonstration
 
@@ -449,9 +765,18 @@ INSERT INTO ORDER_STATUS_HISTORY (order_id, previous_status, new_status, updated
 VALUES (3, NULL, 'Pending', 'SYSTEM', SYSDATE-18, 'Order created');
 
 INSERT INTO ORDER_STATUS_HISTORY (order_id, previous_status, new_status, updated_by, status_change_date, change_reason)
-VALUES (3, 'Pending', 'Processing', 'SYSTEM', SYSDATE-18, 'Payment confirmed');
+VALUES (3, 'Pending', 'Processing', 'SYSTEM', SYSDATE-18, 'Payment confirmed');</code></pre>
+        </div>
+    </div>
 
--- PRODUCT_PROMOTIONS table 
+    <h2 id="product-promotions-data">Product Promotions Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Product Promotion Records</div>
+        <div class="code-description">Junction table linking products to promotions with special pricing</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- PRODUCT_PROMOTIONS table 
 INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, override_discount_amount, effective_start_date, effective_end_date)
 VALUES (1, 1, 20.00, TO_DATE('2023-06-01', 'YYYY-MM-DD'), TO_DATE('2023-08-31', 'YYYY-MM-DD'));  -- BTS Album in BTS promotion
 
@@ -480,9 +805,18 @@ INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, override_discount_amou
 VALUES (2, 6, 25.00, TO_DATE('2023-09-01', 'YYYY-MM-DD'), TO_DATE('2023-09-07', 'YYYY-MM-DD'));  -- Blackpink items in Blackpink week
 
 INSERT INTO PRODUCT_PROMOTIONS (product_id, promotion_id, override_discount_amount, effective_start_date, effective_end_date)
-VALUES (3, 9, 12.00, TO_DATE('2023-10-01', 'YYYY-MM-DD'), TO_DATE('2023-10-15', 'YYYY-MM-DD'));  -- Naruto in Naruto special
+VALUES (3, 9, 12.00, TO_DATE('2023-10-01', 'YYYY-MM-DD'), TO_DATE('2023-10-15', 'YYYY-MM-DD'));  -- Naruto in Naruto special</code></pre>
+        </div>
+    </div>
 
--- CUSTOMER_PROMOTION table 
+    <h2 id="customer-promotions-data">Customer Promotions Sample Data</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Insert Customer Promotion Records</div>
+        <div class="code-description">Customer-specific promotion assignments with usage tracking and limits</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- CUSTOMER_PROMOTION table 
 INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
 VALUES (1, 1, 1, SYSDATE-30, SYSDATE+30, 1, 2);  -- Customer 1 used BTS promotion
 
@@ -527,16 +861,31 @@ INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered
 VALUES (5, 7, 0, SYSDATE-10, SYSDATE+50, 0, 1);  -- Customer 5 has subscription special
 
 INSERT INTO CUSTOMER_PROMOTION (customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit)
-VALUES (6, 2, 0, SYSDATE-20, SYSDATE+40, 0, 1);  -- Customer 6 has anime bundle
+VALUES (6, 2, 0, SYSDATE-20, SYSDATE+40, 0, 1);  -- Customer 6 has anime bundle</code></pre>
+        </div>
+    </div>
 
--- Commit all changes
-COMMIT;
 
--- =====================================================
--- VERIFICATION QUERIES - SMOKE TESTS
--- =====================================================
+        <h2 id="commit">Commit All Changes</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Commit Statement</div>
+        <div class="code-description">xxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Commit all changes
+COMMIT;</code></pre>
+        </div>
+    </div>
 
--- Set basic formatting options
+    <h2 id="testing-queries">Testing and Validation Queries</h2>
+    
+    <div class="code-section">
+        <div class="code-header">Database Testing and Smoke Tests</div>
+        <div class="code-description">Comprehensive queries to validate data insertion and verify table relationships</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Set basic formatting options
 SET LINESIZE 200
 SET PAGESIZE 1000
 SET TRIMOUT ON
@@ -724,9 +1073,16 @@ COLUMN times_used FORMAT 999 HEADING 'Times'
 COLUMN usage_limit FORMAT 999 HEADING 'Limit'
 
 SELECT customer_promotion_id, customer_id, promotion_id, is_used, date_offered, expiry_date, times_used, usage_limit 
-FROM CUSTOMER_PROMOTION ORDER BY customer_id, promotion_id;
+FROM CUSTOMER_PROMOTION ORDER BY customer_id, promotion_id;</code></pre>
+        </div>
+    </div>
 
--- Summary counts
+    <div class="code-section">
+        <div class="code-header">Summary Counts</div>
+        <div class="code-description">xxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Summary counts
 PROMPT ===== DATA SUMMARY =====
 SELECT 'CUSTOMERS' AS table_name, COUNT(*) AS record_count FROM CUSTOMERS
 UNION ALL
@@ -757,9 +1113,16 @@ UNION ALL
 SELECT 'PRODUCT_PROMOTIONS', COUNT(*) FROM PRODUCT_PROMOTIONS
 UNION ALL
 SELECT 'CUSTOMER_PROMOTION', COUNT(*) FROM CUSTOMER_PROMOTION
-ORDER BY table_name;
+ORDER BY table_name;</code></pre>
+        </div>
+    </div>
 
--- Test enhanced views from the improved DDL
+    <div class="code-section">
+        <div class="code-header">Business Intelligence Test Queries</div>
+        <div class="code-description">Sample queries for reporting and analytics validation</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Test enhanced views from the improved DDL
 PROMPT ===== TESTING ENHANCED VIEWS =====
 
 -- Test customer order history view
@@ -809,9 +1172,17 @@ SELECT ROUND(average_rating, 2) as avg_rating,
        five_star_count,
        four_star_count,
        ROUND(satisfaction_percentage, 2) as satisfaction_pct
-FROM vw_customer_feedback_summary;
+FROM vw_customer_feedback_summary;</code></pre>
+        </div>
+    </div>
 
-PROMPT ===== SAMPLE DATA INSERT COMPLETED SUCCESSFULLY =====
+    
+    <div class="code-section">
+        <div class="code-header">Sample Data Inserts and Testing Complete</div>
+        <div class="code-description">Database is now populated with enhanced sample data</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">PROMPT ===== SAMPLE DATA INSERT COMPLETED SUCCESSFULLY =====
 PROMPT Database is now populated with enhanced sample data!
 PROMPT =================================================================
 PROMPT 
@@ -821,4 +1192,12 @@ PROMPT - Enhanced financial breakdown in orders
 PROMPT - All constraint validations working properly
 PROMPT - Triggers and business logic functioning correctly
 PROMPT - Comprehensive views providing detailed insights
-PROMPT ================================================================= 
+PROMPT ================================================================= </code></pre>
+        </div>
+    </div>
+
+    <div class="highlight-note">
+        <strong>Validation Complete:</strong> After running these sample data insertions, our Sweet Seoul Korean Bakery database will be populated with realistic test data including customers,products, promotional campaigns, various orders and subscriptions, and comprehensive business relationships for testing and development purposes.
+    </div>
+
+  
