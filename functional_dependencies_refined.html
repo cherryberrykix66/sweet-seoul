@@ -313,17 +313,11 @@
     <div class="container">
         <h1>Sweet Seoul Korean Bakery Functional Dependency Diagrams</h1>
         
-        <div class="version-info">
+        <!-- <div class="version-info">
             <h3>Version Information</h3>
             <p><strong>Last Updated:</strong> May 30, 2025</p>
             <p><strong>Version:</strong> 2.0 - Updated to match current SQL implementation</p>
-            <p><strong>Legend:</strong></p>
-            <ul>
-                <li><span style="background-color: #fff3cd; padding: 2px 6px; border-radius: 3px; color: #856404;">Yellow</span> = Updated field from previous version</li>
-                <li><span style="background-color: #d4edda; padding: 2px 6px; border-radius: 3px; color: #155724;">Green</span> = New field added</li>
-                <li><span style="background-color: #f5e0fe; padding: 2px 6px; border-radius: 3px; color: #8e44ad;">Purple</span> = Existing field (unchanged)</li>
-            </ul>
-        </div>
+        </div> -->
         
         <div class="legend">
             <div class="legend-title">Functional Dependency Legend:</div>
@@ -367,19 +361,19 @@
                 <div class="dependent-attributes">
                     <div class="attribute">customer_id</div>
                     <div class="attribute">order_date</div>
-                    <div class="attribute new">subtotal</div>
-                    <div class="attribute new">tax_amount</div>
-                    <div class="attribute new">shipping_cost</div>
-                    <div class="attribute new">discount_amount</div>
-                    <div class="attribute updated">total_amount</div>
+                    <div class="attribute">subtotal</div>
+                    <div class="attribute">tax_amount</div>
+                    <div class="attribute">shipping_cost</div>
+                    <div class="attribute">discount_amount</div>
+                    <div class="attribute">total_amount</div>
                     <div class="attribute">order_status</div>
                     <div class="attribute">payment_method</div>
                     <div class="attribute">marketing_channel_id</div>
                     <div class="attribute">platform</div>
                     <div class="attribute">is_gift</div>
                     <div class="attribute">gift_card_id</div>
-                    <div class="attribute new">shipping_address</div>
-                    <div class="attribute new">billing_address</div>
+                    <div class="attribute">shipping_address</div>
+                    <div class="attribute">billing_address</div>
                     <div class="attribute">created_at</div>
                     <div class="attribute">updated_at</div>
                 </div>
@@ -404,7 +398,7 @@
                     <div class="attribute">new_status</div>
                     <div class="attribute">status_change_date</div>
                     <div class="attribute">updated_by</div>
-                    <div class="attribute new">change_reason</div>
+                    <div class="attribute">change_reason</div>
                     <div class="attribute">created_at</div>
                     <div class="attribute">updated_at</div>
                 </div>
@@ -516,13 +510,13 @@
                     <div class="attribute">customer_id</div>
                     <div class="attribute">start_date</div>
                     <div class="attribute">next_delivery_date</div>
-                    <div class="attribute new">end_date</div>
+                    <div class="attribute">end_date</div>
                     <div class="attribute">subscription_status</div>
                     <div class="attribute">monthly_price</div>
-                    <div class="attribute updated">billing_cycle_months</div>
+                    <div class="attribute">billing_cycle_months</div>
                     <div class="attribute">subscription_type</div>
                     <div class="attribute">is_gift</div>
-                    <div class="attribute new">auto_renewal</div>
+                    <div class="attribute">auto_renewal</div>
                     <div class="attribute">delivery_address</div>
                     <div class="attribute">created_at</div>
                     <div class="attribute">updated_at</div>
@@ -543,9 +537,9 @@
                 <div class="dependent-attributes">
                     <div class="attribute">subscription_id</div>
                     <div class="attribute">product_id</div>
-                    <div class="attribute updated">delivery_date</div>
+                    <div class="attribute">delivery_date</div>
                     <div class="attribute">quantity</div>
-                    <div class="attribute new">delivery_status</div>
+                    <div class="attribute">delivery_status</div>
                     <div class="attribute">created_at</div>
                     <div class="attribute">updated_at</div>
                 </div>
@@ -615,9 +609,9 @@
                 <div class="dependent-attributes">
                     <div class="attribute">product_id</div>
                     <div class="attribute">promotion_id</div>
-                    <div class="attribute updated">override_discount_amount</div>
-                    <div class="attribute new">effective_start_date</div>
-                    <div class="attribute new">effective_end_date</div>
+                    <div class="attribute">override_discount_amount</div>
+                    <div class="attribute">effective_start_date</div>
+                    <div class="attribute">effective_end_date</div>
                     <div class="attribute">created_at</div>
                     <div class="attribute">updated_at</div>
                 </div>
@@ -662,9 +656,9 @@
                     <div class="attribute">order_id</div>
                     <div class="attribute">product_id</div>
                     <div class="attribute">rating</div>
-                    <div class="attribute updated">review_text</div>
+                    <div class="attribute">review_text</div>
                     <div class="attribute">feedback_date</div>
-                    <div class="attribute new">is_verified_purchase</div>
+                    <div class="attribute">is_verified_purchase</div>
                     <div class="attribute">created_at</div>
                     <div class="attribute">updated_at</div>
                 </div>
