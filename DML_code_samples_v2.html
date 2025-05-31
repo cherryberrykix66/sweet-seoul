@@ -1111,10 +1111,10 @@ FROM CUSTOMER_PROMOTION ORDER BY customer_id, promotion_id;</code></pre>
         <div class="code-description">xxx</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- SAFE DATA SUMMARY WITH ERROR HANDLING
+            <pre><code class="language-sql">-- safe data summary with error handling
 PROMPT ===== DATA SUMMARY =====
 
--- First, let's check which tables actually exist
+-- check which tables actually exist
 PROMPT Checking existing tables...
 SELECT table_name, 'EXISTS' as status
 FROM user_tables 
