@@ -635,27 +635,138 @@ ORDER BY
         </div>
     </div>
 
-    <h2 id="">xxx</h2>
 
     <div class="code-section">
         <div class="code-header">xxxx</div>
         <div class="code-description">xxxxx</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">
+            <pre><code class="language-sql">-- Subscription Type Performance Analysis
+PROMPT 
+PROMPT ===== SUBSCRIPTION TYPE PERFORMANCE ANALYSIS =====
+
+CLEAR COLUMNS
+
+COLUMN subscription_type FORMAT A12 HEADING 'Subscription|Type'
+COLUMN billing_cycle FORMAT A15 HEADING 'Billing Cycle|Months'
+COLUMN total_subscriptions FORMAT 9,999 HEADING 'Total|Subscriptions'
+COLUMN active_subscriptions FORMAT 9,999 HEADING 'Active|Subscriptions'
+COLUMN avg_monthly_price FORMAT $999.99 HEADING 'Avg Monthly|Price'
+COLUMN total_monthly_revenue FORMAT $99,999.99 HEADING 'Monthly|Revenue'
+COLUMN avg_customer_lifetime FORMAT 999 HEADING 'Avg Lifetime|Days'
+COLUMN churn_rate FORMAT 990.9 HEADING 'Churn|Rate %'
+COLUMN gift_subscription_pct FORMAT 990.9 HEADING 'Gift Sub|%'
+COLUMN auto_renewal_pct FORMAT 990.9 HEADING 'Auto-Renewal|%'
+
+SELECT 
+    s.subscription_type,
+    -- UPDATED: Billing cycle analysis
+    CASE 
+        WHEN s.billing_cycle_months = 1 THEN 'Monthly'
+        WHEN s.billing_cycle_months = 3 THEN 'Quarterly'
+        WHEN s.billing_cycle_months = 6 THEN 'Semi-Annual'
+        WHEN s.billing_cycle_months = 12 THEN 'Annual'
+        ELSE s.billing_cycle_months || ' Months'
+    END AS billing_cycle,
+    COUNT(*) AS total_subscriptions,
+    SUM(CASE WHEN s.subscription_status = 'Active' THEN 1 ELSE 0 END) AS active_subscriptions,
+    ROUND(AVG(s.monthly_price), 2) AS avg_monthly_price,
+    -- UPDATED: Total monthly recurring revenue (MRR)
+    ROUND(SUM(CASE WHEN s.subscription_status = 'Active' THEN s.monthly_price ELSE 0 END), 2) AS total_monthly_revenue,
+    -- Average customer lifetime (start to end/cancel date)
+    ROUND(AVG(
+        CASE 
+            WHEN s.end_date IS NOT NULL THEN s.end_date - s.start_date
+            WHEN s.subscription_status = 'Canceled' THEN SYSDATE - s.start_date
+            ELSE SYSDATE - s.start_date
+        END
+    ), 0) AS avg_customer_lifetime,
+    -- Churn rate calculation
+    ROUND(SUM(CASE WHEN s.subscription_status = 'Canceled' THEN 1 ELSE 0 END) / 
+          NULLIF(COUNT(*), 0) * 100, 1) AS churn_rate,
+    -- Gift subscription percentage
+    ROUND(SUM(CASE WHEN s.is_gift = 1 THEN 1 ELSE 0 END) / 
+          NULLIF(COUNT(*), 0) * 100, 1) AS gift_subscription_pct,
+    -- UPDATED: Auto-renewal rate
+    ROUND(SUM(CASE WHEN s.auto_renewal = 1 THEN 1 ELSE 0 END) / 
+          NULLIF(COUNT(*), 0) * 100, 1) AS auto_renewal_pct
+FROM 
+    SUBSCRIPTIONS s
+GROUP BY 
+    s.subscription_type, s.billing_cycle_months
+ORDER BY 
+    total_monthly_revenue DESC;
                 
             </code></pre>
         </div>
     </div>
 
-    <h2 id="">xxx</h2>
 
     <div class="code-section">
         <div class="code-header">xxxx</div>
         <div class="code-description">xxxxx</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">
+        <div class="code-container">        
+            <pre><code class="language-sql">-- Customer Lifetime Value (CLV) Analysis for Subscriptions
+PROMPT 
+PROMPT ===== SUBSCRIPTION CUSTOMER LIFETIME VALUE ANALYSIS =====
+
+CLEAR COLUMNS
+
+COLUMN customer_id FORMAT 99999 HEADING 'Customer|ID'
+COLUMN customer_name FORMAT A25 HEADING 'Customer Name'
+COLUMN subscription_type FORMAT A12 HEADING 'Sub Type'
+COLUMN subscription_duration_days FORMAT 9999 HEADING 'Duration|Days'
+COLUMN total_subscription_value FORMAT $9,999.99 HEADING 'Total Sub|Value'
+COLUMN monthly_value FORMAT $999.99 HEADING 'Monthly|Value'
+COLUMN subscription_status FORMAT A10 HEADING 'Status'
+COLUMN auto_renewal FORMAT A5 HEADING 'Auto|Renew'
+COLUMN delivery_completion_rate FORMAT 990.9 HEADING 'Delivery|Rate %'
+COLUMN customer_segment FORMAT A15 HEADING 'Value Segment'
+
+SELECT 
+    c.customer_id,
+    c.first_name || ' ' || c.last_name AS customer_name,
+    s.subscription_type,
+    -- Subscription duration calculation
+    CASE 
+        WHEN s.end_date IS NOT NULL THEN TRUNC(s.end_date - s.start_date)
+        WHEN s.subscription_status = 'Canceled' THEN TRUNC(SYSDATE - s.start_date)
+        ELSE TRUNC(SYSDATE - s.start_date)
+    END AS subscription_duration_days,
+    -- Total subscription value
+    ROUND(s.monthly_price * 
+          (CASE 
+               WHEN s.end_date IS NOT NULL THEN MONTHS_BETWEEN(s.end_date, s.start_date)
+               WHEN s.subscription_status = 'Canceled' THEN MONTHS_BETWEEN(SYSDATE, s.start_date)
+               ELSE MONTHS_BETWEEN(SYSDATE, s.start_date)
+           END), 2) AS total_subscription_value,
+    s.monthly_price AS monthly_value,
+    s.subscription_status,
+    CASE WHEN s.auto_renewal = 1 THEN 'Yes' ELSE 'No' END AS auto_renewal,
+    -- Delivery completion rate
+    ROUND(
+        COUNT(CASE WHEN si.delivery_status = 'Delivered' THEN 1 END) / 
+        NULLIF(COUNT(si.subscription_item_id), 0) * 100, 1
+    ) AS delivery_completion_rate,
+    -- Customer value segmentation
+    CASE 
+        WHEN s.monthly_price * MONTHS_BETWEEN(COALESCE(s.end_date, SYSDATE), s.start_date) >= 500 THEN 'High Value'
+        WHEN s.monthly_price * MONTHS_BETWEEN(COALESCE(s.end_date, SYSDATE), s.start_date) >= 200 THEN 'Medium Value'
+        WHEN s.monthly_price * MONTHS_BETWEEN(COALESCE(s.end_date, SYSDATE), s.start_date) >= 50 THEN 'Low Value'
+        ELSE 'New Customer'
+    END AS customer_segment
+FROM 
+    SUBSCRIPTIONS s
+JOIN 
+    CUSTOMERS c ON s.customer_id = c.customer_id
+LEFT JOIN 
+    SUBSCRIPTION_ITEMS si ON s.subscription_id = si.subscription_id
+GROUP BY 
+    c.customer_id, c.first_name, c.last_name, s.subscription_type, s.start_date, 
+    s.end_date, s.monthly_price, s.subscription_status, s.auto_renewal
+ORDER BY 
+    total_subscription_value DESC;
+
                 
             </code></pre>
         </div>
