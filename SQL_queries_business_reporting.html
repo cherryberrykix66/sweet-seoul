@@ -182,10 +182,11 @@
         <ul>
             <li><a href="#req01">Busines Reporting Requirement 01</a></li>
             <li><a href="#req02">Busines Reporting Requirement 02</a></li>
-            <li><a href="#">xxxx</a></li>
-            <li><a href="#">xxxx</a></li>
-            <li><a href="#">xxxx</a></li>
-            <li><a href="#">xxx</a></li>
+            <li><a href="#req03">Busines Reporting Requirement 03</a></li>
+            <li><a href="#req04">Busines Reporting Requirement 04</a></li>
+            <li><a href="#req05">Busines Reporting Requirement 05</a></li>
+            <li><a href="#req06">Busines Reporting Requirement 06</a></li>
+            <li><a href="#req07">Busines Reporting Requirement 07</a></li>
         </ul>
     </div>
 
@@ -773,7 +774,646 @@ ORDER BY
     </div>
 
 
-    <h2 id="">xxx</h2>
+    <h2 id="req03">Busines Reporting Requirement 03</h2>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Marketing Channel Performance Overview
+ PROMPT ===== MARKETING CHANNEL PERFORMANCE OVERVIEW =====
+
+-- Format specific columns for this report
+CLEAR COLUMNS
+
+COLUMN channel_name FORMAT A25 HEADING 'Marketing Channel'
+COLUMN channel_type FORMAT A15 HEADING 'Channel Type'
+COLUMN specific_platform FORMAT A20 HEADING 'Platform'
+COLUMN acquisition_cost FORMAT $999.99 HEADING 'CAC'
+COLUMN customers_acquired FORMAT 999 HEADING 'Customers|Acquired'
+COLUMN total_cac_spend FORMAT $99,999.99 HEADING 'Total CAC|Spend'
+COLUMN total_orders FORMAT 999 HEADING 'Total|Orders'
+COLUMN gross_revenue FORMAT $99,999.99 HEADING 'Gross|Revenue'
+COLUMN net_revenue FORMAT $99,999.99 HEADING 'Net Revenue|After Discounts'
+COLUMN revenue_per_customer FORMAT $9,999.99 HEADING 'Revenue Per|Customer'
+COLUMN net_roi FORMAT 990.9 HEADING 'Net ROI|Ratio'
+COLUMN cac_payback_months FORMAT 990.9 HEADING 'CAC Payback|Months'
+COLUMN avg_order_value FORMAT $999.99 HEADING 'AOV'
+COLUMN customer_ltv FORMAT $9,999.99 HEADING 'Customer|LTV'
+
+-- Enhanced query with proper revenue calculations and profit analysis
+SELECT
+    mc.channel_name,
+    mc.channel_type,
+    mc.specific_platform,
+    mc.customer_acquisition_cost AS acquisition_cost,
+    COUNT(DISTINCT o.customer_id) AS customers_acquired,
+    ROUND(mc.customer_acquisition_cost * COUNT(DISTINCT o.customer_id), 2) AS total_cac_spend,
+    COUNT(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_id END) AS total_orders,
+    -- UPDATED: Gross revenue calculation
+    ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.subtotal + o.tax_amount + o.shipping_cost ELSE 0 END), 2) AS gross_revenue,
+    -- UPDATED: Net revenue after all discounts
+    ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.total_amount ELSE 0 END), 2) AS net_revenue,
+    -- Revenue per customer (net)
+    CASE 
+        WHEN COUNT(DISTINCT o.customer_id) > 0 THEN
+            ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.total_amount ELSE 0 END) / COUNT(DISTINCT o.customer_id), 2)
+        ELSE 0
+    END AS revenue_per_customer,
+    -- UPDATED: Net ROI calculation
+    CASE 
+        WHEN mc.customer_acquisition_cost * COUNT(DISTINCT o.customer_id) > 0 THEN
+            ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.total_amount ELSE 0 END) / 
+                  (mc.customer_acquisition_cost * COUNT(DISTINCT o.customer_id)), 1)
+        ELSE 0
+    END AS net_roi,
+    -- UPDATED: CAC payback period calculation (assuming quarterly revenue cycles)
+    CASE 
+        WHEN SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.total_amount ELSE 0 END) > 0 THEN
+            ROUND((mc.customer_acquisition_cost * COUNT(DISTINCT o.customer_id)) / 
+                  (SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.total_amount ELSE 0 END) / 12), 1)
+        ELSE NULL
+    END AS cac_payback_months,
+    -- ADDED: Average Order Value
+    CASE 
+        WHEN COUNT(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_id END) > 0 THEN
+            ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.total_amount ELSE 0 END) / 
+                  COUNT(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_id END), 2)
+        ELSE 0
+    END AS avg_order_value,
+    -- ADDED: Estimated Customer Lifetime Value (simplified)
+    CASE 
+        WHEN COUNT(DISTINCT o.customer_id) > 0 THEN
+            ROUND((SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.total_amount ELSE 0 END) / COUNT(DISTINCT o.customer_id)) * 2.5, 2)  -- Assuming 2.5x first-year revenue
+        ELSE 0
+    END AS customer_ltv
+FROM
+    MARKETING_CHANNELS mc
+LEFT JOIN
+    ORDERS o ON mc.marketing_channel_id = o.marketing_channel_id
+GROUP BY
+    mc.marketing_channel_id, mc.channel_name, mc.channel_type, mc.specific_platform, mc.customer_acquisition_cost
+HAVING 
+    COUNT(DISTINCT o.customer_id) > 0  -- Only show channels that acquired customers
+ORDER BY
+    net_revenue DESC, net_roi DESC;               
+            </code></pre>
+        </div>
+    </div>
+
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Channel Type Comparison
+PROMPT 
+PROMPT ===== CHANNEL TYPE PERFORMANCE COMPARISON =====
+
+CLEAR COLUMNS
+
+COLUMN marketing_category FORMAT A20 HEADING 'Marketing Category'
+COLUMN channel_count FORMAT 999 HEADING 'Channels'
+COLUMN avg_acquisition_cost FORMAT $999.99 HEADING 'Avg CAC'
+COLUMN avg_conversion_rate FORMAT 990.9 HEADING 'Avg Conv|Rate %'
+COLUMN customers_acquired FORMAT 9,999 HEADING 'Customers|Acquired'
+COLUMN total_cac_spend FORMAT $99,999.99 HEADING 'Total CAC|Spend'
+COLUMN net_revenue FORMAT $999,999.99 HEADING 'Net Revenue'
+COLUMN revenue_per_customer FORMAT $9,999.99 HEADING 'Revenue Per|Customer'
+COLUMN net_roi FORMAT 990.9 HEADING 'Net ROI'
+COLUMN cac_payback_months FORMAT 990.9 HEADING 'Payback|Months'
+COLUMN market_share FORMAT 990.9 HEADING 'Revenue|Share %'
+
+-- FIXED: Corrected aggregation logic to avoid ORA-00937 error
+WITH channel_metrics AS (
+    SELECT
+        CASE 
+            WHEN mc.channel_type IN ('Social Media', 'Social') THEN 'Social Media'
+            WHEN mc.channel_type IN ('Email', 'PPC', 'SEO', 'Display') THEN 'Digital Marketing'
+            WHEN mc.channel_type IN ('Direct', 'Referral') THEN 'Organic/Referral'
+            ELSE 'Traditional/Other'
+        END AS marketing_category,
+        mc.marketing_channel_id,
+        mc.customer_acquisition_cost,
+        mc.conversion_rate
+    FROM
+        MARKETING_CHANNELS mc
+),
+revenue_totals AS (
+    SELECT SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.total_amount ELSE 0 END) AS total_company_revenue
+    FROM ORDERS o
+),
+-- ADDED: Pre-calculate customer counts per channel to fix aggregation issue
+channel_customer_counts AS (
+    SELECT 
+        cm.marketing_channel_id,
+        cm.marketing_category,
+        cm.customer_acquisition_cost,
+        cm.conversion_rate,
+        COUNT(DISTINCT o.customer_id) AS customers_per_channel,
+        SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.total_amount ELSE 0 END) AS revenue_per_channel
+    FROM channel_metrics cm
+    LEFT JOIN ORDERS o ON cm.marketing_channel_id = o.marketing_channel_id
+    GROUP BY cm.marketing_channel_id, cm.marketing_category, cm.customer_acquisition_cost, cm.conversion_rate
+)
+SELECT
+    ccc.marketing_category,
+    COUNT(DISTINCT ccc.marketing_channel_id) AS channel_count,
+    ROUND(AVG(ccc.customer_acquisition_cost), 2) AS avg_acquisition_cost,
+    ROUND(AVG(ccc.conversion_rate), 1) AS avg_conversion_rate,
+    SUM(ccc.customers_per_channel) AS customers_acquired,
+    -- FIXED: Proper CAC spend calculation
+    ROUND(SUM(ccc.customer_acquisition_cost * ccc.customers_per_channel), 2) AS total_cac_spend,
+    ROUND(SUM(ccc.revenue_per_channel), 2) AS net_revenue,
+    CASE 
+        WHEN SUM(ccc.customers_per_channel) > 0 THEN
+            ROUND(SUM(ccc.revenue_per_channel) / SUM(ccc.customers_per_channel), 2)
+        ELSE 0
+    END AS revenue_per_customer,
+    CASE 
+        WHEN SUM(ccc.customer_acquisition_cost * ccc.customers_per_channel) > 0 THEN
+            ROUND(SUM(ccc.revenue_per_channel) / SUM(ccc.customer_acquisition_cost * ccc.customers_per_channel), 1)
+        ELSE 0
+    END AS net_roi,
+    CASE 
+        WHEN SUM(ccc.revenue_per_channel) > 0 THEN
+            ROUND(SUM(ccc.customer_acquisition_cost * ccc.customers_per_channel) / 
+                  (SUM(ccc.revenue_per_channel) / 12), 1)
+        ELSE NULL
+    END AS cac_payback_months,
+    -- FIXED: Market share calculation
+    ROUND(SUM(ccc.revenue_per_channel) / 
+          (SELECT total_company_revenue FROM revenue_totals) * 100, 1) AS market_share
+FROM
+    channel_customer_counts ccc
+CROSS JOIN
+    revenue_totals rt
+GROUP BY
+    ccc.marketing_category
+ORDER BY
+    net_revenue DESC;    
+            </code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Customer Acquisition Funnel Analysis
+PROMPT 
+PROMPT ===== CUSTOMER ACQUISITION FUNNEL ANALYSIS =====
+
+CLEAR COLUMNS
+
+COLUMN channel_name FORMAT A25 HEADING 'Marketing Channel'
+COLUMN estimated_impressions FORMAT 999,999 HEADING 'Est.|Impressions'
+COLUMN conversion_rate FORMAT 990.9 HEADING 'Conv|Rate %'
+COLUMN estimated_prospects FORMAT 99,999 HEADING 'Est.|Prospects'
+COLUMN customers_acquired FORMAT 999 HEADING 'Customers|Acquired'
+COLUMN first_orders FORMAT 999 HEADING 'First|Orders'
+COLUMN repeat_customers FORMAT 999 HEADING 'Repeat|Customers'
+COLUMN acquisition_rate FORMAT 990.99 HEADING 'Acquisition|Rate %'
+COLUMN repeat_rate FORMAT 990.9 HEADING 'Repeat|Rate %'
+COLUMN cost_per_impression FORMAT $90.9999 HEADING 'Cost Per|Impression'
+COLUMN cost_per_customer FORMAT $999.99 HEADING 'CAC'
+
+-- Enhanced funnel analysis with customer behavior tracking
+WITH channel_metrics AS (
+    SELECT
+        mc.marketing_channel_id,
+        mc.channel_name,
+        mc.channel_type,
+        mc.conversion_rate,
+        mc.customer_acquisition_cost,
+        -- UPDATED: More sophisticated impression estimates based on channel type
+        CASE
+            WHEN mc.channel_type = 'Social Media' THEN mc.customer_acquisition_cost * 800
+            WHEN mc.channel_type = 'PPC' THEN mc.customer_acquisition_cost * 500
+            WHEN mc.channel_type = 'SEO' THEN mc.customer_acquisition_cost * 1200
+            WHEN mc.channel_type = 'Email' THEN mc.customer_acquisition_cost * 1500
+            WHEN mc.channel_type = 'Display' THEN mc.customer_acquisition_cost * 2000
+            WHEN mc.channel_type = 'Direct' THEN mc.customer_acquisition_cost * 300
+            WHEN mc.channel_type = 'Referral' THEN mc.customer_acquisition_cost * 200
+            ELSE mc.customer_acquisition_cost * 1000
+        END AS estimated_impressions
+    FROM
+        MARKETING_CHANNELS mc
+),
+customer_behavior AS (
+    SELECT 
+        o.marketing_channel_id,
+        o.customer_id,
+        COUNT(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_id END) AS total_orders,
+        MIN(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_date END) AS first_order_date,
+        MAX(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_date END) AS last_order_date
+    FROM ORDERS o
+    WHERE o.marketing_channel_id IS NOT NULL
+    GROUP BY o.marketing_channel_id, o.customer_id
+)
+SELECT
+    cm.channel_name,
+    cm.estimated_impressions,
+    cm.conversion_rate,
+    ROUND(cm.estimated_impressions * (cm.conversion_rate / 100), 0) AS estimated_prospects,
+    COUNT(DISTINCT cb.customer_id) AS customers_acquired,
+    COUNT(DISTINCT CASE WHEN cb.total_orders >= 1 THEN cb.customer_id END) AS first_orders,
+    COUNT(DISTINCT CASE WHEN cb.total_orders > 1 THEN cb.customer_id END) AS repeat_customers,
+    CASE 
+        WHEN cm.estimated_impressions * (cm.conversion_rate / 100) > 0 THEN
+            ROUND(COUNT(DISTINCT cb.customer_id) / (cm.estimated_impressions * (cm.conversion_rate / 100)) * 100, 2)
+        ELSE 0
+    END AS acquisition_rate,
+    -- ADDED: Repeat customer rate
+    CASE 
+        WHEN COUNT(DISTINCT cb.customer_id) > 0 THEN
+            ROUND(COUNT(DISTINCT CASE WHEN cb.total_orders > 1 THEN cb.customer_id END) / 
+                  COUNT(DISTINCT cb.customer_id) * 100, 1)
+        ELSE 0
+    END AS repeat_rate,
+    CASE 
+        WHEN cm.estimated_impressions > 0 THEN
+            ROUND(cm.customer_acquisition_cost / cm.estimated_impressions, 4)
+        ELSE 0
+    END AS cost_per_impression,
+    cm.customer_acquisition_cost AS cost_per_customer
+FROM
+    channel_metrics cm
+LEFT JOIN
+    customer_behavior cb ON cm.marketing_channel_id = cb.marketing_channel_id
+GROUP BY
+    cm.marketing_channel_id, cm.channel_name, cm.estimated_impressions, 
+    cm.conversion_rate, cm.customer_acquisition_cost
+ORDER BY
+    customers_acquired DESC, repeat_rate DESC;         
+            </code></pre>
+        </div>
+    </div>
+
+    <h2 id="req04">Busines Reporting Requirement 04</h2>
+
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- RFM analysis
+PROMPT ===== ENHANCED RFM CUSTOMER SEGMENTATION =====
+
+-- Format columns for better readability
+COLUMN customer_id FORMAT 999999 HEADING 'Cust ID'
+COLUMN customer_name FORMAT A25 HEADING 'Customer Name'
+COLUMN email FORMAT A30 HEADING 'Email'
+COLUMN last_purchase_date FORMAT A10 HEADING 'Last|Purchase'
+COLUMN purchase_frequency FORMAT 999 HEADING 'Purchase|Frequency'
+COLUMN total_spent FORMAT $999,990.99 HEADING 'Net Total|Spent'
+COLUMN avg_order_value FORMAT $999.99 HEADING 'Avg Order|Value'
+COLUMN days_since_last_purchase FORMAT 990.9 HEADING 'Days|Since'
+COLUMN recency_score FORMAT 9 HEADING 'R'
+COLUMN frequency_score FORMAT 9 HEADING 'F'
+COLUMN monetary_score FORMAT 9 HEADING 'M'
+COLUMN rfm_value FORMAT A5 HEADING 'RFM|Score'
+COLUMN average_score FORMAT 90.9 HEADING 'Avg|Score'
+COLUMN customer_segment FORMAT A20 HEADING 'Customer Segment'
+COLUMN loyalty_status FORMAT A15 HEADING 'Loyalty|Status'
+COLUMN channel_preference FORMAT A10 HEADING 'Channel|Pref'
+
+WITH customer_rfm AS (
+    SELECT 
+        c.customer_id,
+        c.first_name || ' ' || c.last_name AS customer_name,
+        c.email,
+        c.loyalty_status,
+        c.loyalty_points,
+        -- UPDATED: Only count valid orders for accurate metrics
+        MAX(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_date END) AS last_purchase_date,
+        COUNT(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_id END) AS purchase_frequency,
+        -- UPDATED: Use net total amount for accurate spending calculation
+        SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.total_amount ELSE 0 END) AS total_spent,
+        -- ADDED: Average order value calculation
+        CASE 
+            WHEN COUNT(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_id END) > 0 THEN
+                SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.total_amount ELSE 0 END) / 
+                COUNT(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_id END)
+            ELSE 0
+        END AS avg_order_value,
+        -- ADDED: Channel preference analysis
+        CASE 
+            WHEN COUNT(CASE WHEN o.platform = 'online' AND o.order_status NOT IN ('Canceled') THEN 1 END) >
+                 COUNT(CASE WHEN o.platform = 'in-store' AND o.order_status NOT IN ('Canceled') THEN 1 END) THEN 'Online'
+            WHEN COUNT(CASE WHEN o.platform = 'online' AND o.order_status NOT IN ('Canceled') THEN 1 END) <
+                 COUNT(CASE WHEN o.platform = 'in-store' AND o.order_status NOT IN ('Canceled') THEN 1 END) THEN 'In-Store'
+            WHEN COUNT(CASE WHEN o.order_status NOT IN ('Canceled') THEN 1 END) > 0 THEN 'Mixed'
+            ELSE 'None'
+        END AS channel_preference,
+        -- UPDATED: Days since last purchase (handle NULL for customers with no orders)
+        CASE 
+            WHEN MAX(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_date END) IS NOT NULL THEN
+                SYSDATE - MAX(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_date END)
+            ELSE 9999  -- Assign high value for customers with no orders
+        END AS days_since_last_purchase
+    FROM CUSTOMERS c
+    LEFT JOIN ORDERS o ON c.customer_id = o.customer_id
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.email, c.loyalty_status, c.loyalty_points
+),
+rfm_scores AS (
+    SELECT 
+        customer_id,
+        customer_name,
+        email,
+        loyalty_status,
+        loyalty_points,
+        last_purchase_date,
+        purchase_frequency,
+        total_spent,
+        avg_order_value,
+        days_since_last_purchase,
+        channel_preference,
+        -- UPDATED: Enhanced scoring with better handling of edge cases
+        CASE 
+            WHEN days_since_last_purchase >= 9999 THEN 1  -- No purchases
+            ELSE NTILE(5) OVER (ORDER BY days_since_last_purchase ASC)
+        END AS recency_score,
+        CASE 
+            WHEN purchase_frequency = 0 THEN 1  -- No purchases
+            ELSE NTILE(5) OVER (ORDER BY purchase_frequency DESC)
+        END AS frequency_score,
+        CASE 
+            WHEN total_spent = 0 THEN 1  -- No spending
+            ELSE NTILE(5) OVER (ORDER BY total_spent DESC)
+        END AS monetary_score
+    FROM customer_rfm
+),
+segmented_customers AS (
+    SELECT 
+        customer_id,
+        customer_name,
+        email,
+        loyalty_status,
+        loyalty_points,
+        last_purchase_date,
+        purchase_frequency,
+        total_spent,
+        avg_order_value,
+        days_since_last_purchase,
+        channel_preference,
+        recency_score,
+        frequency_score,
+        monetary_score,
+        recency_score || frequency_score || monetary_score AS rfm_value,
+        ROUND((recency_score + frequency_score + monetary_score) / 3, 1) AS average_score,
+        -- UPDATED: More nuanced customer segmentation
+        CASE 
+            WHEN recency_score >= 4 AND frequency_score >= 4 AND monetary_score >= 4 THEN 'Champions'
+            WHEN recency_score >= 4 AND frequency_score >= 4 AND monetary_score >= 3 THEN 'Loyal Customers'
+            WHEN recency_score >= 3 AND frequency_score >= 3 AND monetary_score >= 3 THEN 'Potential Loyalists'
+            WHEN recency_score >= 4 AND frequency_score <= 2 AND monetary_score <= 3 THEN 'New Customers'
+            WHEN recency_score >= 3 AND frequency_score <= 2 AND monetary_score >= 3 THEN 'Big Spenders'
+            WHEN recency_score <= 2 AND frequency_score >= 4 AND monetary_score >= 4 THEN 'At Risk'
+            WHEN recency_score <= 2 AND frequency_score >= 3 AND monetary_score >= 3 THEN 'Cannot Lose Them'
+            WHEN recency_score <= 2 AND frequency_score <= 2 AND monetary_score >= 3 THEN 'Hibernating High Value'
+            WHEN recency_score <= 2 AND frequency_score <= 2 AND monetary_score <= 2 THEN 'Hibernating'
+            WHEN recency_score <= 1 AND frequency_score <= 1 AND monetary_score <= 1 THEN 'Lost'
+            WHEN purchase_frequency = 0 THEN 'No Purchases'
+            ELSE 'Need Attention'
+        END AS customer_segment
+    FROM rfm_scores
+)
+SELECT 
+    customer_id,
+    customer_name,
+    email,
+    loyalty_status,
+    last_purchase_date,
+    purchase_frequency,
+    total_spent,
+    avg_order_value,
+    ROUND(days_since_last_purchase, 1) AS days_since_last_purchase,
+    recency_score,
+    frequency_score,
+    monetary_score,
+    rfm_value,
+    average_score,
+    customer_segment,
+    channel_preference
+FROM segmented_customers
+ORDER BY average_score DESC, total_spent DESC;        
+            </code></pre>
+        </div>
+    </div>
+
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- promotion response segmentation
+PROMPT 
+PROMPT ===== ENHANCED PROMOTION RESPONSE SEGMENTATION =====
+
+-- Clear previous column formatting
+CLEAR COLUMNS
+
+COLUMN customer_id FORMAT 999999 HEADING 'Cust ID'
+COLUMN customer_name FORMAT A25 HEADING 'Customer Name'
+COLUMN email FORMAT A30 HEADING 'Email'
+COLUMN promotions_offered FORMAT 999 HEADING 'Promos|Offered'
+COLUMN promotions_used FORMAT 999 HEADING 'Promos|Used'
+COLUMN total_usage_count FORMAT 999 HEADING 'Total|Usage'
+COLUMN promotion_response_rate FORMAT 990.9 HEADING 'Response|Rate %'
+COLUMN avg_usage_per_promo FORMAT 990.9 HEADING 'Avg Usage|Per Promo'
+COLUMN promotion_segment FORMAT A20 HEADING 'Promotion Segment'
+COLUMN favorite_promo_type FORMAT A15 HEADING 'Favorite|Promo Type'
+COLUMN last_promo_used FORMAT A10 HEADING 'Last Promo|Used'
+COLUMN days_since_last_promo FORMAT 999 HEADING 'Days Since|Last Promo'
+
+WITH promotion_analysis AS (
+    SELECT 
+        c.customer_id,
+        c.first_name || ' ' || c.last_name AS customer_name,
+        c.email,
+        COUNT(DISTINCT cp.customer_promotion_id) AS promotions_offered,
+        COUNT(DISTINCT CASE WHEN cp.is_used = 1 THEN cp.customer_promotion_id END) AS promotions_used,
+        -- UPDATED: Track total usage count (includes multiple uses of same promotion)
+        SUM(COALESCE(cp.times_used, 0)) AS total_usage_count,
+        -- ADDED: Average usage per promotion
+        CASE 
+            WHEN COUNT(DISTINCT CASE WHEN cp.is_used = 1 THEN cp.customer_promotion_id END) > 0 THEN
+                SUM(COALESCE(cp.times_used, 0)) / 
+                COUNT(DISTINCT CASE WHEN cp.is_used = 1 THEN cp.customer_promotion_id END)
+            ELSE 0
+        END AS avg_usage_per_promo,
+        -- ADDED: Favorite promotion type analysis
+        (SELECT p.promotion_type
+         FROM CUSTOMER_PROMOTION cp2
+         JOIN PROMOTIONS p ON cp2.promotion_id = p.promotion_id
+         WHERE cp2.customer_id = c.customer_id AND cp2.times_used > 0
+         GROUP BY p.promotion_type
+         ORDER BY SUM(cp2.times_used) DESC
+         FETCH FIRST 1 ROW ONLY) AS favorite_promo_type,
+        -- ADDED: Last promotion usage date
+        MAX(CASE WHEN cp.is_used = 1 THEN cp.date_offered END) AS last_promo_used,
+        -- ADDED: Days since last promotion usage
+        CASE 
+            WHEN MAX(CASE WHEN cp.is_used = 1 THEN cp.date_offered END) IS NOT NULL THEN
+                SYSDATE - MAX(CASE WHEN cp.is_used = 1 THEN cp.date_offered END)
+            ELSE NULL
+        END AS days_since_last_promo
+    FROM CUSTOMERS c
+    LEFT JOIN CUSTOMER_PROMOTION cp ON c.customer_id = cp.customer_id
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.email
+)
+SELECT 
+    customer_id,
+    customer_name,
+    email,
+    promotions_offered,
+    promotions_used,
+    total_usage_count,
+    CASE 
+        WHEN promotions_offered > 0 
+        THEN ROUND(promotions_used * 100.0 / promotions_offered, 1)
+        ELSE 0 
+    END AS promotion_response_rate,
+    ROUND(avg_usage_per_promo, 1) AS avg_usage_per_promo,
+    -- UPDATED: Enhanced promotion segmentation
+    CASE 
+        WHEN promotions_offered = 0 THEN 'No Promotions Offered'
+        WHEN promotions_used = 0 THEN 'Non-Responder'
+        WHEN (promotions_used * 100.0 / promotions_offered) >= 80 AND total_usage_count >= 5 THEN 'Super Responder'
+        WHEN (promotions_used * 100.0 / promotions_offered) >= 60 THEN 'High Responder'
+        WHEN (promotions_used * 100.0 / promotions_offered) >= 30 THEN 'Medium Responder'
+        WHEN (promotions_used * 100.0 / promotions_offered) >= 10 THEN 'Low Responder'
+        ELSE 'Minimal Responder'
+    END AS promotion_segment,
+    COALESCE(favorite_promo_type, 'None') AS favorite_promo_type,
+    last_promo_used,
+    ROUND(days_since_last_promo, 0) AS days_since_last_promo
+FROM promotion_analysis
+ORDER BY promotion_response_rate DESC, total_usage_count DESC; 
+            </code></pre>
+        </div>
+    </div>
+
+
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+PROMPT 
+PROMPT ===== SUBSCRIPTION CUSTOMER SEGMENTATION =====
+
+CLEAR COLUMNS
+
+COLUMN customer_id FORMAT 999999 HEADING 'Cust ID'
+COLUMN customer_name FORMAT A25 HEADING 'Customer Name'
+COLUMN subscription_type FORMAT A12 HEADING 'Sub Type'
+COLUMN subscription_status FORMAT A10 HEADING 'Status'
+COLUMN subscription_duration FORMAT 999 HEADING 'Duration|Days'
+COLUMN monthly_value FORMAT $999.99 HEADING 'Monthly|Value'
+COLUMN total_subscription_value FORMAT $9,999.99 HEADING 'Total Sub|Value'
+COLUMN auto_renewal FORMAT A5 HEADING 'Auto|Renew'
+COLUMN delivery_success_rate FORMAT 990.9 HEADING 'Delivery|Success %'
+COLUMN subscription_segment FORMAT A20 HEADING 'Subscription Segment'
+
+-- FIXED: Corrected field reference issue
+WITH subscription_analysis AS (
+    SELECT 
+        c.customer_id,
+        c.first_name || ' ' || c.last_name AS customer_name,
+        s.subscription_type,
+        s.subscription_status,
+        s.monthly_price,
+        s.auto_renewal,
+        -- UPDATED: Calculate subscription duration using end_date if available
+        CASE 
+            WHEN s.end_date IS NOT NULL THEN TRUNC(s.end_date - s.start_date)
+            WHEN s.subscription_status = 'Canceled' THEN TRUNC(SYSDATE - s.start_date)
+            ELSE TRUNC(SYSDATE - s.start_date)
+        END AS subscription_duration,
+        -- Calculate total subscription value
+        s.monthly_price * 
+        CASE 
+            WHEN s.end_date IS NOT NULL THEN MONTHS_BETWEEN(s.end_date, s.start_date)
+            WHEN s.subscription_status = 'Canceled' THEN MONTHS_BETWEEN(SYSDATE, s.start_date)
+            ELSE MONTHS_BETWEEN(SYSDATE, s.start_date)
+        END AS total_subscription_value,
+        -- ADDED: Delivery success rate calculation
+        CASE 
+            WHEN COUNT(si.subscription_item_id) > 0 THEN
+                COUNT(CASE WHEN si.delivery_status = 'Delivered' THEN 1 END) * 100.0 / COUNT(si.subscription_item_id)
+            ELSE NULL
+        END AS delivery_success_rate
+    FROM CUSTOMERS c
+    JOIN SUBSCRIPTIONS s ON c.customer_id = s.customer_id
+    LEFT JOIN SUBSCRIPTION_ITEMS si ON s.subscription_id = si.subscription_id
+    GROUP BY c.customer_id, c.first_name, c.last_name, s.subscription_type, s.subscription_status,
+             s.monthly_price, s.auto_renewal, s.start_date, s.end_date
+)
+SELECT 
+    customer_id,
+    customer_name,
+    subscription_type,
+    subscription_status,
+    subscription_duration,
+    monthly_price AS monthly_value,  -- FIXED: Use the correct field name
+    ROUND(total_subscription_value, 2) AS total_subscription_value,
+    CASE WHEN auto_renewal = 1 THEN 'Yes' ELSE 'No' END AS auto_renewal,
+    ROUND(delivery_success_rate, 1) AS delivery_success_rate,
+    -- Subscription customer segmentation
+    CASE 
+        WHEN subscription_status = 'Active' AND total_subscription_value >= 500 AND auto_renewal = 1 THEN 'VIP Subscriber'
+        WHEN subscription_status = 'Active' AND total_subscription_value >= 200 THEN 'Loyal Subscriber'
+        WHEN subscription_status = 'Active' AND subscription_duration >= 90 THEN 'Committed Subscriber'
+        WHEN subscription_status = 'Active' AND subscription_duration < 30 THEN 'New Subscriber'
+        WHEN subscription_status = 'Active' THEN 'Regular Subscriber'
+        WHEN subscription_status = 'Paused' AND total_subscription_value >= 200 THEN 'High-Value Paused'
+        WHEN subscription_status = 'Paused' THEN 'Paused Subscriber'
+        WHEN subscription_status = 'Canceled' AND subscription_duration >= 180 THEN 'Long-term Churned'
+        WHEN subscription_status = 'Canceled' AND subscription_duration >= 30 THEN 'Churned Subscriber'
+        ELSE 'Early Churned'
+    END AS subscription_segment
+FROM subscription_analysis
+ORDER BY total_subscription_value DESC, subscription_duration DESC;  
+            </code></pre>
+        </div>
+    </div>
+
+<h2 id="req05">Busines Reporting Requirement 05</h2>
+
+    <div class="code-section">
+        <div class="code-header">Global Display Formatting </div>
+        <div class="code-description">different from the previous queries</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+-- Set up display format for all queries
+SET LINESIZE 250
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+SET FEEDBACK ON
+SET ECHO OFF
+SET VERIFY OFF
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+            </code></pre>
+        </div>
+    </div>
+
 
     <div class="code-section">
         <div class="code-header">xxxx</div>
@@ -787,7 +1427,16 @@ ORDER BY
     </div>
 
 
-    <h2 id="">xxx</h2>
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+                
+            </code></pre>
+        </div>
+    </div>
 
     <div class="code-section">
         <div class="code-header">xxxx</div>
@@ -800,7 +1449,6 @@ ORDER BY
         </div>
     </div>
 
-    <h2 id="">xxx</h2>
 
     <div class="code-section">
         <div class="code-header">xxxx</div>
@@ -812,8 +1460,6 @@ ORDER BY
             </code></pre>
         </div>
     </div>
-
-    <h2 id="">xxx</h2>
 
     <div class="code-section">
         <div class="code-header">xxxx</div>
