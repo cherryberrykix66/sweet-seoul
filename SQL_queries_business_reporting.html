@@ -1421,7 +1421,266 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
         <div class="code-container">
             
             <pre><code class="language-sql">
-                
+PROMPT ===== K-POP/ANIME PRODUCT PERFORMANCE ANALYSIS =====
+
+-- Format columns for better readability
+COLUMN product_id FORMAT 999 HEADING 'Prod|ID'
+COLUMN product_name FORMAT A25 HEADING 'Product Name'
+COLUMN kpop_anime_tie_in FORMAT A15 HEADING 'K-Pop/Anime|Theme'
+COLUMN category FORMAT A12 HEADING 'Category'
+COLUMN base_price FORMAT $999.99 HEADING 'Base|Price'
+COLUMN units_sold FORMAT 9,999 HEADING 'Units|Sold'
+COLUMN gross_revenue FORMAT $99,999.99 HEADING 'Gross|Revenue'
+COLUMN net_revenue FORMAT $99,999.99 HEADING 'Net Revenue|After Discounts'
+COLUMN avg_selling_price FORMAT $999.99 HEADING 'Avg Selling|Price'
+COLUMN days_available FORMAT 999 HEADING 'Days|Available'
+COLUMN sales_per_day FORMAT 990.99 HEADING 'Daily|Sales'
+COLUMN avg_rating FORMAT 90.9 HEADING 'Avg|Rating'
+COLUMN stock_status FORMAT A12 HEADING 'Stock|Status'
+COLUMN urgency_level FORMAT A10 HEADING 'Urgency'
+
+-- FIXED: Corrected date arithmetic to avoid INTERVAL data type issues
+SELECT 
+    p.product_id,
+    p.product_name,
+    p.kpop_anime_tie_in,
+    p.category,
+    p.base_price,
+    -- Only count valid orders
+    NVL(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) AS units_sold,
+    -- Gross revenue calculation (before discounts)
+    NVL(SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                 THEN oi.quantity * oi.unit_price ELSE 0 END), 0) AS gross_revenue,
+    -- Net revenue after item-level discounts
+    NVL(SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                 THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                 ELSE 0 END), 0) AS net_revenue,
+    -- Average selling price per unit (after discounts)
+    CASE 
+        WHEN SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) > 0 THEN
+            SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                     THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                     ELSE 0 END) / 
+            SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END)
+        ELSE 0
+    END AS avg_selling_price,
+    -- FIXED: Days available calculation using proper date arithmetic
+    CASE 
+        WHEN p.expiry_date IS NOT NULL THEN 
+            GREATEST(1, 
+                TRUNC(LEAST(SYSDATE, p.expiry_date)) - 
+                TRUNC(GREATEST(TRUNC(p.created_at), TRUNC(SYSDATE - 365)))
+            )
+        ELSE 
+            GREATEST(1, 
+                TRUNC(SYSDATE) - 
+                TRUNC(GREATEST(TRUNC(p.created_at), TRUNC(SYSDATE - 365)))
+            )
+    END AS days_available,
+    -- FIXED: Sales per day calculation using the corrected days_available
+    CASE 
+        WHEN GREATEST(1, 
+                CASE 
+                    WHEN p.expiry_date IS NOT NULL THEN 
+                        TRUNC(LEAST(SYSDATE, p.expiry_date)) - 
+                        TRUNC(GREATEST(TRUNC(p.created_at), TRUNC(SYSDATE - 365)))
+                    ELSE 
+                        TRUNC(SYSDATE) - 
+                        TRUNC(GREATEST(TRUNC(p.created_at), TRUNC(SYSDATE - 365)))
+                END) > 0
+        THEN 
+            NVL(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) / 
+            GREATEST(1, 
+                CASE 
+                    WHEN p.expiry_date IS NOT NULL THEN 
+                        TRUNC(LEAST(SYSDATE, p.expiry_date)) - 
+                        TRUNC(GREATEST(TRUNC(p.created_at), TRUNC(SYSDATE - 365)))
+                    ELSE 
+                        TRUNC(SYSDATE) - 
+                        TRUNC(GREATEST(TRUNC(p.created_at), TRUNC(SYSDATE - 365)))
+                END)
+        ELSE 0
+    END AS sales_per_day,
+    -- Only count verified feedback
+    NVL(AVG(CASE WHEN f.is_verified_purchase = 1 THEN f.rating END), 0) AS avg_rating,
+    -- Stock status from inventory
+    CASE 
+        WHEN i.current_stock = 0 THEN 'Out of Stock'
+        WHEN i.current_stock <= i.min_stock_level THEN 'Critical'
+        WHEN i.current_stock <= i.reorder_point THEN 'Low Stock'
+        ELSE 'In Stock'
+    END AS stock_status,
+    -- Urgency level for limited edition items
+    CASE
+        WHEN p.expiry_date IS NOT NULL THEN
+            CASE
+                WHEN TRUNC(p.expiry_date) - TRUNC(SYSDATE) <= 3 AND i.current_stock > 0 THEN 'Emergency'
+                WHEN TRUNC(p.expiry_date) - TRUNC(SYSDATE) <= 7 AND i.current_stock > 0 THEN 'Critical'
+                WHEN TRUNC(p.expiry_date) - TRUNC(SYSDATE) <= 14 AND i.current_stock > 0 THEN 'High'
+                WHEN TRUNC(p.expiry_date) - TRUNC(SYSDATE) <= 30 AND i.current_stock > 0 THEN 'Medium'
+                WHEN TRUNC(p.expiry_date) - TRUNC(SYSDATE) < 0 THEN 'Expired'
+                ELSE 'Low'
+            END
+        WHEN p.limited_edition = 1 AND i.current_stock <= i.min_stock_level THEN 'Critical'
+        ELSE 'Normal'
+    END AS urgency_level
+FROM 
+    PRODUCTS p
+    LEFT JOIN ORDER_ITEMS oi ON p.product_id = oi.product_id
+    LEFT JOIN ORDERS o ON oi.order_id = o.order_id
+    LEFT JOIN FEEDBACK f ON p.product_id = f.product_id
+    LEFT JOIN INVENTORY i ON p.product_id = i.product_id
+WHERE 
+    p.limited_edition = 1 
+    AND p.kpop_anime_tie_in IS NOT NULL
+GROUP BY 
+    p.product_id, p.product_name, p.kpop_anime_tie_in, p.category, p.base_price, 
+    p.expiry_date, p.created_at, p.limited_edition, 
+    i.current_stock, i.min_stock_level, i.reorder_point
+ORDER BY 
+    sales_per_day DESC, net_revenue DESC;
+            </code></pre>
+        </div>
+    </div>
+
+<h2 id="req05">Busines Reporting Requirement 06</h2>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+-- Set up display format for all queries
+SET LINESIZE 250
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+SET FEEDBACK ON
+SET ECHO OFF
+SET VERIFY OFF        
+            </code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+PROMPT ===== PLATFORM-SPECIFIC PROMOTION EFFECTIVENESS ANALYSIS =====
+
+-- Format columns for better readability
+COLUMN platform FORMAT A12 HEADING 'Platform'
+COLUMN promotion_type FORMAT A15 HEADING 'Promotion Type'
+COLUMN promo_count FORMAT 999 HEADING 'Total|Promos'
+COLUMN customers_reached FORMAT 999 HEADING 'Customers|Reached'
+COLUMN total_orders FORMAT 999 HEADING 'Total|Orders'
+COLUMN gross_revenue FORMAT $999,999.99 HEADING 'Gross|Revenue'
+COLUMN net_revenue FORMAT $999,999.99 HEADING 'Net Revenue|After Discounts'
+COLUMN total_discount_given FORMAT $99,999.99 HEADING 'Total|Discounts'
+COLUMN avg_discount_pct FORMAT 990.9 HEADING 'Avg|Discount %'
+COLUMN avg_order_value FORMAT $999.99 HEADING 'Avg Order|Value'
+COLUMN roi FORMAT 990.9 HEADING 'ROI %'
+COLUMN response_rate FORMAT 990.9 HEADING 'Response|Rate %'
+COLUMN usage_rate FORMAT 990.9 HEADING 'Usage|Rate %'
+
+-- UPDATED: Enhanced query with proper revenue calculations and business logic
+WITH promotion_orders AS (
+    -- Find orders that used promotions during the promotion period
+    SELECT DISTINCT
+        p.promotion_id,
+        p.platform,
+        p.promotion_type,
+        p.discount_amount,
+        p.discount_type,
+        p.start_date,
+        p.end_date,
+        o.order_id,
+        o.customer_id,
+        o.order_date,
+        -- UPDATED: Use total_amount for net revenue (includes all order components)
+        o.total_amount,
+        -- UPDATED: Calculate gross revenue (before order-level discounts)
+        o.subtotal + COALESCE(o.tax_amount, 0) + COALESCE(o.shipping_cost, 0) AS gross_amount,
+        -- UPDATED: Get actual discount applied at order level
+        COALESCE(o.discount_amount, 0) AS actual_order_discount
+    FROM PROMOTIONS p
+    LEFT JOIN CUSTOMER_PROMOTION cp ON p.promotion_id = cp.promotion_id 
+    LEFT JOIN ORDERS o ON cp.customer_id = o.customer_id 
+                      AND o.platform = p.platform
+                      AND o.order_date BETWEEN p.start_date AND p.end_date
+                      AND o.order_status NOT IN ('Canceled')  -- UPDATED: Only valid orders
+                      AND cp.is_used = 1  -- Only used promotions
+),
+promotion_metrics AS (
+    SELECT 
+        p.platform,
+        p.promotion_type,
+        COUNT(DISTINCT p.promotion_id) AS promo_count,
+        COUNT(DISTINCT cp.customer_id) AS customers_reached,
+        COUNT(DISTINCT po.order_id) AS total_orders,
+        SUM(COALESCE(po.gross_amount, 0)) AS gross_revenue,
+        SUM(COALESCE(po.total_amount, 0)) AS net_revenue,
+        SUM(COALESCE(po.actual_order_discount, 0)) AS total_discount_given,
+        -- Promotion usage statistics
+        SUM(cp.times_used) AS total_usage_count,
+        COUNT(DISTINCT CASE WHEN cp.is_used = 1 THEN cp.customer_promotion_id END) AS promotions_used,
+        COUNT(DISTINCT cp.customer_promotion_id) AS promotions_offered
+    FROM PROMOTIONS p
+    LEFT JOIN CUSTOMER_PROMOTION cp ON p.promotion_id = cp.promotion_id
+    LEFT JOIN promotion_orders po ON p.promotion_id = po.promotion_id
+    WHERE p.platform != 'both'  -- Exclude promotions available on both platforms
+    GROUP BY p.platform, p.promotion_type
+)
+SELECT
+    pm.platform,
+    pm.promotion_type,
+    pm.promo_count,
+    pm.customers_reached,
+    pm.total_orders,
+    ROUND(pm.gross_revenue, 2) AS gross_revenue,
+    ROUND(pm.net_revenue, 2) AS net_revenue,
+    ROUND(pm.total_discount_given, 2) AS total_discount_given,
+    -- Average discount percentage
+    CASE 
+        WHEN pm.gross_revenue > 0 THEN 
+            ROUND(pm.total_discount_given / pm.gross_revenue * 100, 1)
+        ELSE 0
+    END AS avg_discount_pct,
+    -- Average order value (net)
+    CASE 
+        WHEN pm.total_orders > 0 THEN 
+            ROUND(pm.net_revenue / pm.total_orders, 2)
+        ELSE 0
+    END AS avg_order_value,
+    -- UPDATED: ROI calculation (Revenue generated vs discount cost)
+    CASE 
+        WHEN pm.total_discount_given > 0 THEN
+            ROUND((pm.net_revenue - pm.total_discount_given) / pm.total_discount_given * 100, 1)
+        ELSE 0
+    END AS roi,
+    -- Response rate: % of customers who used promotions
+    CASE 
+        WHEN pm.promotions_offered > 0 THEN
+            ROUND(pm.promotions_used / pm.promotions_offered * 100, 1)
+        ELSE 0
+    END AS response_rate,
+    -- Usage rate: average times used per promotion
+    CASE 
+        WHEN pm.promotions_used > 0 THEN
+            ROUND(pm.total_usage_count / pm.promotions_used, 1)
+        ELSE 0
+    END AS usage_rate
+FROM promotion_metrics pm
+WHERE pm.promo_count > 0  -- Only show platforms with promotions
+ORDER BY 
+    pm.platform, pm.net_revenue DESC; 
             </code></pre>
         </div>
     </div>
@@ -1433,7 +1692,108 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
         <div class="code-container">
             
             <pre><code class="language-sql">
-                
+PROMPT 
+PROMPT ===== PRODUCT CATEGORY PREFERENCES BY PLATFORM =====
+
+-- Clear previous column formatting
+CLEAR COLUMNS
+
+-- Format columns for better readability
+COLUMN platform FORMAT A12 HEADING 'Platform'
+COLUMN category FORMAT A15 HEADING 'Product Category'
+COLUMN total_orders FORMAT 999 HEADING 'Total|Orders'
+COLUMN total_items FORMAT 9,999 HEADING 'Total|Items'
+COLUMN gross_revenue FORMAT $999,999.99 HEADING 'Gross|Revenue'
+COLUMN net_revenue FORMAT $999,999.99 HEADING 'Net Revenue|After Discounts'
+COLUMN revenue_share FORMAT 990.9 HEADING 'Revenue|Share %'
+COLUMN avg_selling_price FORMAT $99.99 HEADING 'Avg Selling|Price'
+COLUMN theme_product_pct FORMAT 990.9 HEADING 'K-Pop/Anime|%'
+COLUMN limited_edition_pct FORMAT 990.9 HEADING 'Limited|Edition %'
+COLUMN avg_discount_per_item FORMAT $99.99 HEADING 'Avg Discount|Per Item'
+
+-- UPDATED: Enhanced query with proper revenue calculations
+SELECT
+    o.platform,
+    p.category,
+    COUNT(DISTINCT o.order_id) AS total_orders,
+    SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) AS total_items,
+    -- UPDATED: Gross revenue calculation (before item discounts)
+    ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                   THEN oi.quantity * oi.unit_price ELSE 0 END), 2) AS gross_revenue,
+    -- UPDATED: Net revenue calculation (after item discounts)
+    ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                   THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                   ELSE 0 END), 2) AS net_revenue,
+    -- Revenue share within platform
+    ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                   THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                   ELSE 0 END) * 100 / 
+          SUM(SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                       THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                       ELSE 0 END)) OVER (PARTITION BY o.platform), 1) AS revenue_share,
+    -- UPDATED: Average selling price per unit (after discounts)
+    CASE 
+        WHEN SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) > 0 THEN
+            ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                           THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                           ELSE 0 END) / 
+                  SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 2)
+        ELSE 0
+    END AS avg_selling_price,
+    -- K-Pop/Anime themed product percentage
+    ROUND(SUM(CASE WHEN p.kpop_anime_tie_in IS NOT NULL AND o.order_status NOT IN ('Canceled') 
+                   THEN oi.quantity ELSE 0 END) * 100.0 / 
+          NULLIF(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0), 1) AS theme_product_pct,
+    -- ADDED: Limited edition product percentage
+    ROUND(SUM(CASE WHEN p.limited_edition = 1 AND o.order_status NOT IN ('Canceled') 
+                   THEN oi.quantity ELSE 0 END) * 100.0 / 
+          NULLIF(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0), 1) AS limited_edition_pct,
+    -- ADDED: Average discount per item
+    CASE 
+        WHEN SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) > 0 THEN
+            ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                           THEN COALESCE(oi.discount, 0) ELSE 0 END) / 
+                  SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 2)
+        ELSE 0
+    END AS avg_discount_per_item
+FROM
+    ORDERS o
+    JOIN ORDER_ITEMS oi ON o.order_id = oi.order_id
+    JOIN PRODUCTS p ON oi.product_id = p.product_id
+GROUP BY
+    o.platform, p.category
+HAVING
+    SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) > 0  -- Only categories with sales
+ORDER BY
+    o.platform, net_revenue DESC;     
+            </code></pre>
+        </div>
+    </div>
+
+<h2 id="req07">Busines Reporting Requirement 07</h2>
+
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+-- Set up display format for all queries
+SET LINESIZE 250
+SET PAGESIZE 1000
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+SET FEEDBACK ON
+SET ECHO OFF
+SET VERIFY OFF
+
+-- Format date display
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';    
             </code></pre>
         </div>
     </div>
@@ -1444,30 +1804,75 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
         <div class="code-container">
             
             <pre><code class="language-sql">
-                
-            </code></pre>
-        </div>
-    </div>
+PROMPT ===== GIFT CARD SALES OVERVIEW DASHBOARD =====
 
+-- Format columns for enhanced display
+COLUMN period FORMAT A10 HEADING 'Period'
+COLUMN total_cards_issued FORMAT 999,999 HEADING 'Cards|Issued'
+COLUMN total_value_issued FORMAT $999,999.99 HEADING 'Total Value|Issued'
+COLUMN avg_card_value FORMAT $999.99 HEADING 'Avg Card|Value'
+COLUMN gift_purchases FORMAT 999,999 HEADING 'As Gift|Purchases'
+COLUMN self_purchases FORMAT 999,999 HEADING 'Self|Purchases'
+COLUMN unique_purchasers FORMAT 999,999 HEADING 'Unique|Purchasers'
+COLUMN cards_redeemed FORMAT 999,999 HEADING 'Cards|Redeemed'
+COLUMN total_redeemed_value FORMAT $999,999.99 HEADING 'Value|Redeemed'
+COLUMN redemption_rate FORMAT 990.9 HEADING 'Redemption|Rate %'
+COLUMN avg_days_to_redeem FORMAT 999 HEADING 'Avg Days|To Redeem'
+COLUMN outstanding_balance FORMAT $999,999.99 HEADING 'Outstanding|Balance'
 
-    <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">
-                
-            </code></pre>
-        </div>
-    </div>
-
-    <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">
-                
+-- UPDATED: Enhanced query with comprehensive gift card metrics
+WITH monthly_sales AS (
+    SELECT 
+        TO_CHAR(gc.issue_date, 'YYYY-MM') AS period,
+        COUNT(*) AS total_cards_issued,
+        SUM(gc.initial_amount) AS total_value_issued,
+        ROUND(AVG(gc.initial_amount), 2) AS avg_card_value,
+        -- Enhanced gift vs self purchase classification
+        COUNT(CASE WHEN gc.recipient_customer_id IS NOT NULL AND 
+                        gc.recipient_customer_id != gc.issuer_customer_id THEN 1 END) AS gift_purchases,
+        COUNT(CASE WHEN gc.recipient_customer_id IS NULL OR 
+                        gc.recipient_customer_id = gc.issuer_customer_id THEN 1 END) AS self_purchases,
+        COUNT(DISTINCT gc.issuer_customer_id) AS unique_purchasers,
+        -- ADDED: Redemption metrics
+        COUNT(CASE WHEN gc.is_redeemed = 1 THEN 1 END) AS cards_redeemed,
+        SUM(CASE WHEN gc.is_redeemed = 1 THEN gc.initial_amount - gc.current_balance ELSE 0 END) AS total_redeemed_value,
+        -- ADDED: Outstanding balance tracking
+        SUM(gc.current_balance) AS outstanding_balance,
+        -- ADDED: Average redemption time (for redeemed cards)
+        ROUND(AVG(CASE WHEN gc.is_redeemed = 1 THEN 
+                      (SELECT MIN(o.order_date) - gc.issue_date 
+                       FROM ORDERS o 
+                       WHERE o.gift_card_id = gc.gift_card_id)
+                  END), 0) AS avg_days_to_redeem
+    FROM GIFT_CARDS gc
+    GROUP BY TO_CHAR(gc.issue_date, 'YYYY-MM')
+),
+enhanced_metrics AS (
+    SELECT 
+        ms.*,
+        -- Calculate redemption rate
+        CASE 
+            WHEN ms.total_cards_issued > 0 THEN
+                ROUND(ms.cards_redeemed / ms.total_cards_issued * 100, 1)
+            ELSE 0
+        END AS redemption_rate
+    FROM monthly_sales ms
+)
+SELECT 
+    em.period,
+    em.total_cards_issued,
+    em.total_value_issued,
+    em.avg_card_value,
+    em.gift_purchases,
+    em.self_purchases,
+    em.unique_purchasers,
+    em.cards_redeemed,
+    ROUND(em.total_redeemed_value, 2) AS total_redeemed_value,
+    em.redemption_rate,
+    em.avg_days_to_redeem,
+    ROUND(em.outstanding_balance, 2) AS outstanding_balance
+FROM enhanced_metrics em
+ORDER BY em.period DESC;     
             </code></pre>
         </div>
     </div>
