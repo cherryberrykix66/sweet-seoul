@@ -85,8 +85,8 @@
         /* .header h1::after {
             content: '✨💖✨';
             position: absolute;
-            top: 20px;
-            right: 200px;
+            top: -20px;
+            right: -50px;
             font-size: 0.5em;
             animation: sparkle 2s infinite;
         } */
@@ -96,7 +96,6 @@
             color: #000000;
             font-weight: bold;
         }
-        
         .cute-badge {
             display: inline-block;
             background: linear-gradient(45deg, #ff9ff3, #f368e0);
@@ -758,4 +757,339 @@
 
         <!-- Gift Card System Section -->
         <div class="rules-section">
+            <div class="section-header">
+                <span class="section-icon">🎁</span>
+                <h2>Gift Card System Rules</h2>
+            </div>
+            <div class="rules-container">
+                <div class="rule-category">
+                    <h3>Gift Card Lifecycle</h3>
+                    <div class="rule-list">
+                        <div class="rule-item forward">
+                            <div class="rule-type">Forward Rule</div>
+                            <div class="rule-text">Gift cards automatically track balance reductions with each use</div>
+                        </div>
+                        <div class="rule-item validation">
+                            <div class="rule-type">Expiry Logic</div>
+                            <div class="rule-text">Gift cards cannot be used past expiry_date</div>
+                        </div>
+                        <div class="rule-item reverse">
+                            <div class="rule-type">Balance Validation</div>
+                            <div class="rule-text">Current balance cannot exceed initial amount</div>
+                        </div>
+                        <div class="rule-item forward">
+                            <div class="rule-type">Multi-Use</div>
+                            <div class="rule-text">Gift cards can be used across multiple orders until balance depleted</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rule-category">
+                    <h3>Gift Card Relationships</h3>
+                    <div class="rule-list">
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Issuer Tracking</div>
+                            <div class="rule-text">Customer who purchased the gift card for relationship management</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Recipient Tracking</div>
+                            <div class="rule-text">Customer who received/uses gift card (nullable for physical cards)</div>
+                        </div>
+                        <div class="rule-item validation">
+                            <div class="rule-type">Code Uniqueness</div>
+                            <div class="rule-text">Gift card codes must be globally unique across all cards</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Revenue Recognition</div>
+                            <div class="rule-text">Gift card sales generate immediate revenue recognition</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Integrity & Audit Section -->
+        <div class="rules-section">
+            <div class="section-header">
+                <span class="section-icon">🔒</span>
+                <h2>Data Integrity & Audit Rules</h2>
+            </div>
+            <div class="rules-container">
+                <div class="rule-category">
+                    <h3>Audit Trail Requirements</h3>
+                    <div class="rule-list">
+                        <div class="rule-item forward">
+                            <div class="rule-type">Timestamp Automation</div>
+                            <div class="rule-text">All tables automatically maintain created_at and updated_at timestamps</div>
+                        </div>
+                        <div class="rule-item validation">
+                            <div class="rule-type">Change Attribution</div>
+                            <div class="rule-text">Critical changes require user identification for accountability</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Immutable Records</div>
+                            <div class="rule-text">Historical records cannot be modified, only appended for compliance</div>
+                        </div>
+                        <div class="rule-item forward">
+                            <div class="rule-type">Status History</div>
+                            <div class="rule-text">Complete audit trail for all order status changes</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rule-category">
+                    <h3>Data Validation & Constraints</h3>
+                    <div class="rule-list">
+                        <div class="rule-item validation">
+                            <div class="rule-type">Referential Integrity</div>
+                            <div class="rule-text">Foreign key constraints prevent orphaned records</div>
+                        </div>
+                        <div class="rule-item validation">
+                            <div class="rule-type">Business Logic Validation</div>
+                            <div class="rule-text">Check constraints enforce business rules at database level</div>
+                        </div>
+                        <div class="rule-item validation">
+                            <div class="rule-type">Date Logic</div>
+                            <div class="rule-text">Start dates must precede end dates across all temporal data</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Database Protection</div>
+                            <div class="rule-text">Database-level validation prevents data corruption</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reporting & Analytics Section -->
+        <div class="rules-section">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <h2>Reporting & Analytics Assumptions</h2>
+            </div>
+            <div class="rules-container">
+                <div class="rule-category">
+                    <h3>Business Intelligence Views</h3>
+                    <div class="rule-list">
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Real-Time Metrics</div>
+                            <div class="rule-text">Views provide current business performance indicators for decision making</div>
+                        </div>
+                        <div class="rule-item forward">
+                            <div class="rule-type">Customer Segmentation</div>
+                            <div class="rule-text">Automatic customer categorization based on behavior patterns</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Performance Tracking</div>
+                            <div class="rule-text">Sales metrics drive inventory and marketing decisions</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Channel Analytics</div>
+                            <div class="rule-text">Marketing channel performance guides budget allocation</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rule-category">
+                    <h3>Predictive Analytics Foundation</h3>
+                    <div class="rule-list">
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Customer Lifetime Value</div>
+                            <div class="rule-text">Historical data predicts future customer worth and behavior</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Inventory Optimization</div>
+                            <div class="rule-text">Sales patterns drive reorder recommendations and stock planning</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Churn Prediction</div>
+                            <div class="rule-text">Subscription patterns indicate retention risk for proactive intervention</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Seasonal Planning</div>
+                            <div class="rule-text">Historical trends guide seasonal inventory and promotional planning</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Operational Workflow Section -->
+        <div class="rules-section">
+            <div class="section-header">
+                <span class="section-icon">⚙️</span>
+                <h2>Operational Workflow Rules</h2>
+            </div>
+            <div class="rules-container">
+                <div class="rule-category">
+                    <h3>Order Fulfillment Process</h3>
+                    <div class="workflow-section">
+                        <div class="workflow-title">Complete Order Lifecycle</div>
+                        <div style="display: grid; gap: 15px; max-width: 800px; margin: 0 auto;">
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <div class="workflow-step">1. Order Creation</div>
+                                <div class="workflow-arrow">→</div>
+                                <div class="workflow-step">2. Payment Validation</div>
+                                <div class="workflow-arrow">→</div>
+                                <div class="workflow-step">3. Inventory Check</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <div class="workflow-step">4. Status Update</div>
+                                <div class="workflow-arrow">→</div>
+                                <div class="workflow-step">5. Fulfillment</div>
+                                <div class="workflow-arrow">→</div>
+                                <div class="workflow-step">6. Delivery Tracking</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px; justify-content: center;">
+                                <div class="workflow-step">7. Post-Sale Feedback</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rule-category">
+                    <h3>Subscription Fulfillment Process</h3>
+                    <div class="workflow-section">
+                        <div class="workflow-title">Monthly Subscription Cycle</div>
+                        <div style="display: grid; gap: 15px; max-width: 600px; margin: 0 auto;">
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <div class="workflow-step">Curation</div>
+                                <div class="workflow-arrow">→</div>
+                                <div class="workflow-step">Scheduling</div>
+                                <div class="workflow-arrow">→</div>
+                                <div class="workflow-step">Preparation</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                <div class="workflow-step">Shipping</div>
+                                <div class="workflow-arrow">→</div>
+                                <div class="workflow-step">Tracking</div>
+                                <div class="workflow-arrow">→</div>
+                                <div class="workflow-step">Feedback Loop</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rule-category">
+                    <h3>Inventory Management Process</h3>
+                    <div class="rule-list">
+                        <div class="rule-item forward">
+                            <div class="rule-type">Stock Monitoring</div>
+                            <div class="rule-text">Continuous tracking of current_stock levels with automated alerts</div>
+                        </div>
+                        <div class="rule-item forward">
+                            <div class="rule-type">Reorder Alerts</div>
+                            <div class="rule-text">Automatic notifications when stock hits reorder_point threshold</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Quality Control</div>
+                            <div class="rule-text">Storage requirements and handling protocols followed for Korean bakery items</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Stock Rotation</div>
+                            <div class="rule-text">FIFO (First In, First Out) for perishable or time-sensitive items</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="rules-section">
+            <div class="section-header">
+                <span class="section-icon">🌟</span>
+                <h2>Key Success Factors</h2>
+            </div>
+            <div class="rules-container">
+                <div class="rule-category">
+                    <h3>Sweet Seoul's Competitive Advantages</h3>
+                    <div class="rule-list">
+                        <div class="rule-item assumption">
+                            <div class="rule-type">K-pop/Anime Specialization</div>
+                            <div class="rule-text">Unique focus on Korean and Japanese pop culture creates niche market leadership</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Multi-Channel Experience</div>
+                            <div class="rule-text">Seamless integration between online and in-store shopping experiences</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Personalized Subscriptions</div>
+                            <div class="rule-text">Curated monthly boxes based on individual customer preferences drive loyalty</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Community Building</div>
+                            <div class="rule-text">Loyalty program and feedback systems foster strong customer community</div>
+                        </div>
+                        <div class="rule-item assumption">
+                            <div class="rule-type">Data-Driven Operations</div>
+                            <div class="rule-text">Oracle 19c analytics enable informed business decisions and optimization</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#top" class="back-to-top">↑</a>
+
+    <script>
+        // Create floating hearts animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = Math.random() > 0.5 ? '💖' : '✨';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            heart.style.opacity = Math.random() * 0.3 + 0.1;
+            
+            document.querySelector('.floating-hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // Create hearts periodically
+        setInterval(createHeart, 2000);
+
+        // Smooth scrolling for back to top
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add click effects to rule items
+        document.querySelectorAll('.rule-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'translateX(15px) scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // Add entrance animations to sections as they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.rules-section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
             
