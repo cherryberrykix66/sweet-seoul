@@ -571,10 +571,11 @@ ALTER TABLE SUBSCRIPTION_ITEMS ADD CONSTRAINT chk_quantity_positive
 ALTER TABLE SUBSCRIPTION_ITEMS ADD CONSTRAINT chk_delivery_status
     CHECK (delivery_status IN ('Planned', 'Shipped', 'Delivered', 'Skipped'));
     
-ALTER TABLE SUBSCRIPTION_ITEMS ADD CONSTRAINT chk_delivery_date_range
+-- Add simplified constraint with fixed upper bound
+ALTER TABLE SUBSCRIPTION_ITEMS ADD CONSTRAINT chk_delivery_date_range_fixed
     CHECK (
         delivery_date >= DATE '2020-01-01' AND 
-        delivery_date <= ADD_MONTHS(SYSDATE, 24)
+        delivery_date <= DATE '2030-12-31'  -- Fixed future date
     );
 
 -- Create indexes
