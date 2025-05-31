@@ -172,58 +172,47 @@
             }
         }
 
-
-       /* Heart-shaped button styles */
-        .heart-button {
+        /* Alternative SVG heart button */
+        .heart-svg-button {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: #ff4757;
-            transform: rotate(-45deg);
+            bottom: 50px;
+            right: 50px;
+            width: 110px;
+            height: 110px;
+            background: #ff99e0;
             border: none;
+            border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
             z-index: 1000;
             text-decoration: none;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 2px;
         }
 
-        .heart-button:before,
-        .heart-button:after {
-            content: '';
-            width: 26px;
-            height: 40px;
-            position: absolute;
-            left: 25px;
-            top: 0;
-            background: #ff4757;
-            border-radius: 25px 25px 0 0;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
+        .heart-svg-button:hover {
+            background: #ffb3e6;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.6);
         }
 
-        .heart-button:after {
-            left: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
+        .heart-svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
         }
 
-        .heart-button:hover {
-            background: #ff3742;
-            transform: rotate(-45deg) scale(1.1);
-            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.6);
+        .button-text {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            margin: 0;
         }
-
-        .heart-button:hover:before,
-        .heart-button:hover:after {
-            background: #ff3742;
-        }
-
     </style>
 </head>
 
@@ -248,9 +237,13 @@
     </div>
 
 
-<!-- CSS Heart Button -->
-    <a href="#top" class="heart-button" title="Back to top"></a>
-
+    <!-- SVG Heart Button (alternative) -->
+    <a href="#top" class="heart-svg-button" title="Back to top (SVG version)">
+        <svg class="heart-svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5 2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+        </svg>
+        <!-- <span class="button-text">Top</span> -->
+    </a>
 
     <h2 id="req01">Busines Reporting Requirement 01</h2>
 
