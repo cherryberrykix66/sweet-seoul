@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Seoul Korean Bakery - Database Entities ✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            color: #2d3436;
+            overflow-x: hidden;
+        }
+        
+        .kawaii-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 80%, #ff7675 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, #74b9ff 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, #fd79a8 0%, transparent 50%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: bounceIn 1s ease-out;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            /* background: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500); */
+            /* -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; */
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            color: #ffffff;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #000000;
+            font-weight: bold;
+        }
+        
+        .cute-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9ff3, #f368e0);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 10px 0;
+            box-shadow: 0 4px 15px rgba(243, 104, 224, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        .entity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .entity-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            transition: all 0.3s ease;
+            animation: slideInUp 0.6s ease-out;
+        }
+        
+        .entity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .entity-card::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #a8edea, #fed6e3);
+            border-radius: 20px;
+            z-index: -1;
+            animation: rainbow 3s linear infinite;
+        }
+        
+        .entity-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .entity-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            animation: bounce 2s infinite;
+        }
+        
+        .entity-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2d3436;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .entity-description {
+            font-size: 0.95rem;
+            color: #636e72;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .fields-list {
+            list-style: none;
+        }
+        
+        .field-item {
+            background: linear-gradient(90deg, #ffecd2 0%, #fcb69f 100%);
+            margin: 8px 0;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .field-item::before {
+            content: '✨';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: left 0.3s ease;
+        }
+        
+        .field-item:hover::before {
+            left: 5px;
+        }
+        
+        .field-name {
+            color: #e17055;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .field-type {
+            color: #74b9ff;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .pk-field {
+            background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 100%);
+        }
+        
+        .fk-field {
+            background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
+        }
+        
+        .features-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .features-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 25px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .feature-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes slideInUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .entity-grid { grid-template-columns: 1fr; }
+            .entity-card { padding: 20px; }
+            .container { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="kawaii-bg"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🌸 Sweet Seoul Korean Bakery 🌸</h1>
+            <p class="subtitle">Database Entity Collection</p>
+            <div class="cute-badge">Oracle 19c Implementation ✨</div>
+        </div>
+        
+        <div class="entity-grid">
+            <!-- Core Entities -->
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">👥</span>
+                    <h3 class="entity-title">CUSTOMERS</h3>
+                </div>
+                <p class="entity-description">Our lovely customers who adore K-pop and Korean treats! 💖</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">customer_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item">first_name, last_name, email, phone</li>
+                    <li class="field-item">join_date, address, city, state, postal_code</li>
+                    <li class="field-item">is_online_customer, is_in_store_customer</li>
+                    <li class="field-item">loyalty_points, loyalty_status</li>
+                    <li class="field-item">preferred_communication_method</li>
+                    <li class="field-item">created_at, updated_at</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">🛒</span>
+                    <h3 class="entity-title">ORDERS</h3>
+                </div>
+                <p class="entity-description">Delicious orders from our amazing customers! 🎂</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">order_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">customer_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item">order_date, subtotal, tax_amount</li>
+                    <li class="field-item">shipping_cost, discount_amount, total_amount</li>
+                    <li class="field-item">order_status, payment_method, platform</li>
+                    <li class="field-item fk-field"><span class="field-name">marketing_channel_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item">is_gift, shipping_address, billing_address</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">📦</span>
+                    <h3 class="entity-title">ORDER_ITEMS</h3>
+                </div>
+                <p class="entity-description">Individual goodies in each order! 🧁</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">order_item_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">order_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">product_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item">quantity, unit_price, discount</li>
+                    <li class="field-item">created_at, updated_at</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">🍰</span>
+                    <h3 class="entity-title">PRODUCTS</h3>
+                </div>
+                <p class="entity-description">K-pop and anime themed treats that make hearts flutter! 💕</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">product_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item">product_name, description, category</li>
+                    <li class="field-item">origin, base_price, seasonal</li>
+                    <li class="field-item">expiry_date, limited_edition</li>
+                    <li class="field-item">kpop_anime_tie_in</li>
+                    <li class="field-item">online_exclusive, in_store_exclusive</li>
+                    <li class="field-item">min_inventory_level</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">📊</span>
+                    <h3 class="entity-title">INVENTORY</h3>
+                </div>
+                <p class="entity-description">Keeping track of all our kawaii products! 📋</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">inventory_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">product_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item">current_stock, reorder_point</li>
+                    <li class="field-item">min_stock_level, max_stock_level</li>
+                    <li class="field-item">last_restock_date, expected_arrival</li>
+                    <li class="field-item">storage_requirements</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">📱</span>
+                    <h3 class="entity-title">MARKETING_CHANNELS</h3>
+                </div>
+                <p class="entity-description">How we spread the K-pop bakery love! 💫</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">marketing_channel_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item">channel_name, channel_type</li>
+                    <li class="field-item">specific_platform</li>
+                    <li class="field-item">customer_acquisition_cost</li>
+                    <li class="field-item">conversion_rate</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">🎁</span>
+                    <h3 class="entity-title">PROMOTIONS</h3>
+                </div>
+                <p class="entity-description">Sweet deals and special offers! 🎉</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">promotion_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item">promotion_name, description</li>
+                    <li class="field-item">start_date, end_date</li>
+                    <li class="field-item">discount_amount, discount_type</li>
+                    <li class="field-item">platform, promotion_type</li>
+                    <li class="field-item">kpop_anime_reference, min_purchase</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">📅</span>
+                    <h3 class="entity-title">SUBSCRIPTIONS</h3>
+                </div>
+                <p class="entity-description">Monthly surprises delivered with love! 💌</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">subscription_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">customer_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item">start_date, next_delivery_date, end_date</li>
+                    <li class="field-item">subscription_status, monthly_price</li>
+                    <li class="field-item">billing_cycle_months, subscription_type</li>
+                    <li class="field-item">is_gift, auto_renewal, delivery_address</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">💎</span>
+                    <h3 class="entity-title">GIFT_CARDS</h3>
+                </div>
+                <p class="entity-description">Spreading joy with gift cards! 🎊</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">gift_card_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">issuer_customer_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">recipient_customer_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item">gift_card_code, initial_amount</li>
+                    <li class="field-item">current_balance, issue_date</li>
+                    <li class="field-item">expiry_date, is_redeemed</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">⭐</span>
+                    <h3 class="entity-title">FEEDBACK</h3>
+                </div>
+                <p class="entity-description">Customer reviews and ratings! 🌟</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">feedback_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">customer_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">order_id</span><span class="field-type">(FK nullable)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">product_id</span><span class="field-type">(FK nullable)</span></li>
+                    <li class="field-item">rating (1-5), review_text</li>
+                    <li class="field-item">feedback_date, is_verified_purchase</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="features-section">
+            <h2 class="features-title">🌈 Oracle 19c Kawaii Features 🌈</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">🤖</span>
+                    <div class="feature-title">Auto-Magic Triggers</div>
+                    <div class="feature-desc">Automatic inventory updates and timestamp management!</div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔢</span>
+                    <div class="feature-title">Identity Columns</div>
+                    <div class="feature-desc">Auto-incrementing primary keys that count by themselves!</div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🛡️</span>
+                    <div class="feature-title">Data Validation</div>
+                    <div class="feature-desc">Check constraints keep our data clean and tidy!</div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📈</span>
+                    <div class="feature-title">Business Intelligence</div>
+                    <div class="feature-desc">Smart reporting for K-pop bakery success!</div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎨</span>
+                    <div class="feature-title">CLOB Fields</div>
+                    <div class="feature-desc">Store lots of kawaii text and descriptions!</div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⏰</span>
+                    <div class="feature-title">Timestamp Precision</div>
+                    <div class="feature-desc">Track every moment with Oracle TIMESTAMP!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
