@@ -1055,7 +1055,7 @@ SELECT table_name FROM user_tables ORDER BY table_name;</code></pre>
         <div class="code-description">Automatically track order status changes in history table</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Enhanced trigger for ORDER_STATUS_HISTORY when ORDERS.order_status changes
+            <pre><code class="language-sql">-- trigger for ORDER_STATUS_HISTORY when ORDERS.order_status changes
 CREATE OR REPLACE TRIGGER before_order_status_update
 BEFORE UPDATE ON ORDERS
 FOR EACH ROW
@@ -1117,7 +1117,7 @@ END;
         <div class="code-description">Automatically update inventory levels when order items are modified</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Enhanced trigger to update inventory when order items are added
+            <pre><code class="language-sql">-- trigger to update inventory when order items are added
 CREATE OR REPLACE TRIGGER after_order_item_insert
 AFTER INSERT ON ORDER_ITEMS
 FOR EACH ROW
@@ -1147,7 +1147,7 @@ BEGIN
 END;
 /
 
--- Enhanced trigger to update inventory when order items are modified
+-- trigger to update inventory when order items are modified
 CREATE OR REPLACE TRIGGER after_order_item_update
 AFTER UPDATE ON ORDER_ITEMS
 FOR EACH ROW
@@ -1177,7 +1177,7 @@ BEGIN
 END;
 /
 
--- Enhanced trigger to update inventory when order items are deleted
+-- trigger to update inventory when order items are deleted
 CREATE OR REPLACE TRIGGER after_order_item_delete
 AFTER DELETE ON ORDER_ITEMS
 FOR EACH ROW
@@ -1204,7 +1204,7 @@ END;
         <div class="code-description">Update gift card balance when used in orders</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Enhanced trigger to update gift card balance when used in an order
+            <pre><code class="language-sql">-- trigger to update gift card balance when used in an order
 CREATE OR REPLACE TRIGGER after_order_with_gift_card
 AFTER INSERT ON ORDERS
 FOR EACH ROW
@@ -1249,7 +1249,7 @@ END;
         <div class="code-description">Automatically mark promotions as used when usage limit is reached</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Enhanced customer promotion usage trigger
+            <pre><code class="language-sql">-- customer promotion usage trigger
 CREATE OR REPLACE TRIGGER trg_customer_promotion_usage
 BEFORE UPDATE OF times_used ON CUSTOMER_PROMOTION
 FOR EACH ROW
@@ -1369,11 +1369,11 @@ END;
     </div>
 
         <div class="code-section">
-        <div class="code-header">Trigger</div>
-        <div class="code-description">xxxx</div>
+        <div class="code-header">Feedback Triggers</div>
+        <div class="code-description">Automatically set default timestamps</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Enhanced FEEDBACK table triggers with default value handling
+            <pre><code class="language-sql">-- FEEDBACK table triggers with default value handling
 CREATE OR REPLACE TRIGGER trg_feedback_before_insert
 BEFORE INSERT ON FEEDBACK
 FOR EACH ROW
@@ -1403,11 +1403,11 @@ END;
     </div>
 
             <div class="code-section">
-        <div class="code-header">Trigger</div>
-        <div class="code-description">xxxx</div>
+        <div class="code-header">Order Items Triggers</div>
+        <div class="code-description">Automatically manages audit timestamps</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Enhanced ORDER_ITEMS table triggers with default value handling
+            <pre><code class="language-sql">-- ORDER_ITEMS table triggers with default value handling
 CREATE OR REPLACE TRIGGER trg_order_items_before_insert
 BEFORE INSERT ON ORDER_ITEMS
 FOR EACH ROW
@@ -1434,11 +1434,11 @@ END;
 
 
             <div class="code-section">
-        <div class="code-header">Trigger</div>
-        <div class="code-description">xxxx</div>
+        <div class="code-header">Subscription Items Triggers</div>
+        <div class="code-description">Automatically manages audit timestamps</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Enhanced SUBSCRIPTION_ITEMS table triggers with default value handling
+            <pre><code class="language-sql">-- SUBSCRIPTION_ITEMS table triggers with default value handling
 CREATE OR REPLACE TRIGGER trg_sub_items_before_insert
 BEFORE INSERT ON SUBSCRIPTION_ITEMS
 FOR EACH ROW
@@ -1465,11 +1465,11 @@ END;
 
 
             <div class="code-section">
-        <div class="code-header">Trigger</div>
-        <div class="code-description">xxxx</div>
+        <div class="code-header">Order Status History Triggers</div>
+        <div class="code-description">Automatically manages audit timestamps</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Enhanced ORDER_STATUS_HISTORY table triggers with default value handling
+            <pre><code class="language-sql">-- ORDER_STATUS_HISTORY table triggers with default value handling
 CREATE OR REPLACE TRIGGER trg_order_hist_before_insert
 BEFORE INSERT ON ORDER_STATUS_HISTORY
 FOR EACH ROW
@@ -1500,11 +1500,11 @@ END;
 
 
                 <div class="code-section">
-        <div class="code-header">Trigger</div>
-        <div class="code-description">xxxx</div>
+        <div class="code-header">Product Promotions Triggers</div>
+        <div class="code-description">Automatically manages audit timestamps</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Enhanced PRODUCT_PROMOTIONS table triggers with default value handling
+            <pre><code class="language-sql">-- PRODUCT_PROMOTIONS table triggers with default value handling
 CREATE OR REPLACE TRIGGER trg_prod_promo_before_insert
 BEFORE INSERT ON PRODUCT_PROMOTIONS
 FOR EACH ROW
@@ -1836,7 +1836,7 @@ WHERE cp.expiry_date >= SYSDATE
 
         <div class="code-section">
         <div class="code-header">Promotion Usage Statistics View</div>
-        <div class="code-description">xxx</div>
+        <div class="code-description">Comprehensive promotion performance statistics to help analyze campaign effectiveness</div>
         <div class="code-container">
             
             <pre><code class="language-sql">-- Promotion usage statistics
@@ -1874,7 +1874,7 @@ GROUP BY p.promotion_id, p.promotion_name, p.promotion_type, p.discount_type,
 
         <div class="code-section">
         <div class="code-header">Order Status Tracking View</div>
-        <div class="code-description">xxx</div>
+        <div class="code-description">Summarizes order statistics by status</div>
         <div class="code-container">
             
             <pre><code class="language-sql">-- Order status tracking
@@ -1895,7 +1895,7 @@ GROUP BY o.order_status;</code></pre>
 
         <div class="code-section">
         <div class="code-header">Product Promotion Effectiveness View</div>
-        <div class="code-description">xxx</div>
+        <div class="code-description">Tracks product-specific promotion effectiveness to analyze how they are applied across different products and categories</div>
         <div class="code-container">
             
             <pre><code class="language-sql">-- Product promotion effectiveness
