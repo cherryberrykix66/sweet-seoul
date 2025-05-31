@@ -1,0 +1,239 @@
+erDiagram
+    CUSTOMERS ||--o{ ORDERS : places
+    CUSTOMERS ||--o{ SUBSCRIPTIONS : subscribes_to
+    CUSTOMERS ||--o{ CUSTOMER_PREFERENCES : has
+    CUSTOMERS ||--o{ FEEDBACK : provides
+    CUSTOMERS ||--o{ CUSTOMER_PROMOTION : receives
+    CUSTOMERS ||--o{ GIFT_CARDS : issues
+    CUSTOMERS ||--o{ GIFT_CARDS : receives
+    
+    CUSTOMER_PROMOTION }o--|| PROMOTIONS : links_to
+
+    ORDERS ||--|{ ORDER_ITEMS : contains
+    ORDERS }o--o| MARKETING_CHANNELS : attributed_to
+    ORDERS ||--o{ ORDER_STATUS_HISTORY : tracks
+    ORDERS }o--o| GIFT_CARDS : redeemed_with
+
+    PRODUCTS ||--o{ ORDER_ITEMS : included_in
+    PRODUCTS ||--o{ SUBSCRIPTION_ITEMS : featured_in
+    PRODUCTS ||--|| INVENTORY : tracked_in
+    PRODUCTS }o--o{ PRODUCT_PROMOTIONS : featured_in
+    PRODUCTS ||--o{ FEEDBACK : reviewed_in
+
+    SUBSCRIPTIONS ||--|{ SUBSCRIPTION_ITEMS : includes
+    
+    PROMOTIONS ||--o{ PRODUCT_PROMOTIONS : applies_to
+    
+    CUSTOMERS {
+        NUMBER customer_id PK "Generated as Identity"
+        VARCHAR2_50 first_name "Not Null"
+        VARCHAR2_50 last_name "Not Null"
+        VARCHAR2_100 email "Unique, Not Null"
+        VARCHAR2_20 phone "Not Null"
+        DATE join_date "Default SYSDATE"
+        VARCHAR2_255 address "Not Null"
+        VARCHAR2_50 city "Not Null"
+        VARCHAR2_50 state "Not Null"
+        VARCHAR2_20 postal_code "Not Null"
+        NUMBER_1 is_online_customer "Default 0 (0=False, 1=True)"
+        NUMBER_1 is_in_store_customer "Default 0 (0=False, 1=True)"
+        NUMBER_10 loyalty_points "Default 0, Check >= 0"
+        VARCHAR2_20 loyalty_status "Default 'Standard'"
+        VARCHAR2_20 preferred_communication_method "Default 'Email', Check in valid values"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    ORDERS {
+        NUMBER order_id PK "Generated as Identity"
+        NUMBER customer_id FK "References CUSTOMERS"
+        DATE order_date "Default SYSDATE"
+        NUMBER_10_2 subtotal "Order subtotal, Check >= 0"
+        NUMBER_10_2 tax_amount "Tax amount, Default 0, Check >= 0"
+        NUMBER_10_2 shipping_cost "Shipping cost, Default 0, Check >= 0"
+        NUMBER_10_2 discount_amount "Total discount, Default 0, Check >= 0"
+        NUMBER_10_2 total_amount "Updated: Calculated field, Check >= 0"
+        VARCHAR2_20 order_status "Default 'Pending', Check in valid statuses"
+        VARCHAR2_50 payment_method "Check in valid payment methods"
+        NUMBER marketing_channel_id FK "Nullable, References MARKETING_CHANNELS"
+        VARCHAR2_20 platform "Check in ('online', 'in-store')"
+        NUMBER_1 is_gift "Default 0 (0=False, 1=True)"
+        NUMBER gift_card_id FK "Nullable, References GIFT_CARDS"
+        VARCHAR2_500 shipping_address "Shipping address, Nullable"
+        VARCHAR2_500 billing_address "Billing address, Nullable"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    ORDER_STATUS_HISTORY {
+        NUMBER history_id PK "Generated as Identity"
+        NUMBER order_id FK "References ORDERS, ON DELETE CASCADE"
+        VARCHAR2_20 previous_status "Nullable, Check in valid statuses"
+        VARCHAR2_20 new_status "Check in valid statuses"
+        TIMESTAMP status_change_date "Default SYSTIMESTAMP"
+        VARCHAR2_50 updated_by "Not Null"
+        VARCHAR2_500 change_reason "Reason for status change, Nullable"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    ORDER_ITEMS {
+        NUMBER order_item_id PK "Generated as Identity"
+        NUMBER order_id FK "References ORDERS, ON DELETE CASCADE"
+        NUMBER product_id FK "References PRODUCTS"
+        NUMBER quantity "Check > 0"
+        NUMBER_10_2 unit_price "Check >= 0"
+        NUMBER_10_2 discount "Default 0.00, Check >= 0"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    PRODUCTS {
+        NUMBER product_id PK "Generated as Identity"
+        VARCHAR2_100 product_name "Unique, Not Null"
+        VARCHAR2_4000 description "Not Null"
+        VARCHAR2_50 category "Check in valid categories"
+        VARCHAR2_50 origin "Check in valid origins"
+        NUMBER_10_2 base_price "Check >= 0"
+        NUMBER_1 seasonal "Default 0 (0=False, 1=True)"
+        DATE expiry_date "Nullable, for seasonal items"
+        NUMBER_1 limited_edition "Default 0 (0=False, 1=True)"
+        VARCHAR2_100 kpop_anime_tie_in "Nullable"
+        NUMBER_1 online_exclusive "Default 0, Cannot be 1 if in_store_exclusive is 1"
+        NUMBER_1 in_store_exclusive "Default 0, Cannot be 1 if online_exclusive is 1"
+        NUMBER min_inventory_level "Check >= 0"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    INVENTORY {
+        NUMBER inventory_id PK "Generated as Identity"
+        NUMBER product_id FK "Unique, References PRODUCTS, ON DELETE CASCADE"
+        NUMBER current_stock "Default 0, Check >= 0"
+        NUMBER reorder_point "Check >= 0"
+        DATE last_restock_date "Nullable"
+        DATE expected_arrival "Nullable"
+        CLOB storage_requirements "Updated: Large text field, Nullable"
+        NUMBER min_stock_level "Check >= 0"
+        NUMBER max_stock_level "Check >= min_stock_level"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    MARKETING_CHANNELS {
+        NUMBER marketing_channel_id PK "Generated as Identity"
+        VARCHAR2_50 channel_name "Unique, Not Null"
+        VARCHAR2_20 channel_type "Check in valid channel types"
+        VARCHAR2_50 specific_platform "Not Null"
+        NUMBER_8_2 customer_acquisition_cost "Default 0.00, Check >= 0"
+        NUMBER_5_2 conversion_rate "Default 0.00, Check between 0 and 100"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    SUBSCRIPTIONS {
+        NUMBER subscription_id PK "Generated as Identity"
+        NUMBER customer_id FK "References CUSTOMERS, ON DELETE CASCADE"
+        DATE start_date "Not Null"
+        DATE next_delivery_date "Check >= start_date"
+        DATE end_date "Subscription end date, Nullable"
+        VARCHAR2_20 subscription_status "Default 'Active', Check in valid statuses"
+        NUMBER_10_2 monthly_price "Check >= 0"
+        NUMBER billing_cycle_months "Updated: Renamed from billing_cycle, Check between 1 and 12"
+        VARCHAR2_20 subscription_type "Default 'Standard', Check in ('Standard', 'Premium')"
+        NUMBER_1 is_gift "Default 0 (0=False, 1=True)"
+        NUMBER_1 auto_renewal "Auto-renewal flag, Default 1 (0=False, 1=True)"
+        CLOB delivery_address "Updated: Large text field, Not Null"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    SUBSCRIPTION_ITEMS {
+        NUMBER subscription_item_id PK "Generated as Identity"
+        NUMBER subscription_id FK "References SUBSCRIPTIONS, ON DELETE CASCADE"
+        NUMBER product_id FK "References PRODUCTS"
+        DATE delivery_date "Updated: Replaces month/year approach"
+        NUMBER quantity "Default 1, Check > 0"
+        VARCHAR2_20 delivery_status "Default 'Planned', Check in valid statuses"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    PROMOTIONS {
+        NUMBER promotion_id PK "Generated as Identity"
+        VARCHAR2_100 promotion_name "Not Null"
+        VARCHAR2_4000 description "Not Null"
+        DATE start_date "Not Null"
+        DATE end_date "Check >= start_date"
+        NUMBER_10_2 discount_amount "Check >= 0"
+        VARCHAR2_20 discount_type "Check in ('percentage', 'fixed')"
+        VARCHAR2_20 platform "Check in ('online', 'in-store', 'both')"
+        VARCHAR2_100 kpop_anime_reference "Nullable"
+        NUMBER_1 is_gift_card_promo "Default 0 (0=False, 1=True)"
+        VARCHAR2_20 promotion_type "Check in ('discount', 'bundle', 'offer', 'gift')"
+        NUMBER_10_2 min_purchase "Default 0.00, Check >= 0"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    CUSTOMER_PROMOTION {
+        NUMBER customer_promotion_id PK "Generated as Identity"
+        NUMBER customer_id FK "References CUSTOMERS, ON DELETE CASCADE"
+        NUMBER promotion_id FK "References PROMOTIONS, ON DELETE CASCADE"
+        NUMBER_1 is_used "Default 0 (0=False, 1=True)"
+        DATE date_offered "Default SYSDATE"
+        DATE expiry_date "Check >= date_offered"
+        NUMBER times_used "Default 0, Check >= 0"
+        NUMBER usage_limit "Default 1, Check > 0"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    PRODUCT_PROMOTIONS {
+        NUMBER product_promotion_id PK "Generated as Identity"
+        NUMBER product_id FK "References PRODUCTS, ON DELETE CASCADE"
+        NUMBER promotion_id FK "References PROMOTIONS, ON DELETE CASCADE"
+        NUMBER_10_2 override_discount_amount "Updated: Renamed from special_price, Nullable, Check >= 0"
+        DATE effective_start_date "Effective start date, Nullable"
+        DATE effective_end_date "Effective end date, Nullable, Check >= effective_start_date"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    CUSTOMER_PREFERENCES {
+        NUMBER preference_id PK "Generated as Identity"
+        NUMBER customer_id FK "Unique, References CUSTOMERS, ON DELETE CASCADE"
+        CLOB flavor_preference "Updated: Large text field, Nullable"
+        CLOB product_category_preference "Updated: Large text field, Nullable"
+        NUMBER_1 subscription_interest "Default 0 (0=False, 1=True)"
+        VARCHAR2_1000 kpop_anime_interest "Updated: Increased size, Nullable"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    FEEDBACK {
+        NUMBER feedback_id PK "Generated as Identity"
+        NUMBER customer_id FK "References CUSTOMERS"
+        NUMBER order_id FK "Nullable, References ORDERS"
+        NUMBER product_id FK "Nullable, References PRODUCTS"
+        NUMBER rating "Check between 1 and 5"
+        VARCHAR2_4000 review_text "Updated: Renamed from comment, Nullable"
+        DATE feedback_date "Default SYSDATE"
+        NUMBER_1 is_verified_purchase "Verified purchase flag, Default 0 (0=False, 1=True)"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
+
+    GIFT_CARDS {
+        NUMBER gift_card_id PK "Generated as Identity"
+        NUMBER issuer_customer_id FK "References CUSTOMERS"
+        NUMBER recipient_customer_id FK "Nullable, References CUSTOMERS"
+        VARCHAR2_50 gift_card_code "Unique, Not Null"
+        NUMBER_10_2 initial_amount "Check > 0"
+        NUMBER_10_2 current_balance "Check >= 0, Check <= initial_amount"
+        DATE issue_date "Default SYSDATE"
+        DATE expiry_date "Check > issue_date"
+        NUMBER_1 is_redeemed "Default 0 (0=False, 1=True)"
+        TIMESTAMP created_at "Default SYSTIMESTAMP"
+        TIMESTAMP updated_at "Default SYSTIMESTAMP"
+    }
