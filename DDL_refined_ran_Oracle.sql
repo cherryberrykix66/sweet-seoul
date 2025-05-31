@@ -1,203 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sweet Seoul Korean Bakery - Oracle SQL Code Examples</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-        }
-        
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px 0;
-            border-bottom: 3px solid #3498db;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 10px 10px 0 0;
-        }
-        
-        h2 {
-            color: #34495e;
-            margin-top: 50px;
-            margin-bottom: 25px;
-            font-size: 1.8em;
-            border-left: 6px solid #3498db;
-            padding-left: 20px;
-            background-color: #ecf0f1;
-            padding: 15px 20px;
-            border-radius: 5px;
-        }
-        
-        h3 {
-            color: #2c3e50;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-            border-bottom: 2px solid #bdc3c7;
-            padding-bottom: 5px;
-        }
-        
-        .code-section {
-            margin-bottom: 30px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        .code-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 20px;
-            font-weight: 600;
-            font-size: 1.1em;
-        }
-        
-        .code-description {
-            padding: 15px 20px;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-            font-style: italic;
-            color: #6c757d;
-        }
-        
-        pre {
-            margin: 0 !important;
-            background-color: #2d3748 !important;
-            border-radius: 0 !important;
-        }
-        
-        pre code {
-            font-size: 0.9em;
-            line-height: 1.5;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-        }
-        
-        .copy-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8em;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        
-        .copy-button:hover {
-            opacity: 1;
-        }
-        
-        .code-container {
-            position: relative;
-        }
-        
-        .toc {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        .toc h3 {
-            margin-top: 0;
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        
-        .toc ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        .toc li {
-            margin: 8px 0;
-        }
-        
-        .toc a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .toc a:hover {
-            text-decoration: underline;
-        }
-        
-        .highlight-note {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 6px;
-            padding: 15px;
-            margin: 20px 0;
-            color: #856404;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            pre code {
-                font-size: 0.8em;
-            }
-            
-            h1 {
-                font-size: 1.8em;
-            }
-            
-            h2 {
-                font-size: 1.5em;
-            }
-        }
-    </style>
-</head>
-<body>
-    <h1>Sweet Seoul Korean Bakery<br>Oracle 19c Database Creation Script</h1>
-    
-    <div class="toc">
-        <h3>Table of Contents</h3>
-        <ul>
-            <li><a href="#sequences">Sequences Creation</a></li>
-            <li><a href="#drop-tables">Drop Existing Tables</a></li>
-            <li><a href="#create-tables">Create Tables</a></li>
-            <li><a href="#business-logic">Business Logic Triggers</a></li>
-            <li><a href="#views">Reporting Views</a></li>
-            <li><a href="#completion">Script Completion Message</a></li>
-        </ul>
-    </div>
+-- Sweet Seoul Korean Bakery Database Creation Script (Oracle 19c Version)
+-- Complete Refined Version with All Recommended Enhancements
+-- This script creates all tables, constraints, triggers, and views for the Sweet Seoul Korean Bakery database
 
-    <div class="highlight-note">
-        <strong>Note:</strong> This Oracle 19c database script creates a comprehensive e-commerce database for Sweet Seoul Korean Bakery, including customer management, orders, inventory, subscriptions, promotions, and reporting views.
-    </div>
-
-    <h2 id="sequences">Sequences Creation</h2>
-    
-    <div class="code-section">
-        <div class="code-header">Create Sequences for Auto-Increment Functionality</div>
-        <div class="code-description">Creates sequences to simulate auto-increment behavior for primary keys in Oracle</div>
-        <div class="code-container">
-            <button class="copy-button" onclick="copyCode(this)">Copy</button>
-            <pre><code class="language-sql">-- Create sequences for compatibility (optional with IDENTITY columns)
+-- Create sequences for compatibility (optional with IDENTITY columns)
 CREATE SEQUENCE customers_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE marketing_channels_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE promotions_seq START WITH 1 INCREMENT BY 1;
@@ -212,19 +17,9 @@ CREATE SEQUENCE order_items_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE subscription_items_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE order_status_history_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE product_promotions_seq START WITH 1 INCREMENT BY 1;
-CREATE SEQUENCE customer_promotion_seq START WITH 1 INCREMENT BY 1;</code></pre>
-        </div>
-    </div>
+CREATE SEQUENCE customer_promotion_seq START WITH 1 INCREMENT BY 1;
 
-
-    <h2 id="drop-tables">Drop Existing Tables</h2>
-    
-    <div class="code-section">
-        <div class="code-header">Safe Table Dropping with Error Handling</div>
-        <div class="code-description">Drops existing tables in reverse order to avoid constraint violations, with proper error handling</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Drop existing tables if they exist (in reverse order of creation to avoid constraint violations)
+-- Drop existing tables if they exist (in reverse order of creation to avoid constraint violations)
 BEGIN
    EXECUTE IMMEDIATE 'DROP TABLE PRODUCT_PROMOTIONS CASCADE CONSTRAINTS';
 EXCEPTION
@@ -373,19 +168,9 @@ EXCEPTION
          RAISE;
       END IF;
 END;
-/</code></pre>
-        </div>
-    </div>
+/
 
-    <h2 id="create-tables">Create Tables</h2>
-
-    <h3>CUSTOMERS Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create CUSTOMERS Table with Identity Column</div>
-        <div class="code-description">Main customer table with auto-generated ID, constraints and indexes</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create CUSTOMERS table
+-- Create CUSTOMERS table
 CREATE TABLE CUSTOMERS (
     customer_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     first_name VARCHAR2(50) NOT NULL,
@@ -409,17 +194,9 @@ CREATE TABLE CUSTOMERS (
 );
 
 -- Create index on CUSTOMERS
-CREATE INDEX idx_customer_loyalty ON CUSTOMERS(loyalty_status);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_customer_loyalty ON CUSTOMERS(loyalty_status);
 
-    <h3>MARKETING_CHANNELS Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create MARKETING_CHANNELS Table</div>
-        <div class="code-description">Table for tracking marketing channel performance and customer acquisition</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create MARKETING_CHANNELS table
+-- Create MARKETING_CHANNELS table
 CREATE TABLE MARKETING_CHANNELS (
     marketing_channel_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     channel_name VARCHAR2(50) NOT NULL UNIQUE,
@@ -435,17 +212,9 @@ CREATE TABLE MARKETING_CHANNELS (
 );
 
 -- Create index
-CREATE INDEX idx_marketing_channel_type ON MARKETING_CHANNELS(channel_type);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_marketing_channel_type ON MARKETING_CHANNELS(channel_type);
 
-    <h3>PROMOTIONS Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create PROMOTIONS Table</div>
-        <div class="code-description">Table for managing promotional campaigns and discounts</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create PROMOTIONS table
+-- Create PROMOTIONS table
 CREATE TABLE PROMOTIONS (
     promotion_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     promotion_name VARCHAR2(100) NOT NULL,
@@ -476,17 +245,9 @@ CREATE TABLE PROMOTIONS (
 -- Create indexes
 CREATE INDEX idx_promotion_dates ON PROMOTIONS(start_date, end_date);
 CREATE INDEX idx_promotion_platform ON PROMOTIONS(platform);
-CREATE INDEX idx_promotion_type ON PROMOTIONS(promotion_type);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_promotion_type ON PROMOTIONS(promotion_type);
 
-    <h3>CUSTOMER_PROMOTION Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create CUSTOMER_PROMOTION Junction Table</div>
-        <div class="code-description">Junction table linking customers to promotions with usage tracking</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create CUSTOMER_PROMOTION table
+-- Create CUSTOMER_PROMOTION table
 CREATE TABLE CUSTOMER_PROMOTION (
     customer_promotion_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     customer_id NUMBER NOT NULL,
@@ -515,17 +276,9 @@ CREATE TABLE CUSTOMER_PROMOTION (
 
 -- Create indexes
 CREATE INDEX idx_customer_promotion_used ON CUSTOMER_PROMOTION(is_used);
-CREATE INDEX idx_customer_promotion_expiry ON CUSTOMER_PROMOTION(expiry_date);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_customer_promotion_expiry ON CUSTOMER_PROMOTION(expiry_date);
 
-    <h3>PRODUCTS Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create PRODUCTS Table</div>
-        <div class="code-description">Product catalog with Korean bakery-specific attributes including K-pop/anime tie-ins</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create PRODUCTS table
+-- Create PRODUCTS table
 CREATE TABLE PRODUCTS (
     product_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     product_name VARCHAR2(100) NOT NULL UNIQUE,
@@ -553,17 +306,9 @@ CREATE TABLE PRODUCTS (
 CREATE INDEX idx_product_category ON PRODUCTS(category);
 CREATE INDEX idx_product_seasonal ON PRODUCTS(seasonal);
 CREATE INDEX idx_product_limited ON PRODUCTS(limited_edition);
-CREATE INDEX idx_product_kpop ON PRODUCTS(kpop_anime_tie_in);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_product_kpop ON PRODUCTS(kpop_anime_tie_in);
 
-    <h3>INVENTORY Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create INVENTORY Table</div>
-        <div class="code-description">Inventory management with stock levels and reorder points</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create INVENTORY table (using CLOB for storage_requirements)
+-- Create INVENTORY table (using CLOB for storage_requirements)
 CREATE TABLE INVENTORY (
     inventory_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     product_id NUMBER NOT NULL UNIQUE,
@@ -586,17 +331,9 @@ CREATE TABLE INVENTORY (
 );
 
 -- Create index
-CREATE INDEX idx_inventory_stock ON INVENTORY(current_stock);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_inventory_stock ON INVENTORY(current_stock);
 
-    <h3>SUBSCRIPTIONS Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create SUBSCRIPTIONS Table</div>
-        <div class="code-description">Subscription box service management</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create SUBSCRIPTIONS table (using CLOB for delivery_address)
+-- Create SUBSCRIPTIONS table (using CLOB for delivery_address)
 CREATE TABLE SUBSCRIPTIONS (
     subscription_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     customer_id NUMBER NOT NULL,
@@ -623,17 +360,9 @@ CREATE TABLE SUBSCRIPTIONS (
 
 -- Create indexes
 CREATE INDEX idx_subscription_status ON SUBSCRIPTIONS(subscription_status);
-CREATE INDEX idx_subscription_type ON SUBSCRIPTIONS(subscription_type);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_subscription_type ON SUBSCRIPTIONS(subscription_type);
 
-    <h3>CUSTOMER_PREFERENCES Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create CUSTOMER_PREFERENCES Table</div>
-        <div class="code-description">Customer preferences for personalized recommendations</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create CUSTOMER_PREFERENCES table (using CLOB for preference fields)
+-- Create CUSTOMER_PREFERENCES table (using CLOB for preference fields)
 CREATE TABLE CUSTOMER_PREFERENCES (
     preference_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     customer_id NUMBER NOT NULL UNIQUE,
@@ -649,17 +378,9 @@ CREATE TABLE CUSTOMER_PREFERENCES (
 );
 
 -- Create index
-CREATE INDEX idx_preference_subscription ON CUSTOMER_PREFERENCES(subscription_interest);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_preference_subscription ON CUSTOMER_PREFERENCES(subscription_interest);
 
-    <h3>GIFT_CARDS Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create GIFT_CARDS Table</div>
-        <div class="code-description">Gift card management with balance tracking</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create GIFT_CARDS table
+-- Create GIFT_CARDS table
 CREATE TABLE GIFT_CARDS (
     gift_card_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     issuer_customer_id NUMBER NOT NULL,
@@ -688,17 +409,9 @@ CREATE TABLE GIFT_CARDS (
 );
 
 -- Create index
-CREATE INDEX idx_gift_card_redeemed ON GIFT_CARDS(is_redeemed);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_gift_card_redeemed ON GIFT_CARDS(is_redeemed);
 
-    <h3>ORDERS Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create ORDERS Table</div>
-        <div class="code-description">Main orders table with payment and fulfillment tracking</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create ORDERS table with unique constraint names
+-- Create ORDERS table with unique constraint names
 CREATE TABLE ORDERS (
     order_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     customer_id NUMBER NOT NULL,
@@ -752,17 +465,9 @@ SELECT 'ORDERS table created successfully' AS status FROM dual;
 SELECT constraint_name, constraint_type, status 
 FROM user_constraints 
 WHERE table_name = 'ORDERS'
-ORDER BY constraint_type, constraint_name;</code></pre>
-        </div>
-    </div>
+ORDER BY constraint_type, constraint_name;
 
-    <h3>FEEDBACK Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create FEEDBACK Table</div>
-        <div class="code-description">Customer feedback and ratings system</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create FEEDBACK table incrementally (following original pattern)
+-- Create FEEDBACK table incrementally (following original pattern)
 CREATE TABLE FEEDBACK (
     feedback_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     customer_id NUMBER NOT NULL,
@@ -801,17 +506,9 @@ ALTER TABLE FEEDBACK ADD CONSTRAINT chk_feedback_association
 -- Create indexes
 CREATE INDEX idx_feedback_rating ON FEEDBACK(rating);
 CREATE INDEX idx_feedback_date ON FEEDBACK(feedback_date);
-CREATE INDEX idx_feedback_verified ON FEEDBACK(is_verified_purchase);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_feedback_verified ON FEEDBACK(is_verified_purchase);
 
-    <h3>ORDER_ITEMS Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create ORDER_ITEMS Table</div>
-        <div class="code-description">Individual line items for each order</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create ORDER_ITEMS table
+-- Create ORDER_ITEMS table
 CREATE TABLE ORDER_ITEMS (
     order_item_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     order_id NUMBER NOT NULL,
@@ -844,17 +541,9 @@ ALTER TABLE ORDER_ITEMS ADD CONSTRAINT chk_discount_reasonable
 
 -- Create indexes
 CREATE INDEX idx_order_item_order ON ORDER_ITEMS(order_id);
-CREATE INDEX idx_order_item_product ON ORDER_ITEMS(product_id);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_order_item_product ON ORDER_ITEMS(product_id);
 
-    <h3>SUBSCRIPTION_ITEMS Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create SUBSCRIPTION_ITEMS Table</div>
-        <div class="code-description">Products included in subscription boxes</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create SUBSCRIPTION_ITEMS table
+-- Create SUBSCRIPTION_ITEMS table
 CREATE TABLE SUBSCRIPTION_ITEMS (
     subscription_item_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     subscription_id NUMBER NOT NULL,
@@ -890,17 +579,9 @@ ALTER TABLE SUBSCRIPTION_ITEMS ADD CONSTRAINT chk_delivery_date_range
 
 -- Create indexes
 CREATE INDEX idx_subscription_item_delivery ON SUBSCRIPTION_ITEMS(delivery_date);
-CREATE INDEX idx_subscription_item_status ON SUBSCRIPTION_ITEMS(delivery_status);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_subscription_item_status ON SUBSCRIPTION_ITEMS(delivery_status);
 
-    <h3>ORDER_STATUS_HISTORY Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create ORDER_STATUS_HISTORY Table</div>
-        <div class="code-description">Audit trail for order status changes</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create ORDER_STATUS_HISTORY table
+-- Create ORDER_STATUS_HISTORY table
 CREATE TABLE ORDER_STATUS_HISTORY (
     history_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     order_id NUMBER NOT NULL,
@@ -941,17 +622,9 @@ ALTER TABLE ORDER_STATUS_HISTORY ADD CONSTRAINT chk_no_backwards_from_canceled
 -- Create indexes
 CREATE INDEX idx_history_order ON ORDER_STATUS_HISTORY(order_id);
 CREATE INDEX idx_history_status ON ORDER_STATUS_HISTORY(new_status);
-CREATE INDEX idx_history_date ON ORDER_STATUS_HISTORY(status_change_date);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_history_date ON ORDER_STATUS_HISTORY(status_change_date);
 
-    <h3>PRODUCT_PROMOTIONS Table</h3>
-    <div class="code-section">
-        <div class="code-header">Create PRODUCT_PROMOTIONS Table</div>
-        <div class="code-description">Junction table linking products to promotions</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Create PRODUCT_PROMOTIONS table
+-- Create PRODUCT_PROMOTIONS table
 CREATE TABLE PRODUCT_PROMOTIONS (
     product_promotion_id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     product_id NUMBER NOT NULL,
@@ -982,29 +655,20 @@ ALTER TABLE PRODUCT_PROMOTIONS ADD CONSTRAINT chk_effective_dates
 -- Create indexes
 CREATE INDEX idx_prod_promo_product ON PRODUCT_PROMOTIONS(product_id);
 CREATE INDEX idx_prod_promo_promotion ON PRODUCT_PROMOTIONS(promotion_id);
-CREATE INDEX idx_prod_promo_dates ON PRODUCT_PROMOTIONS(effective_start_date, effective_end_date);</code></pre>
-        </div>
-    </div>
+CREATE INDEX idx_prod_promo_dates ON PRODUCT_PROMOTIONS(effective_start_date, effective_end_date);
 
-    <h3>Table Creation Confirmation</h3>
-    <div class="code-section">
-        <div class="code-header">Verify All Tables Created</div>
-        <div class="code-description">Query to confirm all tables have been successfully created</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Check that all the tables were created
-SELECT table_name FROM user_tables ORDER BY table_name;</code></pre>
-        </div>
-    </div>
+/***********************************************************************************************************
+ALL TABLES SHOULD BE CREATED AT THIS POINT !!!!!!! QUICK CONFIRMATION TEST BELOW
+***********************************************************************************************************/
 
-    <h2 id="business-logic">Business Logic Triggers</h2>
+-- Check that all the tables were created
+SELECT table_name FROM user_tables ORDER BY table_name;
 
-    <div class="code-section">
-        <div class="code-header">Order Status History Triggers</div>
-        <div class="code-description">Automatically track order status changes in history table</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Enhanced trigger for ORDER_STATUS_HISTORY when ORDERS.order_status changes
+/***********************************************************************************************************
+BEGIN IMPLEMENTING BUSINESS LOGIC TRIGGERS
+***********************************************************************************************************/
+
+-- Enhanced trigger for ORDER_STATUS_HISTORY when ORDERS.order_status changes
 CREATE OR REPLACE TRIGGER before_order_status_update
 BEFORE UPDATE ON ORDERS
 FOR EACH ROW
@@ -1057,16 +721,8 @@ BEGIN
     VALUES (:NEW.order_id, NULL, :NEW.order_status, USER, SYSTIMESTAMP, SYSTIMESTAMP, SYSTIMESTAMP);
 END;
 /
-</code></pre>
-        </div>
-    </div>
 
-    <div class="code-section">
-        <div class="code-header">Inventory Management Triggers</div>
-        <div class="code-description">Automatically update inventory levels when order items are modified</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Enhanced trigger to update inventory when order items are added
+-- Enhanced trigger to update inventory when order items are added
 CREATE OR REPLACE TRIGGER after_order_item_insert
 AFTER INSERT ON ORDER_ITEMS
 FOR EACH ROW
@@ -1144,16 +800,9 @@ BEGIN
         WHERE product_id = :OLD.product_id;
     END IF;
 END;
-/</code></pre>
-        </div>
-    </div>
+/
 
-    <div class="code-section">
-        <div class="code-header">Gift Card Balance Trigger</div>
-        <div class="code-description">Update gift card balance when used in orders</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Enhanced trigger to update gift card balance when used in an order
+-- Enhanced trigger to update gift card balance when used in an order
 CREATE OR REPLACE TRIGGER after_order_with_gift_card
 AFTER INSERT ON ORDERS
 FOR EACH ROW
@@ -1189,16 +838,9 @@ BEGIN
         WHERE gift_card_id = :NEW.gift_card_id;
     END IF;
 END;
-/</code></pre>
-        </div>
-    </div>
+/
 
-    <div class="code-section">
-        <div class="code-header">Customer Promotion Usage Trigger</div>
-        <div class="code-description">Automatically mark promotions as used when usage limit is reached</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Enhanced customer promotion usage trigger
+-- Enhanced customer promotion usage trigger
 CREATE OR REPLACE TRIGGER trg_customer_promotion_usage
 BEFORE UPDATE OF times_used ON CUSTOMER_PROMOTION
 FOR EACH ROW
@@ -1215,16 +857,11 @@ BEGIN
     
     :NEW.updated_at := SYSTIMESTAMP;
 END;
-/</code></pre>
-        </div>
-    </div>
+/
 
-    <div class="code-section">
-        <div class="code-header">All Table Update Triggers</div>
-        <div class="code-description">Update timestamps for auditing</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- CUSTOMERS table update trigger
+-- ALL TABLE UPDATE TRIGGERS (SINGLE DEFINITIONS ONLY)
+
+-- CUSTOMERS table update trigger
 CREATE OR REPLACE TRIGGER trg_customers_update
 BEFORE UPDATE ON CUSTOMERS
 FOR EACH ROW
@@ -1313,16 +950,8 @@ BEGIN
     :NEW.updated_at := SYSTIMESTAMP;
 END;
 /
-</code></pre>
-        </div>
-    </div>
 
-        <div class="code-section">
-        <div class="code-header">Trigger</div>
-        <div class="code-description">xxxx</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Enhanced FEEDBACK table triggers with default value handling
+-- Enhanced FEEDBACK table triggers with default value handling
 CREATE OR REPLACE TRIGGER trg_feedback_before_insert
 BEFORE INSERT ON FEEDBACK
 FOR EACH ROW
@@ -1347,16 +976,9 @@ FOR EACH ROW
 BEGIN
     :NEW.updated_at := SYSTIMESTAMP;
 END;
-/</code></pre>
-        </div>
-    </div>
+/
 
-            <div class="code-section">
-        <div class="code-header">Trigger</div>
-        <div class="code-description">xxxx</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Enhanced ORDER_ITEMS table triggers with default value handling
+-- Enhanced ORDER_ITEMS table triggers with default value handling
 CREATE OR REPLACE TRIGGER trg_order_items_before_insert
 BEFORE INSERT ON ORDER_ITEMS
 FOR EACH ROW
@@ -1377,17 +999,9 @@ FOR EACH ROW
 BEGIN
     :NEW.updated_at := SYSTIMESTAMP;
 END;
-/</code></pre>
-        </div>
-    </div>
+/
 
-
-            <div class="code-section">
-        <div class="code-header">Trigger</div>
-        <div class="code-description">xxxx</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Enhanced SUBSCRIPTION_ITEMS table triggers with default value handling
+-- Enhanced SUBSCRIPTION_ITEMS table triggers with default value handling
 CREATE OR REPLACE TRIGGER trg_sub_items_before_insert
 BEFORE INSERT ON SUBSCRIPTION_ITEMS
 FOR EACH ROW
@@ -1408,17 +1022,9 @@ FOR EACH ROW
 BEGIN
     :NEW.updated_at := SYSTIMESTAMP;
 END;
-/</code></pre>
-        </div>
-    </div>
+/
 
-
-            <div class="code-section">
-        <div class="code-header">Trigger</div>
-        <div class="code-description">xxxx</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Enhanced ORDER_STATUS_HISTORY table triggers with default value handling
+-- Enhanced ORDER_STATUS_HISTORY table triggers with default value handling
 CREATE OR REPLACE TRIGGER trg_order_hist_before_insert
 BEFORE INSERT ON ORDER_STATUS_HISTORY
 FOR EACH ROW
@@ -1443,17 +1049,9 @@ FOR EACH ROW
 BEGIN
     :NEW.updated_at := SYSTIMESTAMP;
 END;
-/</code></pre>
-        </div>
-    </div>
+/
 
-
-                <div class="code-section">
-        <div class="code-header">Trigger</div>
-        <div class="code-description">xxxx</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Enhanced PRODUCT_PROMOTIONS table triggers with default value handling
+-- Enhanced PRODUCT_PROMOTIONS table triggers with default value handling
 CREATE OR REPLACE TRIGGER trg_prod_promo_before_insert
 BEFORE INSERT ON PRODUCT_PROMOTIONS
 FOR EACH ROW
@@ -1474,18 +1072,13 @@ FOR EACH ROW
 BEGIN
     :NEW.updated_at := SYSTIMESTAMP;
 END;
-/</code></pre>
-        </div>
-    </div>
+/
 
-    <h2 id="views">Reporting Views</h2>
+/***********************************************************************************************************
+CREATE VIEWS FOR COMMON REPORTING NEEDS
+***********************************************************************************************************/
 
-    <div class="code-section">
-        <div class="code-header">Customer Order History View</div>
-        <div class="code-description">Comprehensive customer order summary with loyalty information</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Customer order history with totals
+-- Customer order history with totals
 CREATE OR REPLACE VIEW vw_customer_order_history AS
 SELECT 
     c.customer_id,
@@ -1506,16 +1099,9 @@ SELECT
     END AS customer_status
 FROM CUSTOMERS c
 LEFT JOIN ORDERS o ON c.customer_id = o.customer_id
-GROUP BY c.customer_id, c.first_name, c.last_name, c.email, c.loyalty_points, c.loyalty_status;</code></pre>
-        </div>
-    </div>
+GROUP BY c.customer_id, c.first_name, c.last_name, c.email, c.loyalty_points, c.loyalty_status;
 
-    <div class="code-section">
-        <div class="code-header">Product Sales Performance View</div>
-        <div class="code-description">Product performance metrics including sales and ratings</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Product sales performance
+-- Product sales performance
 CREATE OR REPLACE VIEW vw_product_sales AS
 SELECT 
     p.product_id,
@@ -1544,16 +1130,9 @@ LEFT JOIN ORDERS o ON oi.order_id = o.order_id
 LEFT JOIN FEEDBACK f ON p.product_id = f.product_id
 LEFT JOIN INVENTORY i ON p.product_id = i.product_id
 GROUP BY p.product_id, p.product_name, p.category, p.origin, p.base_price, 
-         p.limited_edition, p.seasonal, i.current_stock, i.min_stock_level;</code></pre>
-        </div>
-    </div>
+         p.limited_edition, p.seasonal, i.current_stock, i.min_stock_level;
 
-    <div class="code-section">
-        <div class="code-header">Marketing Channel Performance View</div>
-        <div class="code-description">Marketing channel effectiveness and ROI analysis</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Marketing channel effectiveness
+-- Marketing channel effectiveness
 CREATE OR REPLACE VIEW vw_marketing_channel_performance AS
 SELECT 
     mc.marketing_channel_id,
@@ -1578,16 +1157,9 @@ SELECT
 FROM MARKETING_CHANNELS mc
 LEFT JOIN ORDERS o ON mc.marketing_channel_id = o.marketing_channel_id
 GROUP BY mc.marketing_channel_id, mc.channel_name, mc.channel_type, 
-         mc.specific_platform, mc.customer_acquisition_cost, mc.conversion_rate;</code></pre>
-        </div>
-    </div>
+         mc.specific_platform, mc.customer_acquisition_cost, mc.conversion_rate;
 
-    <div class="code-section">
-        <div class="code-header">Subscription Performance View</div>
-        <div class="code-description">Subscription metrics and retention analysis</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Subscription performance and retention
+-- Subscription performance and retention
 CREATE OR REPLACE VIEW vw_subscription_performance AS
 SELECT 
     s.subscription_type,
@@ -1606,16 +1178,9 @@ SELECT
     COUNT(DISTINCT CASE WHEN s.is_gift = 1 THEN s.subscription_id END) AS gift_subscriptions,
     AVG(s.billing_cycle_months) AS average_billing_cycle
 FROM SUBSCRIPTIONS s
-GROUP BY s.subscription_type;</code></pre>
-        </div>
-    </div>
+GROUP BY s.subscription_type;
 
-    <div class="code-section">
-        <div class="code-header">Inventory Alerts View</div>
-        <div class="code-description">Inventory status monitoring and reorder alerts</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Inventory status and alerts
+-- Inventory status and alerts
 CREATE OR REPLACE VIEW vw_inventory_alerts AS
 SELECT 
     p.product_id,
@@ -1649,16 +1214,9 @@ SELECT
         ELSE 'Scheduled'
     END AS arrival_status
 FROM INVENTORY i
-JOIN PRODUCTS p ON i.product_id = p.product_id;</code></pre>
-        </div>
-    </div>
+JOIN PRODUCTS p ON i.product_id = p.product_id;
 
-    <div class="code-section">
-        <div class="code-header">K-pop/Anime Product Performance View</div>
-        <div class="code-description">Performance tracking for themed products</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- K-pop/anime product performance
+-- K-pop/anime product performance
 CREATE OR REPLACE VIEW vw_kpop_anime_performance AS
 SELECT 
     p.product_id,
@@ -1687,16 +1245,9 @@ LEFT JOIN FEEDBACK f ON p.product_id = f.product_id
 LEFT JOIN INVENTORY i ON p.product_id = i.product_id
 WHERE p.kpop_anime_tie_in IS NOT NULL
 GROUP BY p.product_id, p.product_name, p.category, p.origin, p.kpop_anime_tie_in, 
-         p.limited_edition, p.seasonal, i.current_stock, i.min_stock_level;</code></pre>
-        </div>
-    </div>
+         p.limited_edition, p.seasonal, i.current_stock, i.min_stock_level;
 
-    <div class="code-section">
-        <div class="code-header">Gift Card Statistics View</div>
-        <div class="code-description">Gift card usage and redemption analytics</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Gift card usage statistics
+-- Gift card usage statistics
 CREATE OR REPLACE VIEW vw_gift_card_statistics AS
 SELECT 
     COUNT(gc.gift_card_id) AS total_gift_cards,
@@ -1712,16 +1263,9 @@ SELECT
     COUNT(CASE WHEN gc.current_balance > 0 AND gc.current_balance < gc.initial_amount THEN 1 END) AS partially_redeemed_cards,
     COUNT(CASE WHEN gc.current_balance = gc.initial_amount THEN 1 END) AS unused_cards,
     COUNT(CASE WHEN gc.expiry_date < SYSDATE AND gc.current_balance > 0 THEN 1 END) AS expired_with_balance
-FROM GIFT_CARDS gc;</code></pre>
-        </div>
-    </div>
+FROM GIFT_CARDS gc;
 
-    <div class="code-section">
-        <div class="code-header">Customer Feedback Summary View</div>
-        <div class="code-description">Overall customer satisfaction metrics</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Customer feedback summary
+-- Customer feedback summary
 CREATE OR REPLACE VIEW vw_customer_feedback_summary AS
 SELECT 
     AVG(f.rating) AS average_rating,
@@ -1740,17 +1284,9 @@ SELECT
     AVG(CASE WHEN f.feedback_date >= SYSDATE - 30 THEN f.rating END) AS recent_average_rating,
     COUNT(CASE WHEN f.is_verified_purchase = 1 THEN 1 END) AS verified_feedback_count,
     AVG(CASE WHEN f.is_verified_purchase = 1 THEN f.rating END) AS verified_average_rating
-FROM FEEDBACK f;</code></pre>
-        </div>
-    </div>
+FROM FEEDBACK f;
 
-
-    <div class="code-section">
-        <div class="code-header">Active Customer Promotions View</div>
-        <div class="code-description">Current active promotions available to customers</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Active customer promotions
+-- Active customer promotions
 CREATE OR REPLACE VIEW vw_active_customer_promotions AS
 SELECT 
     cp.customer_promotion_id,
@@ -1779,16 +1315,9 @@ FROM CUSTOMER_PROMOTION cp
 JOIN CUSTOMERS c ON cp.customer_id = c.customer_id
 JOIN PROMOTIONS p ON cp.promotion_id = p.promotion_id
 WHERE cp.expiry_date >= SYSDATE 
-  AND (cp.times_used < cp.usage_limit OR cp.usage_limit = 0);</code></pre>
-        </div>
-    </div>
+  AND (cp.times_used < cp.usage_limit OR cp.usage_limit = 0);
 
-        <div class="code-section">
-        <div class="code-header">Promotion Usage Statistics View</div>
-        <div class="code-description">xxx</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Promotion usage statistics
+-- Promotion usage statistics
 CREATE OR REPLACE VIEW vw_promotion_usage_statistics AS
 SELECT 
     p.promotion_id,
@@ -1816,17 +1345,9 @@ SELECT
 FROM PROMOTIONS p
 LEFT JOIN CUSTOMER_PROMOTION cp ON p.promotion_id = cp.promotion_id
 GROUP BY p.promotion_id, p.promotion_name, p.promotion_type, p.discount_type, 
-         p.discount_amount, p.platform, p.start_date, p.end_date;</code></pre>
-        </div>
-    </div>
+         p.discount_amount, p.platform, p.start_date, p.end_date;
 
-
-        <div class="code-section">
-        <div class="code-header">Order Status Tracking View</div>
-        <div class="code-description">xxx</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Order status tracking
+-- Order status tracking
 CREATE OR REPLACE VIEW vw_order_status_summary AS
 SELECT 
     o.order_status,
@@ -1837,17 +1358,9 @@ SELECT
     COUNT(CASE WHEN o.platform = 'in-store' THEN 1 END) AS in_store_count,
     COUNT(CASE WHEN o.order_date >= SYSDATE - 30 THEN 1 END) AS recent_orders
 FROM ORDERS o
-GROUP BY o.order_status;</code></pre>
-        </div>
-    </div>
+GROUP BY o.order_status;
 
-
-        <div class="code-section">
-        <div class="code-header">Product Promotion Effectiveness View</div>
-        <div class="code-description">xxx</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">-- Product promotion effectiveness
+-- Product promotion effectiveness
 CREATE OR REPLACE VIEW vw_product_promotion_effectiveness AS
 SELECT 
     p.promotion_id,
@@ -1867,18 +1380,13 @@ SELECT
     END AS status
 FROM PRODUCT_PROMOTIONS pp
 JOIN PROMOTIONS p ON pp.promotion_id = p.promotion_id
-JOIN PRODUCTS prod ON pp.product_id = prod.product_id;</code></pre>
-        </div>
-    </div>
+JOIN PRODUCTS prod ON pp.product_id = prod.product_id;
 
-    <h2 id="completion">Script Completion Message</h2>
+/***********************************************************************************************************
+SCRIPT COMPLETION MESSAGE
+***********************************************************************************************************/
 
-    <div class="code-section">
-        <div class="code-header">Run Script Completion Message</div>
-        <div class="code-description">Confirmaion test after running all DDL scripts</div>
-        <div class="code-container">
-            
-            <pre><code class="language-sql">PROMPT
+PROMPT
 PROMPT =====================================================
 PROMPT Database creation script completed successfully!
 PROMPT =====================================================
@@ -1907,6 +1415,4 @@ PROMPT - Customer promotion usage tracking
 PROMPT - Comprehensive reporting views
 PROMPT - CLOB fields for flexible data storage
 PROMPT - Enhanced business logic validation
-PROMPT =====================================================</code></pre>
-        </div>
-    </div>
+PROMPT =====================================================
