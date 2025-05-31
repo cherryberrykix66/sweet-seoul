@@ -1216,6 +1216,42 @@ ORDER BY
         ELSE 3 
     END, current_stock;
 
+-- the test inventory alerts view 
+-- needed some troubleshooting to confirm that there simply isn't sufficient test data
+-- Quick check for data
+SELECT COUNT(*) as products FROM PRODUCTS;
+SELECT COUNT(*) as inventory FROM INVENTORY;
+
+-- See what stock levels look like
+SELECT product_id, current_stock, min_stock_level, reorder_point
+FROM INVENTORY
+ORDER BY current_stock;
+
+-- Manual calculation to see what should trigger alerts
+SELECT 
+    product_id,
+    current_stock,
+    min_stock_level,
+    reorder_point,
+    CASE 
+        WHEN current_stock <= min_stock_level THEN 'Critical'
+        WHEN current_stock <= reorder_point THEN 'Reorder'
+        ELSE 'Normal'
+    END as calculated_status
+FROM INVENTORY;
+
+-- Create a test scenario
+UPDATE INVENTORY 
+SET current_stock = 1 
+WHERE ROWNUM = 1;
+
+-- Now test the view
+SELECT * FROM vw_inventory_alerts 
+WHERE stock_status IN ('Critical', 'Reorder');
+
+-- end troubleshooting 
+-- the view should be working now
+
 -- Test K-pop/Anime performance view
 PROMPT === K-pop/Anime Product Performance (Top 5) ===
 SELECT product_id, product_name, kpop_anime_tie_in, 
