@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Seoul Korean Bakery - Oracle SQL Code Examples</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 3px solid #3498db;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            border-left: 6px solid #3498db;
+            padding-left: 20px;
+            background-color: #ecf0f1;
+            padding: 15px 20px;
+            border-radius: 5px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #bdc3c7;
+            padding-bottom: 5px;
+        }
+
+        .code-section {
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .code-description {
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        pre {
+            margin: 0 !important;
+            background-color: #2d3748 !important;
+            border-radius: 0 !important;
+        }
+
+        pre code {
+            font-size: 0.9em;
+            line-height: 1.5;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .copy-button:hover {
+            opacity: 1;
+        }
+
+        .code-container {
+            position: relative;
+        }
+
+        .toc {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .highlight-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            pre code {
+                font-size: 0.8em;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Sweet Seoul Korean Bakery<br>Oracle 19c Database Business Reporting</h1>
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+            <li><a href="#req01">Busines Reporting Requirement 01</a></li>
+            <li><a href="#req02">Busines Reporting Requirement 02</a></li>
+            <li><a href="#">xxxx</a></li>
+            <li><a href="#">xxxx</a></li>
+            <li><a href="#">xxxx</a></li>
+            <li><a href="#">xxx</a></li>
+        </ul>
+    </div>
+
+    <div class="highlight-note">
+        <strong>Note:</strong> This Oracle 19c database script creates
+    </div>
+
+
+    <div class="code-section">
+        <div class="code-header">Global Formatting</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Set up global formatting for all queries
+SET LINESIZE 250
+SET PAGESIZE 50
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+SET FEEDBACK ON
+SET ECHO OFF
+SET VERIFY OFF
+SET NUMFORMAT 999,999,990.99
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+            </code></pre>
+        </div>
+    </div>
+
+
+    <h2 id="req01">Busines Reporting Requirement 01</h2>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Best-selling items comparison across online and in-store channels
+PROMPT ===== PRODUCT PERFORMANCE: ONLINE VS IN-STORE COMPARISON =====
+
+-- Format specific columns
+COLUMN product_id FORMAT 999 HEADING 'ID'
+COLUMN product_name FORMAT A25 HEADING 'Product Name'
+COLUMN category FORMAT A12 HEADING 'Category'
+COLUMN kpop_anime_tie_in FORMAT A15 HEADING 'K-Pop/Anime'
+COLUMN online_quantity_sold FORMAT 999,999 HEADING 'Online|Quantity'
+COLUMN online_revenue FORMAT $999,999.99 HEADING 'Online|Revenue'
+COLUMN online_avg_price FORMAT $999.99 HEADING 'Online|Avg Price'
+COLUMN in_store_quantity_sold FORMAT 999,999 HEADING 'In-Store|Quantity'
+COLUMN in_store_revenue FORMAT $999,999.99 HEADING 'In-Store|Revenue'
+COLUMN in_store_avg_price FORMAT $999.99 HEADING 'In-Store|Avg Price'
+COLUMN total_quantity_sold FORMAT 999,999 HEADING 'Total|Quantity'
+COLUMN total_revenue FORMAT $999,999.99 HEADING 'Total|Revenue'
+COLUMN online_quantity_percentage FORMAT 990.9 HEADING 'Online %'
+COLUMN in_store_quantity_percentage FORMAT 990.9 HEADING 'In-Store %'
+COLUMN preferred_channel FORMAT A10 HEADING 'Preferred|Channel'
+
+SELECT 
+    p.product_id,
+    p.product_name,
+    p.category,
+    p.kpop_anime_tie_in,
+    -- Online sales metrics (UPDATED: Proper discount handling)
+    SUM(CASE WHEN o.platform = 'online' AND o.order_status NOT IN ('Canceled') 
+             THEN oi.quantity ELSE 0 END) AS online_quantity_sold,
+    ROUND(SUM(CASE WHEN o.platform = 'online' AND o.order_status NOT IN ('Canceled') 
+                   THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                   ELSE 0 END), 2) AS online_revenue,
+    -- ADDED: Average price per unit online
+    ROUND(SUM(CASE WHEN o.platform = 'online' AND o.order_status NOT IN ('Canceled') 
+                   THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                   ELSE 0 END) / 
+          NULLIF(SUM(CASE WHEN o.platform = 'online' AND o.order_status NOT IN ('Canceled') 
+                          THEN oi.quantity ELSE 0 END), 0), 2) AS online_avg_price,
+    -- In-store sales metrics (UPDATED: Proper discount handling)
+    SUM(CASE WHEN o.platform = 'in-store' AND o.order_status NOT IN ('Canceled') 
+             THEN oi.quantity ELSE 0 END) AS in_store_quantity_sold,
+    ROUND(SUM(CASE WHEN o.platform = 'in-store' AND o.order_status NOT IN ('Canceled') 
+                   THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                   ELSE 0 END), 2) AS in_store_revenue,
+    -- ADDED: Average price per unit in-store
+    ROUND(SUM(CASE WHEN o.platform = 'in-store' AND o.order_status NOT IN ('Canceled') 
+                   THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                   ELSE 0 END) / 
+          NULLIF(SUM(CASE WHEN o.platform = 'in-store' AND o.order_status NOT IN ('Canceled') 
+                          THEN oi.quantity ELSE 0 END), 0), 2) AS in_store_avg_price,
+    -- Total sales metrics (UPDATED: Include discount calculations)
+    SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) AS total_quantity_sold,
+    ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                   THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                   ELSE 0 END), 2) AS total_revenue,
+    -- Channel distribution (UPDATED: Only count valid orders)
+    ROUND(SUM(CASE WHEN o.platform = 'online' AND o.order_status NOT IN ('Canceled') 
+                   THEN oi.quantity ELSE 0 END) / 
+          NULLIF(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) * 100, 1) AS online_quantity_percentage,
+    ROUND(SUM(CASE WHEN o.platform = 'in-store' AND o.order_status NOT IN ('Canceled') 
+                   THEN oi.quantity ELSE 0 END) / 
+          NULLIF(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) * 100, 1) AS in_store_quantity_percentage,
+    -- Preferred channel (based on quantity sold)
+    CASE 
+        WHEN SUM(CASE WHEN o.platform = 'online' AND o.order_status NOT IN ('Canceled') 
+                       THEN oi.quantity ELSE 0 END) > 
+             SUM(CASE WHEN o.platform = 'in-store' AND o.order_status NOT IN ('Canceled') 
+                       THEN oi.quantity ELSE 0 END) THEN 'Online'
+        WHEN SUM(CASE WHEN o.platform = 'online' AND o.order_status NOT IN ('Canceled') 
+                       THEN oi.quantity ELSE 0 END) < 
+             SUM(CASE WHEN o.platform = 'in-store' AND o.order_status NOT IN ('Canceled') 
+                       THEN oi.quantity ELSE 0 END) THEN 'In-Store'
+        WHEN SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) > 0 THEN 'Equal'
+        ELSE 'No Sales'
+    END AS preferred_channel
+FROM 
+    PRODUCTS p
+LEFT JOIN 
+    ORDER_ITEMS oi ON p.product_id = oi.product_id
+LEFT JOIN 
+    ORDERS o ON oi.order_id = o.order_id
+GROUP BY 
+    p.product_id, p.product_name, p.category, p.kpop_anime_tie_in
+HAVING 
+    SUM(CASE WHEN o.order_status NOT IN ('Canceled') OR o.order_status IS NULL THEN oi.quantity ELSE 0 END) > 0
+    OR SUM(CASE WHEN o.order_status NOT IN ('Canceled') OR o.order_status IS NULL THEN oi.quantity ELSE 0 END) IS NULL
+ORDER BY 
+    total_revenue DESC NULLS LAST;
+                
+            </code></pre>
+        </div>
+    </div>
+
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Inventory turnover rates to identify fast-moving vs. slow-moving products
+PROMPT 
+PROMPT ===== INVENTORY TURNOVER ANALYSIS =====
+
+-- Format specific columns
+CLEAR COLUMNS
+
+COLUMN product_id FORMAT 999 HEADING 'ID'
+COLUMN product_name FORMAT A25 HEADING 'Product Name'
+COLUMN category FORMAT A12 HEADING 'Category'
+COLUMN current_stock FORMAT 9,999 HEADING 'Current|Stock'
+COLUMN total_quantity_sold FORMAT 9,999 HEADING 'Quantity|Sold'
+COLUMN inventory_turnover_ratio FORMAT 990.99 HEADING 'Turnover|Ratio'
+COLUMN product_velocity FORMAT A15 HEADING 'Velocity'
+COLUMN stock_status FORMAT A15 HEADING 'Stock Status'
+COLUMN estimated_days_supply FORMAT 9,990 HEADING 'Est. Days|Supply'
+COLUMN avg_daily_sales FORMAT 990.99 HEADING 'Avg Daily|Sales'
+COLUMN last_sale_date FORMAT A10 HEADING 'Last Sale'
+
+SELECT 
+    p.product_id,
+    p.product_name,
+    p.category,
+    -- Inventory metrics
+    i.current_stock,
+    -- Sales metrics for turnover calculation (UPDATED: Exclude canceled orders)
+    COALESCE(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) AS total_quantity_sold,
+    -- ADDED: Average daily sales for better forecasting
+    ROUND(
+        COALESCE(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) / 
+        NULLIF(COUNT(DISTINCT CASE WHEN o.order_status NOT IN ('Canceled') THEN TRUNC(o.order_date) END), 0), 
+        2
+    ) AS avg_daily_sales,
+    -- Inventory turnover ratio and categorization (UPDATED: Better calculation)
+    CASE 
+        WHEN i.current_stock = 0 THEN NULL
+        ELSE ROUND(
+            COALESCE(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) / 
+            NULLIF(i.current_stock, 0), 2)
+    END AS inventory_turnover_ratio,
+    -- UPDATED: More nuanced velocity classification
+    CASE 
+        WHEN i.current_stock = 0 THEN 'Out of Stock'
+        WHEN COALESCE(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) = 0 THEN 'No Sales'
+        WHEN COALESCE(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) / 
+             NULLIF(i.current_stock, 0) > 3 THEN 'Very Fast'
+        WHEN COALESCE(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) / 
+             NULLIF(i.current_stock, 0) > 1.5 THEN 'Fast-Moving'
+        WHEN COALESCE(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) / 
+             NULLIF(i.current_stock, 0) BETWEEN 0.5 AND 1.5 THEN 'Medium-Moving'
+        ELSE 'Slow-Moving'
+    END AS product_velocity,
+    -- Stock status indicators (UPDATED: More detailed status logic)
+    CASE 
+        WHEN i.current_stock = 0 THEN 'Out of Stock'
+        WHEN i.current_stock <= i.min_stock_level THEN 'Critical Stock'
+        WHEN i.current_stock <= i.reorder_point THEN 'Reorder Soon'
+        WHEN i.current_stock >= i.max_stock_level * 0.9 THEN 'Overstocked'
+        ELSE 'Adequate Stock'
+    END AS stock_status,
+    -- Days of supply remaining (UPDATED: Better calculation with valid orders only)
+    CASE
+        WHEN COALESCE(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) = 0 THEN NULL 
+        ELSE ROUND(
+            i.current_stock / NULLIF(
+                COALESCE(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0) / 
+                NULLIF(COUNT(DISTINCT CASE WHEN o.order_status NOT IN ('Canceled') THEN TRUNC(o.order_date) END), 0), 
+                0
+            ), 0)
+    END AS estimated_days_supply,
+    -- ADDED: Last sale date for inactive product identification
+    MAX(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_date END) AS last_sale_date
+FROM 
+    PRODUCTS p
+JOIN 
+    INVENTORY i ON p.product_id = i.product_id
+LEFT JOIN 
+    ORDER_ITEMS oi ON p.product_id = oi.product_id
+LEFT JOIN 
+    ORDERS o ON oi.order_id = o.order_id
+GROUP BY 
+    p.product_id, p.product_name, p.category, 
+    i.current_stock, i.min_stock_level, i.reorder_point, i.max_stock_level
+ORDER BY 
+    CASE 
+        WHEN i.current_stock = 0 THEN 1
+        WHEN i.current_stock <= i.min_stock_level THEN 2
+        ELSE 3
+    END,
+    inventory_turnover_ratio DESC NULLS LAST;
+                
+            </code></pre>
+        </div>
+    </div>
+
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Seasonal and limited edition product performance
+PROMPT 
+PROMPT ===== SEASONAL & LIMITED EDITION PERFORMANCE =====
+
+-- Format specific columns
+CLEAR COLUMNS
+
+COLUMN product_id FORMAT 999 HEADING 'ID'
+COLUMN product_name FORMAT A25 HEADING 'Product Name'
+COLUMN category FORMAT A12 HEADING 'Category'
+COLUMN is_seasonal FORMAT A5 HEADING 'Seasn'
+COLUMN is_limited_edition FORMAT A5 HEADING 'Ltd Ed'
+COLUMN expiry_date FORMAT A10 HEADING 'Expiry Date'
+COLUMN days_until_expiry FORMAT 9999 HEADING 'Days|Left'
+COLUMN total_quantity_sold FORMAT 9,999 HEADING 'Qty Sold'
+COLUMN total_revenue FORMAT $99,999.99 HEADING 'Revenue'
+COLUMN avg_selling_price FORMAT $999.99 HEADING 'Avg Price'
+COLUMN current_stock FORMAT 9,999 HEADING 'Current|Stock'
+COLUMN daily_sales_rate FORMAT 990.9 HEADING 'Daily|Sales'
+COLUMN sell_through_percentage FORMAT 990.9 HEADING 'Sell-Thru %'
+COLUMN seasonal_performance FORMAT A15 HEADING 'Performance'
+COLUMN urgency_level FORMAT A10 HEADING 'Urgency'
+
+SELECT
+    p.product_id,
+    p.product_name,
+    p.category,
+    -- Product attributes
+    CASE WHEN p.seasonal = 1 THEN 'Yes' ELSE 'No' END AS is_seasonal,
+    CASE WHEN p.limited_edition = 1 THEN 'Yes' ELSE 'No' END AS is_limited_edition,
+    p.expiry_date,
+    -- ADDED: Days until expiry for urgency assessment
+    CASE 
+        WHEN p.expiry_date IS NOT NULL THEN TRUNC(p.expiry_date - SYSDATE)
+        ELSE NULL
+    END AS days_until_expiry,
+    -- Sales metrics (UPDATED: Exclude canceled orders and include discounts)
+    SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) AS total_quantity_sold,
+    ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                   THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                   ELSE 0 END), 2) AS total_revenue,
+    -- ADDED: Average selling price (after discounts)
+    ROUND(SUM(CASE WHEN o.order_status NOT IN ('Canceled') 
+                   THEN (oi.quantity * oi.unit_price) - COALESCE(oi.discount, 0) 
+                   ELSE 0 END) / 
+          NULLIF(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END), 0), 2) AS avg_selling_price,
+    -- Inventory metrics
+    i.current_stock,
+    -- Temporal metrics for seasonal items (UPDATED: Better date handling)
+    CASE
+        WHEN (p.seasonal = 1 OR p.limited_edition = 1) AND p.expiry_date IS NOT NULL THEN 
+            ROUND(
+                SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) / 
+                NULLIF(GREATEST(TRUNC(LEAST(p.expiry_date, SYSDATE) - 
+                               COALESCE(MIN(CASE WHEN o.order_status NOT IN ('Canceled') THEN o.order_date END), SYSDATE)), 1), 0), 
+                1
+            )
+        WHEN (p.seasonal = 1 OR p.limited_edition = 1) THEN
+            ROUND(
+                SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) / 
+                NULLIF(COUNT(DISTINCT CASE WHEN o.order_status NOT IN ('Canceled') THEN TRUNC(o.order_date) END), 0), 
+                1
+            )
+        ELSE NULL
+    END AS daily_sales_rate,
+    -- Sell-through rate (UPDATED: Better initial stock estimation)
+    CASE
+        WHEN p.seasonal = 1 OR p.limited_edition = 1 THEN
+            ROUND(
+                SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) / 
+                NULLIF(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) + i.current_stock, 0) * 100, 
+                1
+            )
+        ELSE NULL
+    END AS sell_through_percentage,
+    -- Performance classification (UPDATED: More nuanced performance metrics)
+    CASE
+        WHEN p.seasonal = 1 OR p.limited_edition = 1 THEN
+            CASE
+                WHEN SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) / 
+                     NULLIF(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) + i.current_stock, 0) >= 0.9 
+                     THEN 'Excellent'
+                WHEN SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) / 
+                     NULLIF(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) + i.current_stock, 0) >= 0.75 
+                     THEN 'Very Good'
+                WHEN SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) / 
+                     NULLIF(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) + i.current_stock, 0) >= 0.5 
+                     THEN 'Good'
+                WHEN SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) / 
+                     NULLIF(SUM(CASE WHEN o.order_status NOT IN ('Canceled') THEN oi.quantity ELSE 0 END) + i.current_stock, 0) >= 0.25 
+                     THEN 'Fair'
+                ELSE 'Poor'
+            END
+        ELSE 'Regular Product'
+    END AS seasonal_performance,
+    -- ADDED: Urgency level for action planning
+    CASE
+        WHEN p.expiry_date IS NOT NULL THEN
+            CASE
+                WHEN TRUNC(p.expiry_date - SYSDATE) <= 3 AND i.current_stock > 0 THEN 'Emergency'
+                WHEN TRUNC(p.expiry_date - SYSDATE) <= 7 AND i.current_stock > 0 THEN 'Critical'
+                WHEN TRUNC(p.expiry_date - SYSDATE) <= 14 AND i.current_stock > 0 THEN 'High'
+                WHEN TRUNC(p.expiry_date - SYSDATE) <= 30 AND i.current_stock > 0 THEN 'Medium'
+                WHEN TRUNC(p.expiry_date - SYSDATE) <= 60 AND i.current_stock > 0 THEN 'Low'
+                WHEN TRUNC(p.expiry_date - SYSDATE) < 0 THEN 'Expired'
+                ELSE 'Sold Out'
+            END
+        WHEN p.limited_edition = 1 AND i.current_stock <= i.min_stock_level THEN 'Critical'
+        WHEN p.limited_edition = 1 AND i.current_stock <= i.reorder_point THEN 'Medium'
+        ELSE 'Normal'
+    END AS urgency_level
+FROM 
+    PRODUCTS p
+JOIN 
+    INVENTORY i ON p.product_id = i.product_id
+LEFT JOIN 
+    ORDER_ITEMS oi ON p.product_id = oi.product_id
+LEFT JOIN 
+    ORDERS o ON oi.order_id = o.order_id
+WHERE 
+    p.seasonal = 1 OR p.limited_edition = 1
+GROUP BY 
+    p.product_id, p.product_name, p.category, p.seasonal, 
+    p.limited_edition, p.expiry_date, i.current_stock, i.min_stock_level, i.reorder_point
+ORDER BY 
+    -- UPDATED: Better sorting - urgency first, then performance
+    CASE 
+        WHEN p.expiry_date IS NOT NULL AND TRUNC(p.expiry_date - SYSDATE) <= 3 THEN 1
+        WHEN p.expiry_date IS NOT NULL AND TRUNC(p.expiry_date - SYSDATE) <= 7 THEN 2
+        WHEN p.expiry_date IS NOT NULL AND TRUNC(p.expiry_date - SYSDATE) <= 14 THEN 3
+        WHEN p.expiry_date IS NOT NULL AND TRUNC(p.expiry_date - SYSDATE) <= 30 THEN 4
+        WHEN p.limited_edition = 1 AND i.current_stock <= i.min_stock_level THEN 5
+        ELSE 6
+    END,
+    sell_through_percentage DESC NULLS LAST;
+                
+            </code></pre>
+        </div>
+    </div>
+
+
+    <h2 id="req02">Busines Reporting Requirement 02</h2>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Subscription Growth & Status Trends Over Time
+PROMPT ===== SUBSCRIPTION GROWTH & STATUS TRENDS =====
+
+-- Format specific columns for this report
+CLEAR COLUMNS
+
+COLUMN subscription_month FORMAT A10 HEADING 'Month'
+COLUMN new_subscriptions FORMAT 999 HEADING 'New|Subs'
+COLUMN active_subscriptions FORMAT 999 HEADING 'Active|Subs'
+COLUMN paused_subscriptions FORMAT 999 HEADING 'Paused|Subs'
+COLUMN canceled_subscriptions FORMAT 999 HEADING 'Canceled|Subs'
+COLUMN cumulative_subscriptions FORMAT 9,999 HEADING 'Cumulative|Total'
+COLUMN month_over_month_growth_pct FORMAT 990.9 HEADING 'MoM Growth|%'
+COLUMN active_rate FORMAT 990.9 HEADING 'Active|Rate %'
+COLUMN avg_monthly_price FORMAT $999.99 HEADING 'Avg Monthly|Price'
+COLUMN auto_renewal_rate FORMAT 990.9 HEADING 'Auto-Renewal|Rate %'
+
+WITH monthly_subscriptions AS (
+    SELECT 
+        TO_CHAR(start_date, 'YYYY-MM') AS subscription_month,
+        COUNT(*) AS new_subscriptions,
+        -- Current status counts (based on current subscription status)
+        SUM(CASE WHEN subscription_status = 'Active' THEN 1 ELSE 0 END) AS active_subscriptions,
+        SUM(CASE WHEN subscription_status = 'Paused' THEN 1 ELSE 0 END) AS paused_subscriptions,
+        SUM(CASE WHEN subscription_status = 'Canceled' THEN 1 ELSE 0 END) AS canceled_subscriptions,
+        -- UPDATED: Average pricing and auto-renewal metrics
+        ROUND(AVG(monthly_price), 2) AS avg_monthly_price,
+        ROUND(SUM(CASE WHEN auto_renewal = 1 THEN 1 ELSE 0 END) / COUNT(*) * 100, 1) AS auto_renewal_rate
+    FROM 
+        SUBSCRIPTIONS
+    WHERE 
+        start_date IS NOT NULL
+    GROUP BY 
+        TO_CHAR(start_date, 'YYYY-MM')
+)
+SELECT 
+    subscription_month,
+    new_subscriptions,
+    active_subscriptions,
+    paused_subscriptions,
+    canceled_subscriptions,
+    SUM(new_subscriptions) OVER (ORDER BY subscription_month) AS cumulative_subscriptions,
+    -- Month-over-month growth calculation
+    CASE 
+        WHEN LAG(new_subscriptions) OVER (ORDER BY subscription_month) > 0 THEN
+            ROUND((new_subscriptions - LAG(new_subscriptions) OVER (ORDER BY subscription_month)) / 
+                  LAG(new_subscriptions) OVER (ORDER BY subscription_month) * 100, 1)
+        ELSE NULL
+    END AS month_over_month_growth_pct,
+    -- Active subscription rate
+    ROUND(active_subscriptions / 
+          NULLIF(active_subscriptions + paused_subscriptions + canceled_subscriptions, 0) * 100, 1) AS active_rate,
+    avg_monthly_price,
+    auto_renewal_rate
+FROM 
+    monthly_subscriptions
+ORDER BY 
+    subscription_month DESC;
+                
+            </code></pre>
+        </div>
+    </div>
+
+    <h2 id="">xxx</h2>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+                
+            </code></pre>
+        </div>
+    </div>
+
+    <h2 id="">xxx</h2>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+                
+            </code></pre>
+        </div>
+    </div>
+
+
+    <h2 id="">xxx</h2>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+                
+            </code></pre>
+        </div>
+    </div>
+
+
+    <h2 id="">xxx</h2>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+                
+            </code></pre>
+        </div>
+    </div>
+
+    <h2 id="">xxx</h2>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+                
+            </code></pre>
+        </div>
+    </div>
+
+    <h2 id="">xxx</h2>
+
+    <div class="code-section">
+        <div class="code-header">xxxx</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">
+                
+            </code></pre>
+        </div>
+    </div>
