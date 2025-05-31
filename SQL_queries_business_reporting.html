@@ -171,6 +171,59 @@
                 font-size: 1.5em;
             }
         }
+
+
+       /* Heart-shaped button styles */
+        .heart-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #ff4757;
+            transform: rotate(-45deg);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .heart-button:before,
+        .heart-button:after {
+            content: '';
+            width: 26px;
+            height: 40px;
+            position: absolute;
+            left: 25px;
+            top: 0;
+            background: #ff4757;
+            border-radius: 25px 25px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart-button:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .heart-button:hover {
+            background: #ff3742;
+            transform: rotate(-45deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.6);
+        }
+
+        .heart-button:hover:before,
+        .heart-button:hover:after {
+            background: #ff3742;
+        }
+
     </style>
 </head>
 
@@ -195,6 +248,12 @@
     </div>
 
 
+<!-- CSS Heart Button -->
+    <a href="#top" class="heart-button" title="Back to top"></a>
+
+
+    <h2 id="req01">Busines Reporting Requirement 01</h2>
+
     <div class="code-section">
         <div class="code-header">Global Formatting</div>
         <div class="code-description">xxxxx</div>
@@ -217,9 +276,6 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
             </code></pre>
         </div>
     </div>
-
-
-    <h2 id="req01">Busines Reporting Requirement 01</h2>
 
     <div class="code-section">
         <div class="code-header">xxxx</div>
@@ -569,6 +625,29 @@ ORDER BY
     <h2 id="req02">Busines Reporting Requirement 02</h2>
 
     <div class="code-section">
+        <div class="code-header">Global Formatting</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Set up global formatting for all queries
+SET LINESIZE 250
+SET PAGESIZE 50
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+SET FEEDBACK ON
+SET ECHO OFF
+SET VERIFY OFF
+SET NUMFORMAT 999,999,990.99
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+            </code></pre>
+        </div>
+    </div>
+
+    <div class="code-section">
         <div class="code-header">xxxx</div>
         <div class="code-description">xxxxx</div>
         <div class="code-container">
@@ -775,6 +854,29 @@ ORDER BY
 
 
     <h2 id="req03">Busines Reporting Requirement 03</h2>
+
+    <div class="code-section">
+        <div class="code-header">Global Formatting</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Set up global formatting for all queries
+SET LINESIZE 250
+SET PAGESIZE 50
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+SET FEEDBACK ON
+SET ECHO OFF
+SET VERIFY OFF
+SET NUMFORMAT 999,999,990.99
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+            </code></pre>
+        </div>
+    </div>
 
     <div class="code-section">
         <div class="code-header">xxxx</div>
@@ -1054,6 +1156,29 @@ ORDER BY
     </div>
 
     <h2 id="req04">Busines Reporting Requirement 04</h2>
+
+    <div class="code-section">
+        <div class="code-header">Global Formatting</div>
+        <div class="code-description">xxxxx</div>
+        <div class="code-container">
+            
+            <pre><code class="language-sql">-- Set up global formatting for all queries
+SET LINESIZE 250
+SET PAGESIZE 50
+SET TRIMOUT ON
+SET TRIMSPOOL ON
+SET TAB OFF
+SET WRAP ON
+SET HEADING ON
+SET UNDERLINE ON
+SET FEEDBACK ON
+SET ECHO OFF
+SET VERIFY OFF
+SET NUMFORMAT 999,999,990.99
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+            </code></pre>
+        </div>
+    </div>
 
 
     <div class="code-section">
@@ -1543,7 +1668,7 @@ ORDER BY
         </div>
     </div>
 
-<h2 id="req05">Busines Reporting Requirement 06</h2>
+<h2 id="req06">Busines Reporting Requirement 06</h2>
 
     <div class="code-section">
         <div class="code-header">xxxx</div>
