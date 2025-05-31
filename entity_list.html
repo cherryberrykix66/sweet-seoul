@@ -129,7 +129,7 @@
         }
         
         .entity-title {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #2d3436;
             text-transform: uppercase;
@@ -330,6 +330,7 @@
                     <li class="field-item">order_status, payment_method, platform</li>
                     <li class="field-item fk-field"><span class="field-name">marketing_channel_id</span><span class="field-type">(FK)</span></li>
                     <li class="field-item">is_gift, shipping_address, billing_address</li>
+                    <li class="field-item">created_at, updated_at</li>
                 </ul>
             </div>
             
@@ -362,6 +363,7 @@
                     <li class="field-item">kpop_anime_tie_in</li>
                     <li class="field-item">online_exclusive, in_store_exclusive</li>
                     <li class="field-item">min_inventory_level</li>
+                    <li class="field-item">created_at, updated_at</li>
                 </ul>
             </div>
             
@@ -381,7 +383,20 @@
                 </ul>
             </div>
             
-
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">📱</span>
+                    <h3 class="entity-title">MARKETING_CHANNELS</h3>
+                </div>
+                <p class="entity-description">How we spread the K-pop bakery love! 💫</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">marketing_channel_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item">channel_name, channel_type</li>
+                    <li class="field-item">specific_platform</li>
+                    <li class="field-item">customer_acquisition_cost</li>
+                    <li class="field-item">conversion_rate</li>
+                </ul>
+            </div>
             
             <div class="entity-card">
                 <div class="entity-header">
@@ -412,6 +427,88 @@
                     <li class="field-item">subscription_status, monthly_price</li>
                     <li class="field-item">billing_cycle_months, subscription_type</li>
                     <li class="field-item">is_gift, auto_renewal, delivery_address</li>
+                    <li class="field-item">created_at, updated_at</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">📦</span>
+                    <h3 class="entity-title">SUBSCRIPTION_ITEMS</h3>
+                </div>
+                <p class="entity-description">Curated items in subscription boxes! 📮</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">subscription_item_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">subscription_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">product_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item">delivery_date, quantity</li>
+                    <li class="field-item">delivery_status</li>
+                    <li class="field-item">created_at, updated_at</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">📋</span>
+                    <h3 class="entity-title">ORDER_STATUS_HISTORY</h3>
+                </div>
+                <p class="entity-description">Tracking every order's journey! 🚚</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">history_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">order_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item">previous_status, new_status</li>
+                    <li class="field-item">status_change_date, updated_by</li>
+                    <li class="field-item">change_reason</li>
+                    <li class="field-item">created_at, updated_at</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">🤝</span>
+                    <h3 class="entity-title">CUSTOMER_PROMOTION</h3>
+                </div>
+                <p class="entity-description">Personal promotion assignments! 🎯</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">customer_promotion_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">customer_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">promotion_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item">is_used, date_offered, expiry_date</li>
+                    <li class="field-item">times_used, usage_limit</li>
+                    <li class="field-item">created_at, updated_at</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">🏷️</span>
+                    <h3 class="entity-title">PRODUCT_PROMOTIONS</h3>
+                </div>
+                <p class="entity-description">Product-specific promotional pricing! 💰</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">product_promotion_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">product_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">promotion_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item">override_discount_amount</li>
+                    <li class="field-item">effective_start_date, effective_end_date</li>
+                    <li class="field-item">created_at, updated_at</li>
+                </ul>
+            </div>
+            
+            <div class="entity-card">
+                <div class="entity-header">
+                    <span class="entity-icon">💝</span>
+                    <h3 class="entity-title">CUSTOMER_PREFERENCES</h3>
+                </div>
+                <p class="entity-description">Personal taste profiles for better recommendations! 🎨</p>
+                <ul class="fields-list">
+                    <li class="field-item pk-field"><span class="field-name">preference_id</span><span class="field-type">(PK)</span></li>
+                    <li class="field-item fk-field"><span class="field-name">customer_id</span><span class="field-type">(FK)</span></li>
+                    <li class="field-item">flavor_preference</li>
+                    <li class="field-item">product_category_preference</li>
+                    <li class="field-item">subscription_interest</li>
+                    <li class="field-item">kpop_anime_interest</li>
+                    <li class="field-item">created_at, updated_at</li>
                 </ul>
             </div>
             
@@ -447,21 +544,6 @@
                 </ul>
             </div>
         </div>
-
-        <div class="entity-card">
-                <div class="entity-header">
-                    <span class="entity-icon">📱</span>
-                    <h3 class="entity-title">MARKETING_CHANNELS</h3>
-                </div>
-                <p class="entity-description">How we spread the K-pop bakery love! 💫</p>
-                <ul class="fields-list">
-                    <li class="field-item pk-field"><span class="field-name">marketing_channel_id</span><span class="field-type">(PK)</span></li>
-                    <li class="field-item">channel_name, channel_type</li>
-                    <li class="field-item">specific_platform</li>
-                    <li class="field-item">customer_acquisition_cost</li>
-                    <li class="field-item">conversion_rate</li>
-                </ul>
-            </div>
         
         <div class="features-section">
             <h2 class="features-title">🌈 Oracle 19c Kawaii Features 🌈</h2>
