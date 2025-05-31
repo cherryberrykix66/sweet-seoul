@@ -213,6 +213,10 @@
             font-family: Arial, sans-serif;
             margin: 0;
         }
+
+        .contents-sub-item{
+            margin-left: 50px;
+        }
     </style>
 </head>
 
@@ -222,18 +226,46 @@
     <div class="toc">
         <h3>Table of Contents</h3>
         <ul>
-            <li><a href="#req01">Busines Reporting Requirement 01</a></li>
-            <li><a href="#req02">Busines Reporting Requirement 02</a></li>
-            <li><a href="#req03">Busines Reporting Requirement 03</a></li>
-            <li><a href="#req04">Busines Reporting Requirement 04</a></li>
-            <li><a href="#req05">Busines Reporting Requirement 05</a></li>
-            <li><a href="#req06">Busines Reporting Requirement 06</a></li>
-            <li><a href="#req07">Busines Reporting Requirement 07</a></li>
+            <li><a href="#req01">Busines Reporting Requirement 01: Product Performance Analytics</a></li>
+            <li><a href="#best-selling" class="contents-sub-item">Best-Selling Items Comparison Across Online and In-Store Channels</a></li>
+            <li><a href="#turnover" class="contents-sub-item">Inventory Turnover Rates</a></li>
+            <li><a href="#seasonal-products" class="contents-sub-item">Seasonal and Limited Edition Product Performance</a></li>
+            
+            
+            <li><a href="#req02">Busines Reporting Requirement 02: Subscription Box Performance Tracking</a></li>
+            <li><a href="#growth-trends" class="contents-sub-item">Subscription Growth and Status Trends Over Time</a></li>
+            <li><a href="#sub-type" class="contents-sub-item">Subscription Type Performance Analysis</a></li>
+            <li><a href="#clv" class="contents-sub-item">Customer Lifetime Value (CLV) Analysis for Subscriptions</a></li>
+            
+            <li><a href="#req03">Busines Reporting Requirement 03: Customer Acquisition Cost Analysis</a></li>
+             <li><a href="#marketing-channel" class="contents-sub-item">Marketing Channel Performance Overview</a></li>
+             <li><a href="#channel-type" class="contents-sub-item">Channel Type Comparison</a></li>
+             <li><a href="#funnel" class="contents-sub-item">Customer Acquisition Funnel by Marketing Channel</a></li>
+            
+            
+            <li><a href="#req04">Busines Reporting Requirement 04: Customer Segmentation Reporting</a></li>
+             <li><a href="#rfm" class="contents-sub-item">Recency, Frequency, Monetary (RFM) Customer Segmentation Analysis</a></li>
+             <li><a href="#promo-response" class="contents-sub-item">Customer Promotion Response Segmentation</a></li>
+             <li><a href="#sub-seg" class="contents-sub-item">Subscription Customer Segmentation</a></li>
+            
+            
+            <li><a href="#req05">Busines Reporting Requirement 05: Limited-Time Offering Effectiveness Metrics</a></li>
+             <li><a href="#themed" class="contents-sub-item">K-Pop/Anime Themed Product Performance Overview</a></li>
+             <li><a href="#pref-plat" class="contents-sub-item">Product Category Preferences By Platform</a></li>
+           
+           
+            <li><a href="#req06">Busines Reporting Requirement 06: Cross-Platform Customer Behavior Analysis</a></li>
+            <li><a href="#platform-specific" class="contents-sub-item">Platform-Specific Promotion Effectiveness</a></li>
+            <li><a href="#pref-plat" class="contents-sub-item">Product Category Preferences By Platform</a></li>
+            
+            
+            <li><a href="#req07">Busines Reporting Requirement 07: Gift Card Tracking</a></li>
+            <li><a href="#gift-card" class="contents-sub-item">Gift Card Sales Overview Dashboard</a></li>
         </ul>
     </div>
 
     <div class="highlight-note">
-        <strong>Note:</strong> This Oracle 19c database script creates
+        <strong>Note:</strong> This database reporting system is designed specifically for Oracle 19c to provide comprehensive business intelligence and operational insights.
     </div>
 
 
@@ -245,11 +277,11 @@
         <!-- <span class="button-text">Top</span> -->
     </a>
 
-    <h2 id="req01">Busines Reporting Requirement 01</h2>
+    <h2 id="req01">Busines Reporting Requirement 01: Product Performance Analytics</h2>
 
     <div class="code-section">
         <div class="code-header">Global Formatting</div>
-        <div class="code-description">xxxxx</div>
+        <!-- <div class="code-description">xxxxx</div> -->
         <div class="code-container">
             
             <pre><code class="language-sql">-- Set up global formatting for all queries
@@ -271,11 +303,11 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
     </div>
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="best-selling">Best-Selling Items Comparison Across Online and In-Store Channels</div>
+        <div class="code-description">Compares online and in-store performance for each product</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Best-selling items comparison across online and in-store channels
+            <pre><code class="language-sql">
 PROMPT ===== PRODUCT PERFORMANCE: ONLINE VS IN-STORE COMPARISON =====
 
 -- Format specific columns
@@ -369,11 +401,11 @@ ORDER BY
 
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="turnover">Inventory Turnover Rates</div>
+        <div class="code-description">Identifies fast-moving vs. slow-moving products</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Inventory turnover rates to identify fast-moving vs. slow-moving products
+            <pre><code class="language-sql">
 PROMPT 
 PROMPT ===== INVENTORY TURNOVER ANALYSIS =====
 
@@ -470,11 +502,11 @@ ORDER BY
 
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="seasonal-products">Seasonal and Limited Edition Product Performance</div>
+        <div class="code-description">Provides an analysis of the time-sensitive products in order to identify which products need urgent attention based on expiration dates and inventory levels</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Seasonal and limited edition product performance
+            <pre><code class="language-sql">
 PROMPT 
 PROMPT ===== SEASONAL & LIMITED EDITION PERFORMANCE =====
 
@@ -615,11 +647,11 @@ ORDER BY
     </div>
 
 
-    <h2 id="req02">Busines Reporting Requirement 02</h2>
+    <h2 id="req02">Busines Reporting Requirement 02: Subscription Box Performance Tracking</h2>
 
     <div class="code-section">
         <div class="code-header">Global Formatting</div>
-        <div class="code-description">xxxxx</div>
+        <!-- <div class="code-description">xxxxx</div> -->
         <div class="code-container">
             
             <pre><code class="language-sql">-- Set up global formatting for all queries
@@ -641,11 +673,11 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
     </div>
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="growth-trends">Subscription Growth and Status Trends Over Time</div>
+        <div class="code-description">Produces a dashboard that tracks the health and growth of the bakery’s subscription box service over time</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Subscription Growth & Status Trends Over Time
+            <pre><code class="language-sql">
 PROMPT ===== SUBSCRIPTION GROWTH & STATUS TRENDS =====
 
 -- Format specific columns for this report
@@ -710,11 +742,11 @@ ORDER BY
 
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="sub-type">Subscription Type Performance Analysis</div>
+        <div class="code-description">Analyzes subscription performance by type and billing cycle</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Subscription Type Performance Analysis
+            <pre><code class="language-sql">
 PROMPT 
 PROMPT ===== SUBSCRIPTION TYPE PERFORMANCE ANALYSIS =====
 
@@ -776,10 +808,10 @@ ORDER BY
 
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="clv">Customer Lifetime Value (CLV) Analysis for Subscriptions</div>
+        <div class="code-description">Assigns customers to value segments based on subscription duration, total value paid, and delivery completion rates</div>
         <div class="code-container">        
-            <pre><code class="language-sql">-- Customer Lifetime Value (CLV) Analysis for Subscriptions
+            <pre><code class="language-sql">
 PROMPT 
 PROMPT ===== SUBSCRIPTION CUSTOMER LIFETIME VALUE ANALYSIS =====
 
@@ -846,11 +878,11 @@ ORDER BY
     </div>
 
 
-    <h2 id="req03">Busines Reporting Requirement 03</h2>
+    <h2 id="req03">Busines Reporting Requirement 03: Customer Acquisition Cost Analysis</h2>
 
     <div class="code-section">
         <div class="code-header">Global Formatting</div>
-        <div class="code-description">xxxxx</div>
+        <!-- <div class="code-description">xxxxx</div> -->
         <div class="code-container">
             
             <pre><code class="language-sql">-- Set up global formatting for all queries
@@ -872,12 +904,12 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
     </div>
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="marketing-channel">Marketing Channel Performance Overview</div>
+        <div class="code-description">Analyzes marketing channel performance by calculating key metrics</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Marketing Channel Performance Overview
- PROMPT ===== MARKETING CHANNEL PERFORMANCE OVERVIEW =====
+            <pre><code class="language-sql">
+PROMPT ===== MARKETING CHANNEL PERFORMANCE OVERVIEW =====
 
 -- Format specific columns for this report
 CLEAR COLUMNS
@@ -959,11 +991,11 @@ ORDER BY
 
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="channel-type">Channel Type Comparison</div>
+        <div class="code-description">Compares the performance of different marketing channel categories for effectiveness</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Channel Type Comparison
+            <pre><code class="language-sql"> 
 PROMPT 
 PROMPT ===== CHANNEL TYPE PERFORMANCE COMPARISON =====
 
@@ -1054,11 +1086,11 @@ ORDER BY
     </div>
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="funnel">Customer Acquisition Funnel by Marketing Channel</div>
+        <div class="code-description">Analyzes the customer acquisition funnel for each marketing channel </div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- Customer Acquisition Funnel Analysis
+            <pre><code class="language-sql">
 PROMPT 
 PROMPT ===== CUSTOMER ACQUISITION FUNNEL ANALYSIS =====
 
@@ -1148,11 +1180,11 @@ ORDER BY
         </div>
     </div>
 
-    <h2 id="req04">Busines Reporting Requirement 04</h2>
+    <h2 id="req04">Busines Reporting Requirement 04: Customer Segmentation Reporting</h2>
 
     <div class="code-section">
         <div class="code-header">Global Formatting</div>
-        <div class="code-description">xxxxx</div>
+        <!-- <div class="code-description">xxxxx</div> -->
         <div class="code-container">
             
             <pre><code class="language-sql">-- Set up global formatting for all queries
@@ -1175,11 +1207,11 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
 
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="rfm">Recency, Frequency, Monetary (RFM) Customer Segmentation Analysis</div>
+        <div class="code-description">Based on a marketing technique where customers are grouped based on three purchasing behaviors</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- RFM analysis
+            <pre><code class="language-sql">
 PROMPT ===== ENHANCED RFM CUSTOMER SEGMENTATION =====
 
 -- Format columns for better readability
@@ -1326,11 +1358,11 @@ ORDER BY average_score DESC, total_spent DESC;
 
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="promo-response">Customer Promotion Response Segmentation</div>
+        <div class="code-description">Useful when evaluating how well individual customers respond to marketing campaigns</div>
         <div class="code-container">
             
-            <pre><code class="language-sql">-- promotion response segmentation
+            <pre><code class="language-sql">
 PROMPT 
 PROMPT ===== ENHANCED PROMOTION RESPONSE SEGMENTATION =====
 
@@ -1421,8 +1453,8 @@ ORDER BY promotion_response_rate DESC, total_usage_count DESC;
 
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="sub-seg">Subscription Customer Segmentation</div>
+        <div class="code-description">Segments customers into categories based on their subscription status</div>
         <div class="code-container">
             
             <pre><code class="language-sql">
@@ -1505,11 +1537,11 @@ ORDER BY total_subscription_value DESC, subscription_duration DESC;
         </div>
     </div>
 
-<h2 id="req05">Busines Reporting Requirement 05</h2>
+<h2 id="req05">Busines Reporting Requirement 05: Limited-Time Offering Effectiveness Metrics</h2>
 
     <div class="code-section">
-        <div class="code-header">Global Display Formatting </div>
-        <div class="code-description">different from the previous queries</div>
+        <div class="code-header">Global Formatting </div>
+        <div class="code-description">Different from the previous queries</div>
         <div class="code-container">
             
             <pre><code class="language-sql">
@@ -1534,8 +1566,8 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
 
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="themed">K-Pop/Anime Themed Product Performance Overview</div>
+        <div class="code-description">Identifies top-performing products and those requiring immediate attention due to low stock or approaching expiration</div>
         <div class="code-container">
             
             <pre><code class="language-sql">
@@ -1661,15 +1693,14 @@ ORDER BY
         </div>
     </div>
 
-<h2 id="req06">Busines Reporting Requirement 06</h2>
+<h2 id="req06">Busines Reporting Requirement 06: Cross-Platform Customer Behavior Analysis</h2>
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header">Global Formatting </div>
+        <!-- <div class="code-description">xxxxx</div> -->
         <div class="code-container">
             
-            <pre><code class="language-sql">
--- Set up display format for all queries
+            <pre><code class="language-sql">-- Set up display format for all queries
 SET LINESIZE 250
 SET PAGESIZE 1000
 SET TRIMOUT ON
@@ -1686,8 +1717,8 @@ SET VERIFY OFF
     </div>
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="platform-specific">Platform-Specific Promotion Effectiveness</div>
+        <div class="code-description">Evaluates promotion usage patterns to compare platform performance and promotion types</div>
         <div class="code-container">
             
             <pre><code class="language-sql">
@@ -1805,8 +1836,8 @@ ORDER BY
 
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="pref-plat">Product Category Preferences By Platform</div>
+        <div class="code-description">Identifies platform-specific customer preferences and purchasing patterns</div>
         <div class="code-container">
             
             <pre><code class="language-sql">
@@ -1888,12 +1919,12 @@ ORDER BY
         </div>
     </div>
 
-<h2 id="req07">Busines Reporting Requirement 07</h2>
+<h2 id="req07">Busines Reporting Requirement 07: Gift Card Tracking</h2>
 
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header">Global Formatting </div>
+        <!-- <div class="code-description">xxxxx</div> -->
         <div class="code-container">
             
             <pre><code class="language-sql">
@@ -1917,8 +1948,8 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
     </div>
 
     <div class="code-section">
-        <div class="code-header">xxxx</div>
-        <div class="code-description">xxxxx</div>
+        <div class="code-header" id="gift-card">Gift Card Sales Overview Dashboard</div>
+        <div class="code-description">Creates a comprehensive monthly gift card sales dashboard</div>
         <div class="code-container">
             
             <pre><code class="language-sql">
