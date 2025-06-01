@@ -114,6 +114,32 @@
             overflow-x: auto;
             margin-bottom: 30px;
         }
+
+            .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff9ff3, #f368e0);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(243, 104, 224, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .back-to-top:hover {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 8px 25px rgba(243, 104, 224, 0.6);
+        }
         
         @media (max-width: 768px) {
             body {
@@ -586,5 +612,19 @@
         </ul>
     </div> -->
 
+    <a href="#top" class="back-to-top">↑</a>
+
 </body>
+
+<script>
+        // Smooth scrolling for back to top
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+</script>
 </html>
+
