@@ -307,6 +307,75 @@
                 transform: rotate(90deg) scale(1.1);
             }
         }
+
+        /* Alternative SVG heart button */
+        .heart-svg-button {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            background: #e91e63;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .heart-svg-button:hover {
+            background: #ffb3e6;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.6);
+        }
+
+        .heart-svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
+        }
+
+        .button-text {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        /* back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff9ff3, #f368e0);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(243, 104, 224, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .back-to-top:hover {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 8px 25px rgba(243, 104, 224, 0.6);
+        }
     </style>
 </head>
 <body>
@@ -697,5 +766,28 @@
             </div>
         </div>
     </div>
+
+
+    <!-- SVG Heart Button (alternative) -->
+    <a href="https://cherryberrykix66.github.io/sweet-seoul/" class="heart-svg-button" title="Back to top (SVG version)">
+        <svg class="heart-svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5 2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+        </svg>
+        <!-- <span class="button-text">Top</span> -->
+    </a>
+
+    <a href="#top" class="back-to-top">↑</a>
 </body>
+
+<script>
+        // Smooth scrolling for back to top
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+</script>
+
 </html>
