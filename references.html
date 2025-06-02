@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Seoul References & Bibliography ✨</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ffd3e1 0%, #c8e6c9 50%, #e1bee7 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Floating kawaii elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .kawaii-element {
+            position: absolute;
+            font-size: 10rem;
+            animation: float 10s ease-in-out infinite;
+            opacity: 0.25;
+        }
+        
+        .kawaii-element:nth-child(1) { top: 12%; left: 6%; animation-delay: 0s; }
+        .kawaii-element:nth-child(2) { top: 28%; right: 8%; animation-delay: 2s; }
+        .kawaii-element:nth-child(3) { top: 45%; left: 3%; animation-delay: 4s; }
+        .kawaii-element:nth-child(4) { top: 68%; right: 12%; animation-delay: 6s; }
+        .kawaii-element:nth-child(5) { top: 22%; left: 85%; animation-delay: 8s; }
+        .kawaii-element:nth-child(6) { top: 52%; left: 90%; animation-delay: 1s; }
+        .kawaii-element:nth-child(7) { top: 78%; left: 48%; animation-delay: 3s; }
+        .kawaii-element:nth-child(8) { top: 8%; left: 40%; animation-delay: 5s; }
+        .kawaii-element:nth-child(9) { top: 35%; left: 15%; animation-delay: 7s; }
+        .kawaii-element:nth-child(10) { top: 62%; right: 35%; animation-delay: 9s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-15px) rotate(5deg); }
+            66% { transform: translateY(-8px) rotate(-3deg); }
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 12px 45px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 211, 225, 0.5);
+        }
+        
+        .header h1 {
+            color: #d81b60;
+            font-size: 3.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header .subtitle {
+            color: #388e3c;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .references-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 12px 45px rgba(0, 0, 0, 0.12);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 211, 225, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .references-container::before {
+            content: '';
+            position: absolute;
+            top: -25%;
+            right: -25%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(200, 230, 201, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .section-title {
+            color: #d81b60;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: '📚';
+            font-size: 2rem;
+        }
+        
+        .reference-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 6px solid #d81b60;
+            position: relative;
+            transition: all 0.3s ease;
+            counter-increment: ref-counter;
+        }
+        
+        .reference-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(216, 27, 96, 0.15);
+        }
+        
+        .reference-item::before {
+            content: counter(ref-counter);
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            background: linear-gradient(135deg, #d81b60, #ad1457);
+            color: white;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+        }
+        
+        .references-container {
+            counter-reset: ref-counter;
+        }
+        
+        .reference-item .author {
+            color: #2e7d32;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .reference-item .year {
+            color: #7b1fa2;
+            font-weight: 600;
+            display: inline-block;
+            background: rgba(123, 31, 162, 0.1);
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        
+        .reference-item .title {
+            color: #1565c0;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        
+        .reference-item .publication {
+            color: #5d4037;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .reference-item .url {
+            color: #00695c;
+            font-size: 0.95rem;
+            word-break: break-all;
+            background: rgba(0, 105, 92, 0.05);
+            padding: 8px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .cute-divider {
+            text-align: center;
+            margin: 35px 0;
+            font-size: 2.2rem;
+            opacity: 0.6;
+        }
+        
+        .stats-box {
+            background: linear-gradient(135deg, #ffecb3 0%, #fff3c4 100%);
+            border-radius: 18px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 3px dashed #d81b60;
+            text-align: center;
+            position: relative;
+        }
+        
+        .stats-box::before {
+            content: '📖';
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 50%;
+            border: 1px solid #f3cf00;
+        }
+        
+        .stats-box p {
+            color: #d84315;
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .references-container {
+                padding: 25px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .reference-item {
+                padding: 20px;
+            }
+            
+            .kawaii-element {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Sparkle animation */
+        .sparkle {
+            display: inline-block;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.7; transform: scale(1.2) rotate(15deg); }
+        }
+
+
+        /* Alternative SVG heart button */
+        .heart-svg-button {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            background: #e91e63;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .heart-svg-button:hover {
+            background: #ffb3e6;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.6);
+        }
+
+        .heart-svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
+        }
+
+        .button-text {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        /* back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff9ff3, #f368e0);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(243, 104, 224, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .back-to-top:hover {
+            transform: scale(1.1) rotate(360deg);
+            box-shadow: 0 8px 25px rgba(243, 104, 224, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="kawaii-element">📚</div>
+        <div class="kawaii-element">📖</div>
+        <div class="kawaii-element">📝</div>
+        <div class="kawaii-element">🔍</div>
+        <div class="kawaii-element">💡</div>
+        <div class="kawaii-element">🌟</div>
+        <div class="kawaii-element">📊</div>
+        <div class="kawaii-element">💻</div>
+        <div class="kawaii-element">🎓</div>
+        <div class="kawaii-element">✨</div>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🌸Sweet Seoul Korean Bakery🌸<br /><span class="sparkle">🖥️</span>~<span class="sparkle">📚</span>~<span class="sparkle">✏️</span></h1>
+            <div class="subtitle">References & Bibliography</div>
+        </div>
+        
+        <div class="references-container">
+            <h2 class="section-title">Academic & Professional Sources</h2>
+            
+            <div class="stats-box">
+                <p>✨ Complete documentation supporting Sweet Seoul's database implementation! ✨</p>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">"A Complete Guide to Personalization Engines | Braze."</div>
+                <div class="year">2024</div>
+                <div class="publication">Braze.com.</div>
+                <div class="url">https://www.braze.com/resources/articles/a-complete-guide-to-personalization-engines</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">Atzeni, Paolo, and D. Stott Parker.</div>
+                <div class="year">1982</div>
+                <div class="title">"Assumptions in Relational Database Theory."</div>
+                <div class="publication">Proceedings of the 1st ACM SIGACT-SIGMOD Symposium on Principles of Database Systems - PODS '82.</div>
+                <div class="url">https://doi.org/10.1145/588111.588113</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">Barick, Ankur.</div>
+                <div class="year">2020</div>
+                <div class="title">"Normalization Process in DBMS."</div>
+                <div class="publication">GeeksforGeeks. August 10, 2020.</div>
+                <div class="url">https://www.geeksforgeeks.org/normalization-process-in-dbms/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">Bond, Conor.</div>
+                <div class="year">2023</div>
+                <div class="title">"Conversion Rate Benchmarks: Find out How YOUR Conversion Rate Compares."</div>
+                <div class="publication">Wordstream.com.</div>
+                <div class="url">https://www.wordstream.com/blog/ws/2019/08/19/conversion-rate-benchmarks</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">Caldwell, Austin.</div>
+                <div class="year">2022</div>
+                <div class="title">"How to Calculate Customer Lifetime Value."</div>
+                <div class="publication">Oracle NetSuite. July 21, 2022.</div>
+                <div class="url">https://www.netsuite.com/portal/resource/articles/ecommerce/customer-lifetime-value-clv.shtml</div>
+            </div>
+            
+            <div class="cute-divider">🌸 ～ 📚 ～ 🌸</div>
+            
+            <div class="reference-item">
+                <div class="author">Claude (Anthropic).</div>
+                <div class="year">2025</div>
+                <div class="title">"Troubleshooting Business Intelligence Test: Inventory Alerts View."</div>
+                <div class="publication">Claude AI. May 30, 2025. AI-generated code.</div>
+                <div class="url">https://claude.ai</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">codezone.</div>
+                <div class="year">2024</div>
+                <div class="title">"Understanding GENERATED ALWAYS as IDENTITY vs. GENERATED by DEFAULT as IDENTITY in Oracle."</div>
+                <div class="publication">Medium. October 19, 2024.</div>
+                <div class="url">https://medium.com/@codezone/understanding-generated-always-as-identity-vs-generated-by-default-as-identity-in-oracle-a9a8fd9e8e0d</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">"Constraint."</div>
+                <div class="year">2025</div>
+                <div class="publication">Oracle Help Center. SQL Language Reference.</div>
+                <div class="url">https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/constraint.html</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">Cornel and Morris.</div>
+                <div class="title">"Data versus Information."</div>
+                <div class="publication">In Database Systems Design, Implementation, & Management. 13th ed. Boston, MA: Cengage Learning, 2018.</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">"CTE in SQL."</div>
+                <div class="year">2018</div>
+                <div class="publication">GeeksforGeeks. September 17, 2018.</div>
+                <div class="url">https://www.geeksforgeeks.org/cte-in-sql/</div>
+            </div>
+            
+            <div class="cute-divider">💻 ～ 🔍 ～ 💻</div>
+            
+            <div class="reference-item">
+                <div class="author">"Exception Handling in PL/SQL."</div>
+                <div class="year">2018</div>
+                <div class="publication">GeeksforGeeks. April 28, 2018.</div>
+                <div class="url">https://www.geeksforgeeks.org/exception-handling-plsql/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">"Formatting Query Results."</div>
+                <div class="publication">Docs.oracle.com.</div>
+                <div class="url">https://docs.oracle.com/cd/A87860_01/doc/server.817/a82950/ch4.htm</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">GeeksforGeeks.</div>
+                <div class="year">2015</div>
+                <div class="title">"Introduction of Database Normalization."</div>
+                <div class="publication">GeeksforGeeks. July 2, 2015.</div>
+                <div class="url">https://www.geeksforgeeks.org/introduction-of-database-normalization/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">GeeksforGeeks.</div>
+                <div class="year">2016</div>
+                <div class="title">"Indexing in Databases | Set 1 - GeeksforGeeks."</div>
+                <div class="publication">GeeksforGeeks. July 15, 2016.</div>
+                <div class="url">https://www.geeksforgeeks.org/indexing-in-databases-set-1/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">GeeksforGeeks.</div>
+                <div class="year">2024</div>
+                <div class="title">"Database Development Life Cycle."</div>
+                <div class="publication">GeeksforGeeks. September 9, 2024.</div>
+                <div class="url">https://www.geeksforgeeks.org/database-development-life-cycle/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">GeeksforGeeks.</div>
+                <div class="year">2024</div>
+                <div class="title">"Difference between PARTITION by and GROUP by in PL/SQL."</div>
+                <div class="publication">GeeksforGeeks. March 18, 2024.</div>
+                <div class="url">https://www.geeksforgeeks.org/difference-between-partition-by-and-group-by-in-plsql/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">GeeksForGeeks.</div>
+                <div class="year">2024</div>
+                <div class="title">"What Is Data Dictionary?"</div>
+                <div class="publication">GeeksforGeeks. April 23, 2024.</div>
+                <div class="url">https://www.geeksforgeeks.org/what-is-data-dictionary/</div>
+            </div>
+            
+            <div class="cute-divider">🎓 ～ 📊 ～ 🎓</div>
+            
+            <div class="reference-item">
+                <div class="author">James, Jenna.</div>
+                <div class="title">"Sweet Seoul Entity Relationship Diagram for Oracle 19c Implementation."</div>
+                <div class="publication">Diagram created using Mermaid.live, May 26, 2025.</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">James, Jenna.</div>
+                <div class="title">"Sweet Seoul Normalization Diagram."</div>
+                <div class="publication">Diagram created using Mermaid.live, May 26, 2025.</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">Kedem, Ram.</div>
+                <div class="year">2015</div>
+                <div class="title">"Oracle String Concatenation."</div>
+                <div class="publication">Upscale Analytics. August 30, 2015.</div>
+                <div class="url">https://ramkedem.com/en/oracle-string-concatenation/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">"Khan Academy."</div>
+                <div class="year">2023</div>
+                <div class="publication">Khanacademy.org.</div>
+                <div class="url">https://www.khanacademy.org/computing/computer-programming/sql/more-advanced-sql-queries/pt/calculating-results-with-case</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">"Machine Learning for Database and Big Data Environments."</div>
+                <div class="year">2024</div>
+                <div class="publication">Oracle.com.</div>
+                <div class="url">https://www.oracle.com/artificial-intelligence/database-machine-learning/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">McDermid, David, and Sarika Surampudi.</div>
+                <div class="year">2025</div>
+                <div class="title">"USER_SYS_PRIVS."</div>
+                <div class="publication">Oracle Help Center. Database Reference.</div>
+                <div class="url">https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/USER_SYS_PRIVS.html</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">Microsoft.</div>
+                <div class="year">2024</div>
+                <div class="title">"What Is Azure Machine Learning? - Azure Machine Learning."</div>
+                <div class="publication">Learn.microsoft.com. January 29, 2024.</div>
+                <div class="url">https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning?view=azureml-api-2</div>
+            </div>
+            
+            <div class="cute-divider">🌟 ～ 💡 ～ 🌟</div>
+            
+            <div class="reference-item">
+                <div class="author">"Oracle Data Types."</div>
+                <div class="year">2025</div>
+                <div class="publication">Oracle.com.</div>
+                <div class="url">https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">"QUOTA in Tablespace - Learnomate Technologies."</div>
+                <div class="year">2024</div>
+                <div class="publication">Learnomate Technologies. June 12, 2024.</div>
+                <div class="url">https://learnomate.org/qouta-in-tablespace/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">"Reduce Database Storage and Optimize Performance."</div>
+                <div class="year">2023</div>
+                <div class="publication">Oracle.com.</div>
+                <div class="url">https://www.oracle.com/database/advanced-compression/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">Roeser, Mary Beth, Drew Adams, Lance Ashdown, Vikas Arora, Thomas Baby, Hermann Baer, Yasin Baskan, et al.</div>
+                <div class="title">"Data Types."</div>
+                <div class="publication">Oracle Help Center.</div>
+                <div class="url">https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Data-Types.html#GUID-7B72E154-677A-4342-A1EA-C74C1EA928E6</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">Salsi, Hava.</div>
+                <div class="year">2024</div>
+                <div class="title">"The Marketing Funnel: What It Is & How It Works."</div>
+                <div class="publication">Semrush Blog. August 30, 2024.</div>
+                <div class="url">https://www.semrush.com/blog/marketing-funnel/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">"Smoke Testing | Software Testing."</div>
+                <div class="year">2019</div>
+                <div class="publication">GeeksforGeeks. April 18, 2019.</div>
+                <div class="url">https://www.geeksforgeeks.org/smoke-testing-software-testing/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">"Surrogate Key in DBMS."</div>
+                <div class="year">2021</div>
+                <div class="publication">GeeksforGeeks. June 1, 2021.</div>
+                <div class="url">https://www.geeksforgeeks.org/surrogate-key-in-dbms/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">Upadhyay, Mithlesh.</div>
+                <div class="year">2019</div>
+                <div class="title">"Boyce-Codd Normal Form (BCNF) - GeeksforGeeks."</div>
+                <div class="publication">GeeksforGeeks. July 31, 2019.</div>
+                <div class="url">https://www.geeksforgeeks.org/boyce-codd-normal-form-bcnf/</div>
+            </div>
+            
+            <div class="reference-item">
+                <div class="author">Wright, Gavin.</div>
+                <div class="year">2021</div>
+                <div class="title">"What Is RFM (Recency, Frequency, Monetary) Analysis and How Does It Work?"</div>
+                <div class="publication">SearchDataManagement. May 2021.</div>
+                <div class="url">https://www.techtarget.com/searchdatamanagement/definition/RFM-analysis</div>
+            </div>
+            
+
+        </div>
+    </div>
+
+    <!-- SVG Heart Button (alternative) -->
+    <a href="https://cherryberrykix66.github.io/sweet-seoul/" class="heart-svg-button" title="Back to top (SVG version)">
+        <svg class="heart-svg" viewBox="0 0 24 24">
+            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5 2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+        </svg>
+        <!-- <span class="button-text">Top</span> -->
+    </a>
+
+    <a href="#top" class="back-to-top">↑</a>
+
+</body>
+
+<script>
+        // Smooth scrolling for back to top
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+</script>
+
+</html>
